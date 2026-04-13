@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot Potato — Party Brawler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Special+Elite&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --cream:#EDE9DE;--cream2:#E4E0D4;--ink:#1A1512;
+      --gold:#C4922A;--gold2:#E8B84B;
+      --crimson:#8B1F2A;--teal:#1B5E6E;--olive:#3D5024;
+      --dark:#141820;--dark2:#1C2430;
+      --muted:rgba(26,21,18,0.5);--muted-lt:rgba(237,233,222,0.55);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(237,233,222,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,146,42,.25);}
+    .nav-logo{text-decoration:none;}
+    .nav-logo-text{font-family:'Lilita One',sans-serif;font-size:1.2rem;color:var(--ink);}
+    .nav-logo-sub{font-family:'Special Elite',sans-serif;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+    .nav-links{display:flex;gap:1.75rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+    .nav-links a:hover{color:var(--gold);}
+    .lang-toggle{display:flex;border:1px solid rgba(196,146,42,.35);border-radius:5px;overflow:hidden;}
+    .lang-btn{background:none;border:none;color:var(--muted);font-family:'Special Elite',sans-serif;font-size:.72rem;letter-spacing:.1em;padding:.28rem .6rem;cursor:pointer;transition:all .2s;}
+    .lang-btn.active{background:var(--gold);color:white;}
+
+    /* HERO */
+    #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+    .hero-left{display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem 5rem;background:var(--cream);position:relative;}
+    .hero-left::after{content:'';position:absolute;top:0;right:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold) 70%,transparent);}
+    .hero-eyebrow{font-family:'Special Elite',sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;animation:fadeUp .5s ease both;}
+    .hero-title-wrap{position:relative;display:inline-block;margin-bottom:1.5rem;}
+    .hero-title{font-family:'Lilita One',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);line-height:.92;color:var(--ink);animation:fadeUp .6s .1s ease both;cursor:default;user-select:none;}
+    #title-click-hint{font-family:'Special Elite',sans-serif;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(196,146,42,0);position:absolute;bottom:-1.5rem;left:0;transition:color .3s;white-space:nowrap;}
+    .hero-title.pulse{animation:titlePulse .2s ease;}
+    @keyframes titlePulse{0%{transform:scale(1);}50%{transform:scale(1.03);}100%{transform:scale(1);}}
+    .gold-bar{width:5rem;height:2px;background:var(--gold);margin-bottom:1.5rem;animation:fadeUp .6s .15s ease both;}
+    .hero-tagline{font-family:'Special Elite',sans-serif;font-size:clamp(.88rem,1.3vw,1rem);line-height:1.75;color:var(--ink);max-width:420px;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both;}
+    .hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;animation:fadeUp .6s .3s ease both;}
+    .hero-awards{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:3rem;animation:fadeUp .6s .4s ease both;}
+    .award-laurel{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;max-width:110px;}
+    .laurel-icon{font-size:2rem;line-height:1;}
+    .laurel-text{font-family:'Special Elite',sans-serif;font-size:.6rem;line-height:1.35;letter-spacing:.04em;color:var(--gold);}
+    .laurel-event{font-size:.56rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em;}
+    .hero-right{position:relative;overflow:hidden;background:var(--dark);min-height:50vh;background-size:cover;background-position:center;}
+    .hero-art-bg{position:absolute;inset:0;background:linear-gradient(160deg,var(--crimson) 0%,var(--dark) 40%,var(--teal) 100%);opacity:.75;transition:opacity .4s;}
+    .hero-right.has-image .hero-art-bg{opacity:.12;}
+    .hero-art-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;transition:opacity .3s;}
+    .hero-right.has-image .hero-art-label{opacity:0;pointer-events:none;}
+    .hero-art-emoji{font-size:4rem;opacity:.3;}
+    .hero-art-note{font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,233,222,.35);text-align:center;max-width:220px;line-height:1.5;}
+    .trailer-pill{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(237,233,222,.08);border:1px solid rgba(237,233,222,.18);backdrop-filter:blur(8px);border-radius:100px;padding:.5rem 1.25rem;font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,233,222,.65);text-decoration:none;white-space:nowrap;transition:border-color .2s,color .2s;}
+    .trailer-pill:hover{border-color:var(--gold);color:var(--gold2);}
+
+    /* BUTTONS */
+    .btn-primary{background:var(--ink);color:var(--cream);border:none;padding:.8rem 1.75rem;font-family:'Special Elite',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .15s,box-shadow .15s;}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,21,18,.25);}
+    .btn-gold{background:var(--gold);color:white;border:none;padding:.8rem 1.75rem;font-family:'Special Elite',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .15s,box-shadow .15s;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,146,42,.35);}
+    .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:.8rem 1.75rem;font-family:'Special Elite',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;}
+    .btn-outline:hover{background:var(--ink);color:var(--cream);}
+
+    /* SECTIONS */
+    .sec-cream{background:var(--cream);color:var(--ink);}
+    .sec-cream2{background:var(--cream2);color:var(--ink);}
+    .sec-dark{background:var(--dark);color:var(--cream);}
+    .sec-dark2{background:var(--dark2);color:var(--cream);}
+    .sec-ink{background:var(--ink);color:var(--cream);}
+    .sec{padding:5.5rem 2rem;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-label{font-family:'Special Elite',sans-serif;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+    .sec-label-lt{color:var(--gold2);}
+    .sec-title{font-family:'Lilita One',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);line-height:1;margin-bottom:.75rem;}
+    .sec-bar{width:3.5rem;height:2px;background:var(--gold);margin-bottom:1.25rem;}
+    .sec-sub{color:var(--muted);max-width:540px;line-height:1.65;margin-bottom:2.75rem;font-size:.95rem;}
+    .sec-sub-lt{color:var(--muted-lt);}
+    .divider-gold{border:none;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:.3;}
+
+    /* VIDEOS */
+    .trailer-full{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid rgba(196,146,42,.3);box-shadow:0 20px 60px rgba(0,0,0,.5);}
+    .trailer-full iframe{width:100%;height:100%;border:none;display:block;}
+    .videos-layout{display:grid;grid-template-columns:3fr 1fr;gap:1rem;}
+    .video-slot{aspect-ratio:16/9;border-radius:8px;border:1px dashed rgba(196,146,42,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(237,233,222,.25);font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s;position:relative;overflow:hidden;background-size:cover;background-position:center;}
+    .video-slot:hover{border-color:rgba(196,146,42,.4);}
+    .vs-label{display:flex;flex-direction:column;align-items:center;gap:.4rem;transition:opacity .2s;}
+    .video-slot.has-image .vs-label{opacity:0;}
+    .video-slot-icon{font-size:1.5rem;opacity:.4;}
+
+    /* SCREENSHOTS */
+    .shots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}
+    .shot{aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:1px solid rgba(26,21,18,.1);position:relative;cursor:pointer;transition:transform .2s,border-color .2s;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;}
+    .shot:hover{transform:scale(1.02);border-color:var(--gold);}
+    .shot-bg{position:absolute;inset:0;}
+    .shot-label{position:relative;z-index:1;font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,233,222,.4);transition:opacity .2s;}
+    .shot.has-image .shot-bg,.shot.has-image .shot-label{opacity:0;}
+    .s1{background:linear-gradient(135deg,#8B1F2A,#1B5E6E);opacity:.5;}
+    .s2{background:linear-gradient(135deg,#1B5E6E,#3D5024);opacity:.5;}
+    .s3{background:linear-gradient(135deg,#3D5024,#8B1F2A);opacity:.5;}
+    .s4{background:linear-gradient(135deg,#1C2430,#8B1F2A);opacity:.5;}
+    .s5{background:linear-gradient(135deg,#8B1F2A,#3D5024);opacity:.5;}
+    .s6{background:linear-gradient(135deg,#1B5E6E,#8B1F2A);opacity:.5;}
+
+    /* MAPS */
+    .maps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem;}
+    .map-card{background:rgba(237,233,222,.04);border:1px solid rgba(237,233,222,.08);border-radius:8px;overflow:hidden;transition:transform .2s,border-color .2s;position:relative;}
+    .map-card:hover{transform:translateY(-4px);border-color:rgba(196,146,42,.35);}
+    .map-thumb{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;background-size:cover;background-position:center;}
+    .map-thumb-bg{position:absolute;inset:0;}
+    .map-emoji{position:relative;z-index:1;font-size:2.5rem;transition:opacity .2s;}
+    .map-thumb.has-image .map-thumb-bg,.map-thumb.has-image .map-emoji{opacity:0;}
+    .map-info{padding:1.1rem 1.2rem 1.3rem;}
+    .map-mode{font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.3rem;}
+    .map-name{font-family:'Lilita One',sans-serif;font-size:1.05rem;color:var(--cream);margin-bottom:.5rem;}
+    .map-desc{font-size:.82rem;color:var(--muted-lt);line-height:1.5;}
+
+    /* CHARACTERS */
+    .chars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.25rem;}
+    .char-card{background:var(--cream2);border:1px solid rgba(26,21,18,.1);border-radius:8px;overflow:hidden;text-align:center;transition:transform .2s,border-color .2s;position:relative;}
+    .char-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+    .char-art{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;background-size:cover;background-position:center;}
+    .char-art-bg{position:absolute;inset:0;}
+    .char-emoji{position:relative;z-index:1;font-size:3.5rem;transition:opacity .2s;}
+    .char-art.has-image .char-art-bg,.char-art.has-image .char-emoji{opacity:0;}
+    .char-info{padding:1rem;}
+    .char-name{font-family:'Lilita One',sans-serif;font-size:1.05rem;color:var(--ink);margin-bottom:.2rem;}
+    .char-role{font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+    .char-desc{font-size:.8rem;color:var(--muted);line-height:1.4;}
+
+    /* AWARDS */
+    .awards-row{display:flex;gap:1.25rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .award-card{flex:1;min-width:200px;background:linear-gradient(135deg,rgba(196,146,42,.1),rgba(196,146,42,.03));border:1px solid rgba(196,146,42,.25);border-radius:8px;padding:1.6rem;display:flex;gap:1.1rem;align-items:flex-start;position:relative;}
+    .award-trophy{font-size:2rem;line-height:1;flex-shrink:0;}
+    .award-event{font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.3rem;}
+    .award-name{font-family:'Lilita One',sans-serif;font-size:.95rem;color:var(--cream);line-height:1.2;margin-bottom:.2rem;}
+    .award-year{font-size:.72rem;color:var(--muted-lt);}
+
+    /* QUOTES */
+    .quotes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .quote-card{background:rgba(237,233,222,.04);border:1px solid rgba(237,233,222,.08);border-radius:8px;padding:1.25rem;position:relative;}
+    .q-mark{font-family:'Lilita One',sans-serif;font-size:3rem;color:var(--gold);line-height:.8;margin-bottom:.5rem;opacity:.4;}
+    .q-text{font-family:'Special Elite',sans-serif;font-size:.88rem;line-height:1.7;color:rgba(237,233,222,.8);margin-bottom:.75rem;font-style:italic;}
+    .q-source{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+
+    /* TEAM */
+    .team-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .team-text h3{font-family:'Lilita One',sans-serif;font-size:1.75rem;margin-bottom:.75rem;}
+    .team-text p{color:var(--muted);line-height:1.7;margin-bottom:.75rem;font-size:.95rem;}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+    .stat-box{background:var(--cream2);border:1px solid rgba(26,21,18,.08);border-radius:8px;padding:1.25rem;text-align:center;}
+    .stat-num{font-family:'Lilita One',sans-serif;font-size:2.4rem;color:var(--gold);display:block;}
+    .stat-label{font-family:'Special Elite',sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+
+    /* RRSS */
+    .rrss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:1rem;}
+    .rrss-link{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.5rem 1rem;background:var(--cream2);border:1px solid rgba(26,21,18,.1);border-radius:8px;text-decoration:none;color:var(--ink);font-family:'Special Elite',sans-serif;font-size:.78rem;letter-spacing:.06em;transition:transform .2s,border-color .2s,color .2s;position:relative;}
+    .rrss-link:hover{transform:translateY(-3px);border-color:var(--gold);color:var(--gold);}
+    .rrss-icon{width:26px;height:26px;}
+
+    /* PRESS KIT */
+    .pk-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .pk-text h3{font-family:'Lilita One',sans-serif;font-size:2.25rem;margin-bottom:.5rem;}
+    .pk-text p{color:var(--muted-lt);max-width:440px;line-height:1.65;font-size:.95rem;}
+
+    /* CONTACT */
+    .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+    .contact-info h3{font-family:'Lilita One',sans-serif;font-size:1.75rem;margin-bottom:.75rem;}
+    .contact-info p{color:var(--muted);line-height:1.7;margin-bottom:1rem;font-size:.95rem;}
+    .contact-email{color:var(--gold);font-family:'Special Elite',sans-serif;font-size:1rem;text-decoration:none;display:block;margin-top:.5rem;letter-spacing:.04em;}
+    .contact-email:hover{text-decoration:underline;}
+    .contact-form{display:flex;flex-direction:column;gap:.85rem;}
+    .contact-form input,.contact-form textarea{background:var(--cream2);border:1px solid rgba(26,21,18,.12);border-radius:5px;padding:.8rem 1rem;color:var(--ink);font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;width:100%;}
+    .contact-form input:focus,.contact-form textarea:focus{border-color:var(--gold);}
+    .contact-form textarea{resize:vertical;min-height:110px;}
+
+    /* FOOTER */
+    footer{background:var(--ink);color:rgba(237,233,222,.45);padding:1.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .footer-logo{font-family:'Lilita One',sans-serif;font-size:1.05rem;color:var(--cream);}
+    .footer-gold{color:var(--gold);}
+    .footer-copy{font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.08em;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* ═══════════════════════════════
+       EDIT MODE SYSTEM
+    ═══════════════════════════════ */
+
+    /* Edit bar */
+    #edit-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--ink);border-top:2px solid var(--gold);padding:.75rem 2rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+    .edit-bar-left{display:flex;align-items:center;gap:1rem;}
+    .edit-badge{font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:.25rem .75rem;border-radius:4px;}
+    .edit-hint{font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.06em;color:rgba(237,233,222,.4);}
+    .edit-bar-right{display:flex;gap:.6rem;flex-wrap:wrap;}
+    .edit-btn{font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;border-radius:4px;cursor:pointer;border:none;transition:all .2s;}
+    .edit-btn-save{background:var(--gold);color:white;}
+    .edit-btn-save:hover{background:var(--gold2);}
+    .edit-btn-exit{background:rgba(237,233,222,.08);color:rgba(237,233,222,.7);border:1px solid rgba(237,233,222,.15);}
+    .edit-btn-exit:hover{background:rgba(237,233,222,.15);color:var(--cream);}
+    .edit-btn-clear{background:rgba(139,31,42,.2);color:#ff9999;border:1px solid rgba(139,31,42,.4);}
+    .edit-btn-clear:hover{background:rgba(139,31,42,.4);}
+
+    /* Toast */
+    #edit-toast{position:fixed;top:5.5rem;left:50%;transform:translateX(-50%);z-index:600;background:var(--ink);border:1px solid var(--gold);color:var(--gold);font-family:'Special Elite',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.25rem;border-radius:4px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+
+    /* Image overlay */
+    .img-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;background:rgba(196,146,42,.1);border:2px dashed rgba(196,146,42,.35);border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Special Elite',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);z-index:10;}
+    .img-overlay-icon{font-size:1.5rem;}
+    body.edit-mode [data-ikey]:hover .img-overlay{opacity:1;}
+
+    /* Edit mode — text */
+    body.edit-mode [data-ekey]{outline:1.5px dashed rgba(196,146,42,.3);border-radius:2px;cursor:text;transition:outline .15s,background .15s;}
+    body.edit-mode [data-ekey]:hover{outline:1.5px dashed var(--gold);background:rgba(196,146,42,.07);}
+    body.edit-mode [data-ekey][contenteditable="true"]{outline:2px solid var(--gold);background:rgba(196,146,42,.12);border-radius:2px;}
+
+    /* Edit mode — image zones */
+    body.edit-mode [data-ikey]{cursor:pointer;}
+
+    /* Edit mode — links */
+    body.edit-mode [data-ukey]{outline:1.5px dashed rgba(196,146,42,.3);border-radius:3px;}
+    body.edit-mode [data-ukey]:hover{outline:1.5px dashed var(--gold);}
+    body.edit-mode [data-ukey]::after{content:' ✎';color:var(--gold);font-size:.7em;}
+
+    /* DELETE button on cards */
+    .del-btn{display:none;position:absolute;top:.5rem;right:.5rem;width:24px;height:24px;background:rgba(139,31,42,.85);border:1px solid rgba(255,100,100,.3);border-radius:50%;color:#ffaaaa;font-size:12px;font-weight:bold;cursor:pointer;z-index:30;align-items:center;justify-content:center;line-height:1;padding:0;transition:transform .15s,background .15s;}
+    body.edit-mode .del-btn{display:flex;}
+    .del-btn:hover{background:var(--crimson);transform:scale(1.15);}
+
+    /* ADD button — adapts to section bg */
+    .add-btn{display:none;border:2px dashed rgba(196,146,42,.25);border-radius:8px;background:transparent;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:rgba(196,146,42,.45);font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;padding:1.25rem;}
+    body.edit-mode .add-btn{display:flex;}
+    .add-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(196,146,42,.06);}
+    .add-plus{font-family:'Lilita One',sans-serif;font-size:1.75rem;line-height:1;}
+
+    /* Specific add-btn sizing per context */
+    .shots-grid .add-btn{aspect-ratio:16/9;}
+    .maps-grid .add-btn{min-height:240px;}
+    .chars-grid .add-btn{min-height:240px;}
+    .awards-row .add-btn{flex:0 0 auto;min-width:180px;min-height:100px;}
+    .quotes-grid .add-btn{min-height:160px;}
+    .rrss-grid .add-btn{min-height:110px;}
+
+    @media(max-width:900px){
+      #hero{grid-template-columns:1fr;}
+      .hero-right{min-height:55vw;}
+      .hero-left{padding:7rem 2rem 3rem;}
+      .nav-links{display:none;}
+      .team-layout{grid-template-columns:1fr;}
+      .contact-layout{grid-template-columns:1fr;}
+      .videos-layout{grid-template-columns:1fr;}
+    }
+    @media(max-width:600px){
+      .shots-grid{grid-template-columns:repeat(2,1fr);}
+      nav{padding:.9rem 1.25rem;}
+      .pk-inner{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="edit-bar">
+  <div class="edit-bar-left">
+    <div class="edit-badge">✏ Edit Mode</div>
+    <div class="edit-hint">Text: click to edit · Images: click area to upload · Links: click to set URL · Cards: ✕ to delete · + to add new</div>
+  </div>
+  <div class="edit-bar-right">
+    <button class="edit-btn edit-btn-clear" onclick="clearAll()">Reset all</button>
+    <button class="edit-btn edit-btn-save" onclick="saveAll()">Save</button>
+    <button class="edit-btn edit-btn-exit" onclick="deactivateEdit()">Exit</button>
+  </div>
+</div>
+<div id="edit-toast"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-text">HOT POTATO</div>
+    <div class="nav-logo-sub">Wild Alchemists</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#gameplay" data-en="Gameplay" data-es="Gameplay">Gameplay</a></li>
+    <li><a href="#maps" data-en="Maps" data-es="Mapas">Maps</a></li>
+    <li><a href="#characters" data-en="Characters" data-es="Personajes">Characters</a></li>
+    <li><a href="#awards" data-en="Awards" data-es="Premios">Awards</a></li>
+    <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
+    <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow" data-ekey="hero-eyebrow" data-en="🎮 Chaotic Multiplayer Party Brawler" data-es="🎮 Party Brawler Multijugador Caótico">🎮 Chaotic Multiplayer Party Brawler</div>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title" id="secret-title">HOT<br>POTATO</h1>
+      <div id="title-click-hint"></div>
+    </div>
+    <div class="gold-bar"></div>
+    <p class="hero-tagline" data-ekey="hero-tagline" data-en='A chaotic multiplayer party brawl to avoid being "it" at the end of the match.' data-es='Un party brawler multijugador caótico donde debes evitar ser el último en sostener la patata.'>A chaotic multiplayer party brawl to avoid being "it" at the end of the match.</p>
+    <div class="hero-ctas">
+      <a href="https://store.steampowered.com" class="btn-primary" data-en="▶ Wishlist on Steam" data-es="▶ Añadir a Steam" data-ukey="url-steam-wishlist">▶ Wishlist on Steam</a>
+      <a href="#gameplay" class="btn-outline" data-en="Watch Trailer" data-es="Ver Tráiler">Watch Trailer</a>
+    </div>
+    <div class="hero-awards">
+      <div class="award-laurel"><div class="laurel-icon">🏆</div><div class="laurel-text" data-ekey="laurel-1" data-en="3rd Jury Award" data-es="3er Premio del Jurado">3rd Jury Award</div><div class="laurel-event">Match in Games 2025</div></div>
+      <div class="award-laurel"><div class="laurel-icon">🥇</div><div class="laurel-text" data-ekey="laurel-2" data-en="Best Idea Award" data-es="Premio Mejor Idea">Best Idea Award</div><div class="laurel-event">CYL Game Show 2025</div></div>
+      <div class="award-laurel"><div class="laurel-icon">🏅</div><div class="laurel-text" data-ekey="laurel-3" data-en="Audience Award" data-es="Premio del Público">Audience Award</div><div class="laurel-event">Match in Games 2025</div></div>
+    </div>
+  </div>
+  <div class="hero-right" id="hero-art" data-ikey="hero-art">
+    <div class="hero-art-bg"></div>
+    <div class="hero-art-label"><span class="hero-art-emoji">🎨</span><span class="hero-art-note">Replace with key art / character illustration</span></div>
+    <a href="#gameplay" class="trailer-pill" data-en="▶ Watch Official Trailer" data-es="▶ Ver Tráiler Oficial">▶ Watch Official Trailer</a>
+    <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload key art</span></div>
+  </div>
+</section>
+
+<hr class="divider-gold">
+
+<!-- GAMEPLAY -->
+<div class="sec sec-dark" id="gameplay">
+  <div class="sec-inner">
+    <div class="sec-label sec-label-lt" data-ekey="gameplay-label" data-en="In Action" data-es="En Acción">In Action</div>
+    <h2 class="sec-title">Gameplay</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub sec-sub-lt" data-ekey="gameplay-sub" data-en="Watch the chaos unfold. Fast rounds, explosive passes, and nowhere to hide." data-es="Observa el caos en acción. Partidas rápidas, pases explosivos y sin escapatoria.">Watch the chaos unfold. Fast rounds, explosive passes, and nowhere to hide.</p>
+    <div class="videos-layout">
+      <div class="trailer-full"><iframe src="https://www.youtube.com/embed/PpLcHtBJhDs?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Hot Potato Trailer"></iframe></div>
+      <div style="display:flex;flex-direction:column;gap:.9rem;height:100%;">
+        <div class="video-slot" style="flex:1;" data-ikey="gameplay-clip-1" data-item-id="gameplay-clip-1">
+          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-1')">✕</button>
+          <div class="vs-label"><span class="video-slot-icon">📹</span><span data-en="+ Add gameplay clip" data-es="+ Añadir vídeo">+ Add gameplay clip</span></div>
+          <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload thumbnail</span></div>
+        </div>
+        <div class="video-slot" style="flex:1;" data-ikey="gameplay-clip-2" data-item-id="gameplay-clip-2">
+          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-2')">✕</button>
+          <div class="vs-label"><span class="video-slot-icon">📹</span><span data-en="+ Add gameplay clip" data-es="+ Añadir vídeo">+ Add gameplay clip</span></div>
+          <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload thumbnail</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- SCREENSHOTS -->
+<div class="sec sec-cream2" id="screenshots">
+  <div class="sec-inner">
+    <div class="sec-label" data-en="Gallery" data-es="Galería">Gallery</div>
+    <h2 class="sec-title" data-en="Screenshots" data-es="Capturas">Screenshots</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub" data-ekey="shots-sub" data-en="Moments captured from the heat of battle." data-es="Momentos capturados en el fragor de la batalla.">Moments captured from the heat of battle.</p>
+    <div class="shots-grid" id="shots-grid">
+      <div class="shot" data-ikey="shot-1" data-item-id="shot-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-1')">✕</button><div class="shot-bg s1"></div><span class="shot-label">Screenshot 01</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-2" data-item-id="shot-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-2')">✕</button><div class="shot-bg s2"></div><span class="shot-label">Screenshot 02</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-3" data-item-id="shot-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-3')">✕</button><div class="shot-bg s3"></div><span class="shot-label">Screenshot 03</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-4" data-item-id="shot-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-4')">✕</button><div class="shot-bg s4"></div><span class="shot-label">Screenshot 04</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-5" data-item-id="shot-5"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-5')">✕</button><div class="shot-bg s5"></div><span class="shot-label">Screenshot 05</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-6" data-item-id="shot-6"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-6')">✕</button><div class="shot-bg s6"></div><span class="shot-label">Screenshot 06</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <button class="add-btn" id="add-btn-shot" onclick="addItem('shot')"><span class="add-plus">+</span><span>Add screenshot</span></button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- MAPS & MODES -->
+<div class="sec sec-dark2" id="maps">
+  <div class="sec-inner">
+    <div class="sec-label sec-label-lt" data-en="Arenas & Rules" data-es="Arenas y Reglas">Arenas & Rules</div>
+    <h2 class="sec-title" data-en="Maps & Modes" data-es="Mapas y Modos">Maps & Modes</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub sec-sub-lt" data-ekey="maps-sub" data-en="Every arena brings a new flavor of chaos." data-es="Cada arena trae un nuevo sabor de caos.">Every arena brings a new flavor of chaos.</p>
+    <div class="maps-grid" id="maps-grid">
+      <div class="map-card" data-item-id="map-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-1')">✕</button><div class="map-thumb" data-ikey="map-1-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#8B1F2A,#1B5E6E);opacity:.5;"></div><span class="map-emoji">🏭</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-1-mode" data-en="Classic Mode" data-es="Modo Clásico">Classic Mode</div><div class="map-name" data-ekey="map-1-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-1-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-2')">✕</button><div class="map-thumb" data-ikey="map-2-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1B5E6E,#3D5024);opacity:.5;"></div><span class="map-emoji">🌋</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-2-mode" data-en="Sudden Death" data-es="Muerte Súbita">Sudden Death</div><div class="map-name" data-ekey="map-2-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-2-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-3')">✕</button><div class="map-thumb" data-ikey="map-3-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#3D5024,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🌃</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-3-mode" data-en="Team Mode" data-es="Modo Equipo">Team Mode</div><div class="map-name" data-ekey="map-3-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-3-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-4')">✕</button><div class="map-thumb" data-ikey="map-4-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1C2430,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🎪</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-4-mode" data-en="Chaos Mode" data-es="Modo Caos">Chaos Mode</div><div class="map-name" data-ekey="map-4-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-4-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <button class="add-btn" id="add-btn-map" onclick="addItem('map')"><span class="add-plus">+</span><span>Add map</span></button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- CHARACTERS -->
+<div class="sec sec-cream" id="characters">
+  <div class="sec-inner">
+    <div class="sec-label" data-en="The Roster" data-es="El Plantel">The Roster</div>
+    <h2 class="sec-title" data-en="Characters" data-es="Personajes">Characters</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub" data-ekey="chars-sub" data-en="Pick your fighter. Each one plays completely different." data-es="Elige tu luchador. Cada uno juega de forma completamente distinta.">Pick your fighter. Each one plays completely different.</p>
+    <div class="chars-grid" id="chars-grid">
+      <div class="char-card" data-item-id="char-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-1')">✕</button><div class="char-art" data-ikey="char-1-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🥔</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-1-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-1-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-1-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-2')">✕</button><div class="char-art" data-ikey="char-2-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🔥</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-2-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-2-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-2-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-3')">✕</button><div class="char-art" data-ikey="char-3-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🧊</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-3-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-3-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-3-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-4')">✕</button><div class="char-art" data-ikey="char-4-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">⚡</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-4-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-4-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-4-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <button class="add-btn" id="add-btn-char" onclick="addItem('char')"><span class="add-plus">+</span><span>Add character</span></button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- AWARDS & PRESS -->
+<div class="sec sec-dark" id="awards">
+  <div class="sec-inner">
+    <div class="sec-label sec-label-lt" data-en="Recognition" data-es="Reconocimientos">Recognition</div>
+    <h2 class="sec-title" data-en="Awards & Press" data-es="Premios y Prensa">Awards & Press</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub sec-sub-lt" data-ekey="awards-sub" data-en="Recognized at Spain's leading indie game events — three times." data-es="Reconocido en los principales eventos indie de España — tres veces.">Recognized at Spain's leading indie game events — three times.</p>
+    <div class="awards-row" id="awards-row">
+      <div class="award-card" data-item-id="award-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-1')">✕</button><div class="award-trophy">🏆</div><div><div class="award-event" data-ekey="award-1-event">Match in Games 2025</div><div class="award-name" data-ekey="award-1-name" data-en="3rd Jury Award" data-es="3er Premio del Jurado">3rd Jury Award</div><div class="award-year" data-ekey="award-1-year">2025</div></div></div>
+      <div class="award-card" data-item-id="award-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-2')">✕</button><div class="award-trophy">🥇</div><div><div class="award-event" data-ekey="award-2-event">CYL Game Show 2025</div><div class="award-name" data-ekey="award-2-name" data-en="Best Idea Award" data-es="Premio a la Mejor Idea">Best Idea Award</div><div class="award-year" data-ekey="award-2-year">2025</div></div></div>
+      <div class="award-card" data-item-id="award-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-3')">✕</button><div class="award-trophy">🏅</div><div><div class="award-event" data-ekey="award-3-event">Match in Games 2025</div><div class="award-name" data-ekey="award-3-name" data-en="Audience Award" data-es="Premio del Público">Audience Award</div><div class="award-year" data-ekey="award-3-year">2025</div></div></div>
+      <button class="add-btn" id="add-btn-award" onclick="addItem('award')"><span class="add-plus">+</span><span>Add award</span></button>
+    </div>
+    <div class="quotes-grid" id="quotes-grid">
+      <div class="quote-card" data-item-id="quote-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-1')">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-1-text">Add a press or jury quote here.</p><div class="q-source" data-ekey="quote-1-source">— Publication / Person, 2025</div></div>
+      <div class="quote-card" data-item-id="quote-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-2')">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-2-text">A second quote from another outlet or event organizer.</p><div class="q-source" data-ekey="quote-2-source">— Publication / Person, 2025</div></div>
+      <button class="add-btn" id="add-btn-quote" onclick="addItem('quote')"><span class="add-plus">+</span><span>Add quote</span></button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- TEAM -->
+<div class="sec sec-cream" id="team">
+  <div class="sec-inner">
+    <div class="sec-label" data-en="Who We Are" data-es="Quiénes Somos">Who We Are</div>
+    <h2 class="sec-title" data-en="About the Team" data-es="Sobre el Equipo">About the Team</h2>
+    <div class="sec-bar"></div>
+    <div class="team-layout">
+      <div class="team-text">
+        <h3>Wild Alchemists</h3>
+        <p data-ekey="team-p1" data-en="We're a ~10-person indie studio born at university, united by one obsession: making games that are impossibly fun to play with friends." data-es="Somos un estudio indie de ~10 personas nacido en la universidad, unidos por una obsesión: hacer juegos imposiblemente divertidos para jugar con amigos.">We're a ~10-person indie studio born at university, united by one obsession: making games that are impossibly fun to play with friends.</p>
+        <p data-ekey="team-p2" data-en="Hot Potato is our love letter to party games — frenetic, unpredictable, and always funnier than the round before." data-es="Hot Potato es nuestra carta de amor a los party games: frenético, impredecible y siempre más divertido que la partida anterior.">Hot Potato is our love letter to party games — frenetic, unpredictable, and always funnier than the round before.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-num" data-ekey="stat-1-num">~10</span><span class="stat-label" data-ekey="stat-1-lbl" data-en="Team members" data-es="Miembros">Team members</span></div>
+        <div class="stat-box"><span class="stat-num" data-ekey="stat-2-num">3</span><span class="stat-label" data-ekey="stat-2-lbl" data-en="Awards won" data-es="Premios">Awards won</span></div>
+        <div class="stat-box"><span class="stat-num" data-ekey="stat-3-num">∞</span><span class="stat-label" data-ekey="stat-3-lbl" data-en="Hours of fun" data-es="Horas de diversión">Hours of fun</span></div>
+        <div class="stat-box"><span class="stat-num" data-ekey="stat-4-num">1</span><span class="stat-label" data-ekey="stat-4-lbl" data-en="Legendary potato" data-es="Patata legendaria">Legendary potato</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- PRESS KIT -->
+<div class="sec-ink" id="presskit">
+  <div class="pk-inner">
+    <div class="pk-text">
+      <h3 data-ekey="pk-title">Press Kit</h3>
+      <p data-ekey="pk-desc" data-en="Logos, screenshots, key art, and a full game fact sheet — everything you need to cover Hot Potato." data-es="Logos, capturas, arte clave y ficha del juego — todo lo que necesitas para cubrir Hot Potato.">Logos, screenshots, key art, and a full game fact sheet.</p>
+    </div>
+    <a href="#" class="btn-gold" data-en="⬇ Download Press Kit" data-es="⬇ Descargar Press Kit" data-ukey="url-presskit">⬇ Download Press Kit</a>
+  </div>
+</div>
+
+<!-- RRSS -->
+<div class="sec sec-cream2" id="rrss">
+  <div class="sec-inner">
+    <div class="sec-label" data-en="Find Us" data-es="Encuéntranos">Find Us</div>
+    <h2 class="sec-title" data-en="Follow the Heat" data-es="Sigue el Calor">Follow the Heat</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-sub" data-ekey="rrss-sub" data-en="Stay updated on news, events, and behind-the-scenes content." data-es="Mantente al día con noticias, eventos y contenido detrás de cámaras.">Stay updated on news, events, and behind-the-scenes content.</p>
+    <div class="rrss-grid" id="rrss-grid">
+      <a href="https://instagram.com" class="rrss-link" target="_blank" data-ukey="url-instagram" data-item-id="rrss-instagram"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-instagram')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+      <a href="https://x.com" class="rrss-link" target="_blank" data-ukey="url-twitter" data-item-id="rrss-twitter"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-twitter')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</a>
+      <a href="https://youtube.com" class="rrss-link" target="_blank" data-ukey="url-youtube" data-item-id="rrss-youtube"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-youtube')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+      <a href="https://store.steampowered.com" class="rrss-link" target="_blank" data-ukey="url-steam" data-item-id="rrss-steam"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-steam')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 0 5.26 0 11.026v3.178c0 1.625 1.248 2.924 2.71 2.924h1.026c.406 0 .776-.196 1.006-.526.173-.25.226-.567.146-.86L4.118 13.3c-.114-.425-.478-.719-.919-.719H1.863c-.198 0-.374.076-.517.199C1.614 11.494 1.5 10.282 1.5 9.218c0-4.86 4.69-8.82 10.479-8.82 5.789 0 10.479 3.96 10.479 8.82 0 1.065-.115 2.276-.347 3.562a1.36 1.36 0 0 0-.517-.199h-1.336c-.441 0-.805.294-.919.719l-.77 2.442c-.08.293-.027.61.146.86.23.33.6.526 1.006.526h1.026C22.752 17.128 24 15.829 24 14.204v-3.178C24 5.26 18.28 0 11.979 0zM7.54 10.965c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113zm8.878 0c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113z"/></svg>Steam</a>
+      <a href="https://discord.com" class="rrss-link" target="_blank" data-ukey="url-discord" data-item-id="rrss-discord"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-discord')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
+      <a href="https://linkedin.com" class="rrss-link" target="_blank" data-ukey="url-linkedin" data-item-id="rrss-linkedin"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-linkedin')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <button class="add-btn" id="add-btn-rrss" onclick="addItem('rrss')"><span class="add-plus">+</span><span>Add link</span></button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-gold">
+
+<!-- CONTACT -->
+<div class="sec sec-cream" id="contact">
+  <div class="sec-inner">
+    <div class="sec-label" data-en="Get in Touch" data-es="Ponte en Contacto">Get in Touch</div>
+    <h2 class="sec-title" data-en="Contact" data-es="Contacto">Contact</h2>
+    <div class="sec-bar"></div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3 data-ekey="contact-h3" data-en="Let's talk!" data-es="¡Hablemos!">Let's talk!</h3>
+        <p data-ekey="contact-p" data-en="Whether you're press, a publisher, a fellow dev, or just a fan — we'd love to hear from you." data-es="Seas prensa, publisher, desarrollador o fan — nos encantaría saber de ti.">Whether you're press, a publisher, a fellow dev, or just a fan — we'd love to hear from you.</p>
+        <a href="mailto:hello@wildalchemists.com" class="contact-email" data-ekey="contact-email" data-ukey="url-email">hello@wildalchemists.com</a>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" data-en-placeholder="Name" data-es-placeholder="Nombre" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <input type="text" data-en-placeholder="Subject (Press, Business, General…)" data-es-placeholder="Asunto" placeholder="Subject">
+        <textarea data-en-placeholder="Message" data-es-placeholder="Mensaje" placeholder="Message"></textarea>
+        <button type="button" class="btn-primary" data-en="Send Message" data-es="Enviar Mensaje">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">HOT POTATO <span class="footer-gold">·</span> Wild Alchemists</div>
+  <div class="footer-copy" data-en="© 2025 Wild Alchemists. All rights reserved." data-es="© 2025 Wild Alchemists. Todos los derechos reservados.">© 2025 Wild Alchemists. All rights reserved.</div>
+</footer>
+
+<script>
+// ═══════════════════════ LANGUAGE ═══════════════════════
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\''+lang+'\')"]').classList.add('active');
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (el.getAttribute('contenteditable') === 'true') return;
+    const t = el.getAttribute('data-' + lang);
+    if (t) el.textContent = t;
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+    const p = el.getAttribute('data-' + lang + '-placeholder');
+    if (p) el.placeholder = p;
+  });
+}
+
+// ═══════════════════════ SECRET UNLOCK ═══════════════════════
+let clickCount = 0, clickTimer = null;
+const hint = document.getElementById('title-click-hint');
+const titleEl = document.getElementById('secret-title');
+
+titleEl.addEventListener('click', () => {
+  if (document.body.classList.contains('edit-mode')) return;
+  clickCount++;
+  titleEl.classList.remove('pulse');
+  void titleEl.offsetWidth;
+  titleEl.classList.add('pulse');
+  const left = 6 - clickCount;
+  if (left > 0) {
+    hint.textContent = left === 1 ? 'one more...' : left + ' more clicks...';
+    hint.style.color = 'rgba(196,146,42,' + (0.25 + clickCount * 0.13) + ')';
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; hint.style.color = 'rgba(196,146,42,0)'; }, 3000);
+  } else {
+    clickCount = 0; clearTimeout(clickTimer);
+    hint.style.color = 'rgba(196,146,42,0)';
+    activateEdit();
+  }
+});
+
+// ═══════════════════════ EDIT MODE ═══════════════════════
+function activateEdit() {
+  document.body.classList.add('edit-mode');
+  document.getElementById('edit-bar').style.display = 'flex';
+  toast('Edit mode unlocked! Text: click · Images: click area · Links: click · ✕: delete · +: add');
+}
+function deactivateEdit() {
+  document.body.classList.remove('edit-mode');
+  document.getElementById('edit-bar').style.display = 'none';
+  document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+}
+function saveAll() {
+  document.querySelectorAll('[data-ekey]').forEach(el => {
+    if (el.getAttribute('contenteditable') === 'true') el.blur();
+    const k = el.dataset.ekey, t = el.textContent.trim();
+    localStorage.setItem('hp_t_' + k + '_' + currentLang, t);
+    el.setAttribute('data-' + currentLang, t);
+  });
+  toast('All changes saved!');
+}
+function clearAll() {
+  if (!confirm('Reset all saved edits and reload?')) return;
+  Object.keys(localStorage).filter(k => k.startsWith('hp_')).forEach(k => localStorage.removeItem(k));
+  location.reload();
+}
+
+// ═══════════════════════ EVENT DELEGATION ═══════════════════════
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.del-btn') || e.target.closest('.add-btn') || e.target.closest('#edit-bar')) return;
+  if (!document.body.classList.contains('edit-mode')) return;
+
+  // URL links first
+  const urlEl = e.target.closest('[data-ukey]');
+  if (urlEl && !e.target.closest('[data-ikey]')) {
+    e.preventDefault(); e.stopPropagation();
+    const k = urlEl.dataset.ukey;
+    const nv = prompt('URL for ' + k.replace('url-','') + ':', urlEl.href || '');
+    if (nv !== null && nv.trim()) {
+      urlEl.href = nv.trim();
+      localStorage.setItem('hp_url_' + k, nv.trim());
+      toast('Link updated!');
+    }
+    return;
+  }
+
+  // Image areas
+  const imgEl = e.target.closest('[data-ikey]');
+  if (imgEl) {
+    e.preventDefault(); e.stopPropagation();
+    uploadImage(imgEl);
+    return;
+  }
+
+  // Text
+  const textEl = e.target.closest('[data-ekey]');
+  if (textEl) {
+    e.stopPropagation();
+    if (textEl.getAttribute('contenteditable') === 'true') return;
+    textEl.setAttribute('contenteditable', 'true');
+    textEl.focus();
+    const r = document.createRange(); r.selectNodeContents(textEl);
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    textEl.addEventListener('blur', function onblur() {
+      textEl.removeAttribute('contenteditable');
+      const k = textEl.dataset.ekey, t = textEl.textContent.trim();
+      localStorage.setItem('hp_t_' + k + '_' + currentLang, t);
+      textEl.setAttribute('data-' + currentLang, t);
+      textEl.removeEventListener('blur', onblur);
+    });
+    return;
+  }
+});
+
+document.addEventListener('keydown', e => {
+  const ce = document.querySelector('[contenteditable="true"]');
+  if (!ce) return;
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ce.blur(); }
+  if (e.key === 'Escape') ce.blur();
+});
+
+// ═══════════════════════ IMAGE UPLOAD ═══════════════════════
+function applyBgImage(el, url) {
+  el.style.backgroundImage = 'url(' + url + ')';
+  el.style.backgroundSize = 'cover';
+  el.style.backgroundPosition = 'center';
+  el.classList.add('has-image');
+}
+function uploadImage(el) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = () => {
+    const f = inp.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      const url = ev.target.result;
+      applyBgImage(el, url);
+      try { localStorage.setItem('hp_img_' + el.dataset.ikey, url); } catch(e) { toast('Image too large for storage — visible this session only.'); return; }
+      toast('Image uploaded!');
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+// ═══════════════════════ ADD ITEMS ═══════════════════════
+const GRADIENTS = ['135deg,#8B1F2A,#1B5E6E','135deg,#1B5E6E,#3D5024','135deg,#3D5024,#8B1F2A','135deg,#1C2430,#8B1F2A'];
+const EMOJIS_MAP = ['🗺️','🏟️','🏕️','🌆','🎯','⚔️'];
+const EMOJIS_CHAR = ['🎮','🦸','💥','🌀','🎲','🦊'];
+
+function makeShot(id) {
+  return `<div class="shot" data-ikey="${id}" data-item-id="${id}">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <div class="shot-bg" style="background:linear-gradient(${GRADIENTS[Math.floor(Math.random()*4)]});opacity:.5;"></div>
+    <span class="shot-label" data-ekey="${id}-lbl">New Screenshot</span>
+    <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div>
+  </div>`;
+}
+
+function makeMap(id) {
+  const g = GRADIENTS[Math.floor(Math.random()*4)];
+  const em = EMOJIS_MAP[Math.floor(Math.random()*EMOJIS_MAP.length)];
+  return `<div class="map-card" data-item-id="${id}">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <div class="map-thumb" data-ikey="${id}-thumb">
+      <div class="map-thumb-bg" style="background:linear-gradient(${g});opacity:.5;"></div>
+      <span class="map-emoji">${em}</span>
+      <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div>
+    </div>
+    <div class="map-info">
+      <div class="map-mode" data-ekey="${id}-mode">Mode Name</div>
+      <div class="map-name" data-ekey="${id}-name">Map Name</div>
+      <p class="map-desc" data-ekey="${id}-desc">Short description of this arena and its special mechanic.</p>
+    </div>
+  </div>`;
+}
+
+function makeChar(id) {
+  const em = EMOJIS_CHAR[Math.floor(Math.random()*EMOJIS_CHAR.length)];
+  return `<div class="char-card" data-item-id="${id}">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <div class="char-art" data-ikey="${id}-art">
+      <div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div>
+      <span class="char-emoji">${em}</span>
+      <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div>
+    </div>
+    <div class="char-info">
+      <div class="char-name" data-ekey="${id}-name">Character Name</div>
+      <div class="char-role" data-ekey="${id}-role">Role / Archetype</div>
+      <p class="char-desc" data-ekey="${id}-desc">One-liner about playstyle or personality.</p>
+    </div>
+  </div>`;
+}
+
+function makeAward(id) {
+  return `<div class="award-card" data-item-id="${id}">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <div class="award-trophy">🏆</div>
+    <div>
+      <div class="award-event" data-ekey="${id}-event">Event Name</div>
+      <div class="award-name" data-ekey="${id}-name">Award Name</div>
+      <div class="award-year" data-ekey="${id}-year">2025</div>
+    </div>
+  </div>`;
+}
+
+function makeQuote(id) {
+  return `<div class="quote-card" data-item-id="${id}">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <div class="q-mark">"</div>
+    <p class="q-text" data-ekey="${id}-text">Add a press or jury quote here.</p>
+    <div class="q-source" data-ekey="${id}-source">— Source, Year</div>
+  </div>`;
+}
+
+function makeRRSS(id) {
+  return `<a href="#" class="rrss-link" data-ukey="${id}-url" data-item-id="${id}" target="_blank">
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+    <span data-ekey="${id}-name">Link Name</span>
+  </a>`;
+}
+
+const MAKERS = { shot: makeShot, map: makeMap, char: makeChar, award: makeAward, quote: makeQuote, rrss: makeRRSS };
+const GRIDS   = { shot: 'shots-grid', map: 'maps-grid', char: 'chars-grid', award: 'awards-row', quote: 'quotes-grid', rrss: 'rrss-grid' };
+const ADDBTNS = { shot: 'add-btn-shot', map: 'add-btn-map', char: 'add-btn-char', award: 'add-btn-award', quote: 'add-btn-quote', rrss: 'add-btn-rrss' };
+
+function addItem(type) {
+  const id = type + '-' + Date.now();
+  const html = MAKERS[type](id);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  const el = tmp.firstElementChild;
+  const addBtn = document.getElementById(ADDBTNS[type]);
+  document.getElementById(GRIDS[type]).insertBefore(el, addBtn);
+  restoreItemData(el);
+  const added = JSON.parse(localStorage.getItem('hp_added_' + type) || '[]');
+  added.push(id);
+  localStorage.setItem('hp_added_' + type, JSON.stringify(added));
+  toast('Added! Click to edit · Click image area to upload.');
+}
+
+// ═══════════════════════ DELETE ═══════════════════════
+function deleteItem(id) {
+  if (!confirm('Delete this item?')) return;
+  const el = document.querySelector('[data-item-id="' + id + '"]');
+  if (el) el.remove();
+  const del = JSON.parse(localStorage.getItem('hp_deleted') || '[]');
+  if (!del.includes(id)) { del.push(id); localStorage.setItem('hp_deleted', JSON.stringify(del)); }
+  // Remove from added lists
+  Object.keys(GRIDS).forEach(type => {
+    const added = JSON.parse(localStorage.getItem('hp_added_' + type) || '[]');
+    const filtered = added.filter(i => i !== id);
+    if (filtered.length !== added.length) localStorage.setItem('hp_added_' + type, JSON.stringify(filtered));
+  });
+  toast('Deleted.');
+}
+
+// ═══════════════════════ PERSIST & RESTORE ═══════════════════════
+function restoreItemData(el) {
+  ['en','es'].forEach(lang => {
+    el.querySelectorAll('[data-ekey]').forEach(te => {
+      const saved = localStorage.getItem('hp_t_' + te.dataset.ekey + '_' + lang);
+      if (saved) { te.setAttribute('data-' + lang, saved); if (lang === currentLang) te.textContent = saved; }
+    });
+  });
+  el.querySelectorAll('[data-ikey]').forEach(ie => {
+    try { const s = localStorage.getItem('hp_img_' + ie.dataset.ikey); if (s) applyBgImage(ie, s); } catch(e) {}
+  });
+  if (el.dataset && el.dataset.ikey) {
+    try { const s = localStorage.getItem('hp_img_' + el.dataset.ikey); if (s) applyBgImage(el, s); } catch(e) {}
+  }
+  el.querySelectorAll('[data-ukey]').forEach(ue => {
+    const s = localStorage.getItem('hp_url_' + ue.dataset.ukey);
+    if (s) ue.href = s;
+  });
+}
+
+function loadAll() {
+  // Text
+  ['en','es'].forEach(lang => {
+    document.querySelectorAll('[data-ekey]').forEach(el => {
+      const s = localStorage.getItem('hp_t_' + el.dataset.ekey + '_' + lang);
+      if (s) { el.setAttribute('data-' + lang, s); if (lang === currentLang) el.textContent = s; }
+    });
+  });
+  // Images
+  document.querySelectorAll('[data-ikey]').forEach(el => {
+    try { const s = localStorage.getItem('hp_img_' + el.dataset.ikey); if (s) applyBgImage(el, s); } catch(e) {}
+  });
+  // URLs
+  document.querySelectorAll('[data-ukey]').forEach(el => {
+    const s = localStorage.getItem('hp_url_' + el.dataset.ukey); if (s) el.href = s;
+  });
+  // Deletions
+  const del = JSON.parse(localStorage.getItem('hp_deleted') || '[]');
+  del.forEach(id => { const el = document.querySelector('[data-item-id="' + id + '"]'); if (el) el.remove(); });
+  // Additions
+  Object.keys(GRIDS).forEach(type => {
+    const added = JSON.parse(localStorage.getItem('hp_added_' + type) || '[]');
+    const addBtn = document.getElementById(ADDBTNS[type]);
+    const grid = document.getElementById(GRIDS[type]);
+    added.forEach(id => {
+      if (document.querySelector('[data-item-id="' + id + '"]')) return; // already exists
+      const html = MAKERS[type](id);
+      const tmp = document.createElement('div'); tmp.innerHTML = html;
+      const el = tmp.firstElementChild;
+      grid.insertBefore(el, addBtn);
+      restoreItemData(el);
+    });
+  });
+}
+
+// ═══════════════════════ TOAST ═══════════════════════
+let toastT = null;
+function toast(msg) {
+  const t = document.getElementById('edit-toast');
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(toastT);
+  toastT = setTimeout(() => { t.style.opacity = '0'; }, 3500);
+}
+
+// ═══════════════════════ INIT ═══════════════════════
+loadAll();
+</script>
+</body>
+</html>
