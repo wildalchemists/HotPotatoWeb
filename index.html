@@ -202,6 +202,8 @@
     .edit-btn-exit:hover{background:rgba(237,233,222,.15);color:var(--cream);}
     .edit-btn-clear{background:rgba(139,31,42,.2);color:#ff9999;border:1px solid rgba(139,31,42,.4);}
     .edit-btn-clear:hover{background:rgba(139,31,42,.4);}
+    .edit-btn-export{background:rgba(27,94,110,.55);color:#7dd6e8;border:1px solid rgba(27,94,110,.7);}
+    .edit-btn-export:hover{background:rgba(27,94,110,.85);color:white;}
 
     /* Toast */
     #edit-toast{position:fixed;top:5.5rem;left:50%;transform:translateX(-50%);z-index:600;background:var(--ink);border:1px solid var(--gold);color:var(--gold);font-family:'Special Elite',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.25rem;border-radius:4px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
@@ -269,6 +271,7 @@
   </div>
   <div class="edit-bar-right">
     <button class="edit-btn edit-btn-clear" onclick="clearAll()">Reset all</button>
+    <button class="edit-btn edit-btn-export" onclick="exportHTML()">⬇ Export HTML</button>
     <button class="edit-btn edit-btn-save" onclick="saveAll()">Save</button>
     <button class="edit-btn edit-btn-exit" onclick="deactivateEdit()">Exit</button>
   </div>
@@ -857,4 +860,106 @@ let toastT = null;
 function toast(msg) {
   const t = document.getElementById('edit-toast');
   t.textContent = msg; t.style.opacity = '1';
-  clearTimeout(toastT)
+  clearTimeout(toastT);
+  toastT = setTimeout(() => { t.style.opacity = '0'; }, 3500);
+}
+
+// ═══════════════════════ EXPORT HTML ═══════════════════════
+function exportHTML() {
+  toast('Building export...');
+
+  // Force-save all text first
+  document.querySelectorAll('[data-ekey]').forEach(el => {
+    if (el.getAttribute('contenteditable') === 'true') el.blur();
+    const k = el.dataset.ekey;
+    ['en','es'].forEach(lang => {
+      const saved = localStorage.getItem('hp_t_' + k + '_' + lang);
+      if (saved) el.setAttribute('data-' + lang, saved);
+    });
+  });
+
+  // Clone entire document
+  const clone = document.documentElement.cloneNode(true);
+
+  // Apply saved text to clone attributes + visible text
+  ['en','es'].forEach(lang => {
+    clone.querySelectorAll('[data-ekey]').forEach(el => {
+      const saved = localStorage.getItem('hp_t_' + el.dataset.ekey + '_' + lang);
+      if (saved) el.setAttribute('data-' + lang, saved);
+    });
+  });
+  clone.querySelectorAll('[data-ekey]').forEach(el => {
+    const t = el.getAttribute('data-' + currentLang) || el.getAttribute('data-en');
+    if (t) el.textContent = t;
+  });
+
+  // Apply saved URLs
+  clone.querySelectorAll('[data-ukey]').forEach(el => {
+    const saved = localStorage.getItem('hp_url_' + el.dataset.ukey);
+    if (saved) el.href = saved;
+  });
+
+  // Embed images (already base64 in localStorage)
+  clone.querySelectorAll('[data-ikey]').forEach(el => {
+    try {
+      const saved = localStorage.getItem('hp_img_' + el.dataset.ikey);
+      if (saved) {
+        el.style.backgroundImage = 'url(' + saved + ')';
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+        el.classList.add('has-image');
+      }
+    } catch(e) {}
+  });
+
+  // Remove deleted items
+  const del = JSON.parse(localStorage.getItem('hp_deleted') || '[]');
+  del.forEach(id => {
+    const el = clone.querySelector('[data-item-id="' + id + '"]');
+    if (el) el.remove();
+  });
+
+  // Strip all edit-mode UI
+  ['#edit-bar','#edit-toast','#title-click-hint'].forEach(sel => {
+    const el = clone.querySelector(sel); if (el) el.remove();
+  });
+  clone.querySelectorAll('.del-btn, .add-btn, .img-overlay').forEach(el => el.remove());
+  clone.classList.remove('edit-mode');
+
+  // Replace all scripts with minimal lang-toggle only
+  clone.querySelectorAll('script').forEach(s => s.remove());
+  const minScript = document.createElement('script');
+  minScript.textContent = [
+    "var currentLang='" + currentLang + "';",
+    "function setLang(lang){",
+    "  currentLang=lang;",
+    "  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});",
+    "  var btn=document.querySelector('.lang-btn[onclick=\"setLang(\\''+lang+'\\')\"');",
+    "  if(btn)btn.classList.add('active');",
+    "  document.documentElement.lang=lang;",
+    "  document.querySelectorAll('[data-en]').forEach(function(el){",
+    "    var t=el.getAttribute('data-'+lang);if(t)el.textContent=t;",
+    "  });",
+    "  document.querySelectorAll('[data-en-placeholder]').forEach(function(el){",
+    "    var p=el.getAttribute('data-'+lang+'-placeholder');if(p)el.placeholder=p;",
+    "  });",
+    "}"
+  ].join('\n');
+  clone.querySelector('body').appendChild(minScript);
+
+  // Serialize + download
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'hot-potato-website.html';
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+  setTimeout(() => toast('Exported! The downloaded file is fully self-contained.'), 500);
+}
+
+// ═══════════════════════ INIT ═══════════════════════
+loadAll();
+</script>
+</body>
+</html>
