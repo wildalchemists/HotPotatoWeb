@@ -225,9 +225,10 @@
     body.edit-mode [data-ukey]::after{content:' ✎';color:var(--gold);font-size:.7em;}
 
     /* DELETE button on cards */
-    .del-btn{display:none;position:absolute;top:.5rem;right:.5rem;width:24px;height:24px;background:rgba(139,31,42,.85);border:1px solid rgba(255,100,100,.3);border-radius:50%;color:#ffaaaa;font-size:12px;font-weight:bold;cursor:pointer;z-index:30;align-items:center;justify-content:center;line-height:1;padding:0;transition:transform .15s,background .15s;}
+    .del-btn{display:none;position:absolute;top:.4rem;right:.4rem;height:22px;background:rgba(139,31,42,.88);border:1px solid rgba(255,100,100,.3);border-radius:11px;color:#ffaaaa;font-size:11px;font-weight:bold;cursor:pointer;z-index:30;align-items:center;justify-content:center;line-height:1;padding:0 7px;transition:all .18s;white-space:nowrap;gap:4px;}
     body.edit-mode .del-btn{display:flex;}
-    .del-btn:hover{background:var(--crimson);transform:scale(1.15);}
+    .del-btn:hover{background:rgba(139,31,42,1);}
+    .del-btn.confirming{background:var(--crimson);color:white;border-color:rgba(255,100,100,.6);padding:0 9px;}
 
     /* ADD button — adapts to section bg */
     .add-btn{display:none;border:2px dashed rgba(196,146,42,.25);border-radius:8px;background:transparent;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:rgba(196,146,42,.45);font-family:'Special Elite',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;padding:1.25rem;}
@@ -334,12 +335,12 @@
       <div class="trailer-full"><iframe src="https://www.youtube.com/embed/PpLcHtBJhDs?rel=0&modestbranding=1" allowfullscreen loading="lazy" title="Hot Potato Trailer"></iframe></div>
       <div style="display:flex;flex-direction:column;gap:.9rem;height:100%;">
         <div class="video-slot" style="flex:1;" data-ikey="gameplay-clip-1" data-item-id="gameplay-clip-1">
-          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-1')">✕</button>
+          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-1',this)">✕</button>
           <div class="vs-label"><span class="video-slot-icon">📹</span><span data-en="+ Add gameplay clip" data-es="+ Añadir vídeo">+ Add gameplay clip</span></div>
           <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload thumbnail</span></div>
         </div>
         <div class="video-slot" style="flex:1;" data-ikey="gameplay-clip-2" data-item-id="gameplay-clip-2">
-          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-2')">✕</button>
+          <button class="del-btn" onclick="event.stopPropagation();deleteItem('gameplay-clip-2',this)">✕</button>
           <div class="vs-label"><span class="video-slot-icon">📹</span><span data-en="+ Add gameplay clip" data-es="+ Añadir vídeo">+ Add gameplay clip</span></div>
           <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload thumbnail</span></div>
         </div>
@@ -358,12 +359,12 @@
     <div class="sec-bar"></div>
     <p class="sec-sub" data-ekey="shots-sub" data-en="Moments captured from the heat of battle." data-es="Momentos capturados en el fragor de la batalla.">Moments captured from the heat of battle.</p>
     <div class="shots-grid" id="shots-grid">
-      <div class="shot" data-ikey="shot-1" data-item-id="shot-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-1')">✕</button><div class="shot-bg s1"></div><span class="shot-label">Screenshot 01</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
-      <div class="shot" data-ikey="shot-2" data-item-id="shot-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-2')">✕</button><div class="shot-bg s2"></div><span class="shot-label">Screenshot 02</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
-      <div class="shot" data-ikey="shot-3" data-item-id="shot-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-3')">✕</button><div class="shot-bg s3"></div><span class="shot-label">Screenshot 03</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
-      <div class="shot" data-ikey="shot-4" data-item-id="shot-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-4')">✕</button><div class="shot-bg s4"></div><span class="shot-label">Screenshot 04</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
-      <div class="shot" data-ikey="shot-5" data-item-id="shot-5"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-5')">✕</button><div class="shot-bg s5"></div><span class="shot-label">Screenshot 05</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
-      <div class="shot" data-ikey="shot-6" data-item-id="shot-6"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-6')">✕</button><div class="shot-bg s6"></div><span class="shot-label">Screenshot 06</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-1" data-item-id="shot-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-1',this)">✕</button><div class="shot-bg s1"></div><span class="shot-label">Screenshot 01</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-2" data-item-id="shot-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-2',this)">✕</button><div class="shot-bg s2"></div><span class="shot-label">Screenshot 02</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-3" data-item-id="shot-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-3',this)">✕</button><div class="shot-bg s3"></div><span class="shot-label">Screenshot 03</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-4" data-item-id="shot-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-4',this)">✕</button><div class="shot-bg s4"></div><span class="shot-label">Screenshot 04</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-5" data-item-id="shot-5"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-5',this)">✕</button><div class="shot-bg s5"></div><span class="shot-label">Screenshot 05</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
+      <div class="shot" data-ikey="shot-6" data-item-id="shot-6"><button class="del-btn" onclick="event.stopPropagation();deleteItem('shot-6',this)">✕</button><div class="shot-bg s6"></div><span class="shot-label">Screenshot 06</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div>
       <button class="add-btn" id="add-btn-shot" onclick="addItem('shot')"><span class="add-plus">+</span><span>Add screenshot</span></button>
     </div>
   </div>
@@ -379,10 +380,10 @@
     <div class="sec-bar"></div>
     <p class="sec-sub sec-sub-lt" data-ekey="maps-sub" data-en="Every arena brings a new flavor of chaos." data-es="Cada arena trae un nuevo sabor de caos.">Every arena brings a new flavor of chaos.</p>
     <div class="maps-grid" id="maps-grid">
-      <div class="map-card" data-item-id="map-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-1')">✕</button><div class="map-thumb" data-ikey="map-1-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#8B1F2A,#1B5E6E);opacity:.5;"></div><span class="map-emoji">🏭</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-1-mode" data-en="Classic Mode" data-es="Modo Clásico">Classic Mode</div><div class="map-name" data-ekey="map-1-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-1-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
-      <div class="map-card" data-item-id="map-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-2')">✕</button><div class="map-thumb" data-ikey="map-2-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1B5E6E,#3D5024);opacity:.5;"></div><span class="map-emoji">🌋</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-2-mode" data-en="Sudden Death" data-es="Muerte Súbita">Sudden Death</div><div class="map-name" data-ekey="map-2-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-2-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
-      <div class="map-card" data-item-id="map-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-3')">✕</button><div class="map-thumb" data-ikey="map-3-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#3D5024,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🌃</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-3-mode" data-en="Team Mode" data-es="Modo Equipo">Team Mode</div><div class="map-name" data-ekey="map-3-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-3-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
-      <div class="map-card" data-item-id="map-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-4')">✕</button><div class="map-thumb" data-ikey="map-4-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1C2430,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🎪</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-4-mode" data-en="Chaos Mode" data-es="Modo Caos">Chaos Mode</div><div class="map-name" data-ekey="map-4-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-4-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-1',this)">✕</button><div class="map-thumb" data-ikey="map-1-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#8B1F2A,#1B5E6E);opacity:.5;"></div><span class="map-emoji">🏭</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-1-mode" data-en="Classic Mode" data-es="Modo Clásico">Classic Mode</div><div class="map-name" data-ekey="map-1-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-1-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-2',this)">✕</button><div class="map-thumb" data-ikey="map-2-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1B5E6E,#3D5024);opacity:.5;"></div><span class="map-emoji">🌋</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-2-mode" data-en="Sudden Death" data-es="Muerte Súbita">Sudden Death</div><div class="map-name" data-ekey="map-2-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-2-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-3',this)">✕</button><div class="map-thumb" data-ikey="map-3-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#3D5024,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🌃</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-3-mode" data-en="Team Mode" data-es="Modo Equipo">Team Mode</div><div class="map-name" data-ekey="map-3-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-3-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
+      <div class="map-card" data-item-id="map-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('map-4',this)">✕</button><div class="map-thumb" data-ikey="map-4-thumb"><div class="map-thumb-bg" style="background:linear-gradient(135deg,#1C2430,#8B1F2A);opacity:.5;"></div><span class="map-emoji">🎪</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div></div><div class="map-info"><div class="map-mode" data-ekey="map-4-mode" data-en="Chaos Mode" data-es="Modo Caos">Chaos Mode</div><div class="map-name" data-ekey="map-4-name" data-en="Map Name" data-es="Nombre del Mapa">Map Name</div><p class="map-desc" data-ekey="map-4-desc" data-en="Short description of this arena." data-es="Descripción corta de esta arena.">Short description of this arena.</p></div></div>
       <button class="add-btn" id="add-btn-map" onclick="addItem('map')"><span class="add-plus">+</span><span>Add map</span></button>
     </div>
   </div>
@@ -398,10 +399,10 @@
     <div class="sec-bar"></div>
     <p class="sec-sub" data-ekey="chars-sub" data-en="Pick your fighter. Each one plays completely different." data-es="Elige tu luchador. Cada uno juega de forma completamente distinta.">Pick your fighter. Each one plays completely different.</p>
     <div class="chars-grid" id="chars-grid">
-      <div class="char-card" data-item-id="char-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-1')">✕</button><div class="char-art" data-ikey="char-1-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🥔</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-1-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-1-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-1-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
-      <div class="char-card" data-item-id="char-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-2')">✕</button><div class="char-art" data-ikey="char-2-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🔥</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-2-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-2-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-2-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
-      <div class="char-card" data-item-id="char-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-3')">✕</button><div class="char-art" data-ikey="char-3-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🧊</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-3-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-3-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-3-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
-      <div class="char-card" data-item-id="char-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-4')">✕</button><div class="char-art" data-ikey="char-4-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">⚡</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-4-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-4-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-4-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-1',this)">✕</button><div class="char-art" data-ikey="char-1-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🥔</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-1-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-1-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-1-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-2',this)">✕</button><div class="char-art" data-ikey="char-2-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🔥</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-2-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-2-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-2-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-3',this)">✕</button><div class="char-art" data-ikey="char-3-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">🧊</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-3-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-3-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-3-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
+      <div class="char-card" data-item-id="char-4"><button class="del-btn" onclick="event.stopPropagation();deleteItem('char-4',this)">✕</button><div class="char-art" data-ikey="char-4-art"><div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div><span class="char-emoji">⚡</span><div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload art</span></div></div><div class="char-info"><div class="char-name" data-ekey="char-4-name" data-en="Character Name" data-es="Nombre">Character Name</div><div class="char-role" data-ekey="char-4-role" data-en="Role / Archetype" data-es="Rol / Arquetipo">Role / Archetype</div><p class="char-desc" data-ekey="char-4-desc" data-en="One-liner about playstyle." data-es="Una frase sobre su estilo de juego.">One-liner about playstyle.</p></div></div>
       <button class="add-btn" id="add-btn-char" onclick="addItem('char')"><span class="add-plus">+</span><span>Add character</span></button>
     </div>
   </div>
@@ -417,14 +418,14 @@
     <div class="sec-bar"></div>
     <p class="sec-sub sec-sub-lt" data-ekey="awards-sub" data-en="Recognized at Spain's leading indie game events — three times." data-es="Reconocido en los principales eventos indie de España — tres veces.">Recognized at Spain's leading indie game events — three times.</p>
     <div class="awards-row" id="awards-row">
-      <div class="award-card" data-item-id="award-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-1')">✕</button><div class="award-trophy">🏆</div><div><div class="award-event" data-ekey="award-1-event">Match in Games 2025</div><div class="award-name" data-ekey="award-1-name" data-en="3rd Jury Award" data-es="3er Premio del Jurado">3rd Jury Award</div><div class="award-year" data-ekey="award-1-year">2025</div></div></div>
-      <div class="award-card" data-item-id="award-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-2')">✕</button><div class="award-trophy">🥇</div><div><div class="award-event" data-ekey="award-2-event">CYL Game Show 2025</div><div class="award-name" data-ekey="award-2-name" data-en="Best Idea Award" data-es="Premio a la Mejor Idea">Best Idea Award</div><div class="award-year" data-ekey="award-2-year">2025</div></div></div>
-      <div class="award-card" data-item-id="award-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-3')">✕</button><div class="award-trophy">🏅</div><div><div class="award-event" data-ekey="award-3-event">Match in Games 2025</div><div class="award-name" data-ekey="award-3-name" data-en="Audience Award" data-es="Premio del Público">Audience Award</div><div class="award-year" data-ekey="award-3-year">2025</div></div></div>
+      <div class="award-card" data-item-id="award-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-1',this)">✕</button><div class="award-trophy">🏆</div><div><div class="award-event" data-ekey="award-1-event">Match in Games 2025</div><div class="award-name" data-ekey="award-1-name" data-en="3rd Jury Award" data-es="3er Premio del Jurado">3rd Jury Award</div><div class="award-year" data-ekey="award-1-year">2025</div></div></div>
+      <div class="award-card" data-item-id="award-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-2',this)">✕</button><div class="award-trophy">🥇</div><div><div class="award-event" data-ekey="award-2-event">CYL Game Show 2025</div><div class="award-name" data-ekey="award-2-name" data-en="Best Idea Award" data-es="Premio a la Mejor Idea">Best Idea Award</div><div class="award-year" data-ekey="award-2-year">2025</div></div></div>
+      <div class="award-card" data-item-id="award-3"><button class="del-btn" onclick="event.stopPropagation();deleteItem('award-3',this)">✕</button><div class="award-trophy">🏅</div><div><div class="award-event" data-ekey="award-3-event">Match in Games 2025</div><div class="award-name" data-ekey="award-3-name" data-en="Audience Award" data-es="Premio del Público">Audience Award</div><div class="award-year" data-ekey="award-3-year">2025</div></div></div>
       <button class="add-btn" id="add-btn-award" onclick="addItem('award')"><span class="add-plus">+</span><span>Add award</span></button>
     </div>
     <div class="quotes-grid" id="quotes-grid">
-      <div class="quote-card" data-item-id="quote-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-1')">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-1-text">Add a press or jury quote here.</p><div class="q-source" data-ekey="quote-1-source">— Publication / Person, 2025</div></div>
-      <div class="quote-card" data-item-id="quote-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-2')">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-2-text">A second quote from another outlet or event organizer.</p><div class="q-source" data-ekey="quote-2-source">— Publication / Person, 2025</div></div>
+      <div class="quote-card" data-item-id="quote-1"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-1',this)">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-1-text">Add a press or jury quote here.</p><div class="q-source" data-ekey="quote-1-source">— Publication / Person, 2025</div></div>
+      <div class="quote-card" data-item-id="quote-2"><button class="del-btn" onclick="event.stopPropagation();deleteItem('quote-2',this)">✕</button><div class="q-mark">"</div><p class="q-text" data-ekey="quote-2-text">A second quote from another outlet or event organizer.</p><div class="q-source" data-ekey="quote-2-source">— Publication / Person, 2025</div></div>
       <button class="add-btn" id="add-btn-quote" onclick="addItem('quote')"><span class="add-plus">+</span><span>Add quote</span></button>
     </div>
   </div>
@@ -475,12 +476,12 @@
     <div class="sec-bar"></div>
     <p class="sec-sub" data-ekey="rrss-sub" data-en="Stay updated on news, events, and behind-the-scenes content." data-es="Mantente al día con noticias, eventos y contenido detrás de cámaras.">Stay updated on news, events, and behind-the-scenes content.</p>
     <div class="rrss-grid" id="rrss-grid">
-      <a href="https://instagram.com" class="rrss-link" target="_blank" data-ukey="url-instagram" data-item-id="rrss-instagram"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-instagram')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
-      <a href="https://x.com" class="rrss-link" target="_blank" data-ukey="url-twitter" data-item-id="rrss-twitter"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-twitter')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</a>
-      <a href="https://youtube.com" class="rrss-link" target="_blank" data-ukey="url-youtube" data-item-id="rrss-youtube"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-youtube')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
-      <a href="https://store.steampowered.com" class="rrss-link" target="_blank" data-ukey="url-steam" data-item-id="rrss-steam"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-steam')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 0 5.26 0 11.026v3.178c0 1.625 1.248 2.924 2.71 2.924h1.026c.406 0 .776-.196 1.006-.526.173-.25.226-.567.146-.86L4.118 13.3c-.114-.425-.478-.719-.919-.719H1.863c-.198 0-.374.076-.517.199C1.614 11.494 1.5 10.282 1.5 9.218c0-4.86 4.69-8.82 10.479-8.82 5.789 0 10.479 3.96 10.479 8.82 0 1.065-.115 2.276-.347 3.562a1.36 1.36 0 0 0-.517-.199h-1.336c-.441 0-.805.294-.919.719l-.77 2.442c-.08.293-.027.61.146.86.23.33.6.526 1.006.526h1.026C22.752 17.128 24 15.829 24 14.204v-3.178C24 5.26 18.28 0 11.979 0zM7.54 10.965c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113zm8.878 0c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113z"/></svg>Steam</a>
-      <a href="https://discord.com" class="rrss-link" target="_blank" data-ukey="url-discord" data-item-id="rrss-discord"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-discord')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
-      <a href="https://linkedin.com" class="rrss-link" target="_blank" data-ukey="url-linkedin" data-item-id="rrss-linkedin"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-linkedin')">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <a href="https://instagram.com" class="rrss-link" target="_blank" data-ukey="url-instagram" data-item-id="rrss-instagram"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-instagram',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+      <a href="https://x.com" class="rrss-link" target="_blank" data-ukey="url-twitter" data-item-id="rrss-twitter"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-twitter',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</a>
+      <a href="https://youtube.com" class="rrss-link" target="_blank" data-ukey="url-youtube" data-item-id="rrss-youtube"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-youtube',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+      <a href="https://store.steampowered.com" class="rrss-link" target="_blank" data-ukey="url-steam" data-item-id="rrss-steam"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-steam',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 0 5.26 0 11.026v3.178c0 1.625 1.248 2.924 2.71 2.924h1.026c.406 0 .776-.196 1.006-.526.173-.25.226-.567.146-.86L4.118 13.3c-.114-.425-.478-.719-.919-.719H1.863c-.198 0-.374.076-.517.199C1.614 11.494 1.5 10.282 1.5 9.218c0-4.86 4.69-8.82 10.479-8.82 5.789 0 10.479 3.96 10.479 8.82 0 1.065-.115 2.276-.347 3.562a1.36 1.36 0 0 0-.517-.199h-1.336c-.441 0-.805.294-.919.719l-.77 2.442c-.08.293-.027.61.146.86.23.33.6.526 1.006.526h1.026C22.752 17.128 24 15.829 24 14.204v-3.178C24 5.26 18.28 0 11.979 0zM7.54 10.965c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113zm8.878 0c-.56 0-1.014-.498-1.014-1.113 0-.614.454-1.113 1.014-1.113.56 0 1.014.499 1.014 1.113 0 .615-.454 1.113-1.014 1.113z"/></svg>Steam</a>
+      <a href="https://discord.com" class="rrss-link" target="_blank" data-ukey="url-discord" data-item-id="rrss-discord"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-discord',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
+      <a href="https://linkedin.com" class="rrss-link" target="_blank" data-ukey="url-linkedin" data-item-id="rrss-linkedin"><button class="del-btn" onclick="event.stopPropagation();deleteItem('rrss-linkedin',this)">✕</button><svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
       <button class="add-btn" id="add-btn-rrss" onclick="addItem('rrss')"><span class="add-plus">+</span><span>Add link</span></button>
     </div>
   </div>
@@ -498,7 +499,7 @@
       <div class="contact-info">
         <h3 data-ekey="contact-h3" data-en="Let's talk!" data-es="¡Hablemos!">Let's talk!</h3>
         <p data-ekey="contact-p" data-en="Whether you're press, a publisher, a fellow dev, or just a fan — we'd love to hear from you." data-es="Seas prensa, publisher, desarrollador o fan — nos encantaría saber de ti.">Whether you're press, a publisher, a fellow dev, or just a fan — we'd love to hear from you.</p>
-        <a href="mailto:hello@wildalchemists.com" class="contact-email" data-ekey="contact-email" data-ukey="url-email">hello@wildalchemists.com</a>
+        <a href="/cdn-cgi/l/email-protection#6b030e0707042b1c02070f0a0708030e0602181f1845080406" class="contact-email" data-ekey="contact-email" data-ukey="url-email"><span class="__cf_email__" data-cfemail="5b333e3737341b2c32373f3a3738333e3632282f2875383436">[email&#160;protected]</span></a>
       </div>
       <form class="contact-form" onsubmit="return false;">
         <input type="text" data-en-placeholder="Name" data-es-placeholder="Nombre" placeholder="Name">
@@ -516,7 +517,7 @@
   <div class="footer-copy" data-en="© 2025 Wild Alchemists. All rights reserved." data-es="© 2025 Wild Alchemists. Todos los derechos reservados.">© 2025 Wild Alchemists. All rights reserved.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════ LANGUAGE ═══════════════════════
 let currentLang = 'en';
 function setLang(lang) {
@@ -670,7 +671,7 @@ const EMOJIS_CHAR = ['🎮','🦸','💥','🌀','🎲','🦊'];
 
 function makeShot(id) {
   return `<div class="shot" data-ikey="${id}" data-item-id="${id}">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <div class="shot-bg" style="background:linear-gradient(${GRADIENTS[Math.floor(Math.random()*4)]});opacity:.5;"></div>
     <span class="shot-label" data-ekey="${id}-lbl">New Screenshot</span>
     <div class="img-overlay"><span class="img-overlay-icon">📷</span><span>Upload</span></div>
@@ -681,7 +682,7 @@ function makeMap(id) {
   const g = GRADIENTS[Math.floor(Math.random()*4)];
   const em = EMOJIS_MAP[Math.floor(Math.random()*EMOJIS_MAP.length)];
   return `<div class="map-card" data-item-id="${id}">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <div class="map-thumb" data-ikey="${id}-thumb">
       <div class="map-thumb-bg" style="background:linear-gradient(${g});opacity:.5;"></div>
       <span class="map-emoji">${em}</span>
@@ -698,7 +699,7 @@ function makeMap(id) {
 function makeChar(id) {
   const em = EMOJIS_CHAR[Math.floor(Math.random()*EMOJIS_CHAR.length)];
   return `<div class="char-card" data-item-id="${id}">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <div class="char-art" data-ikey="${id}-art">
       <div class="char-art-bg" style="background:linear-gradient(160deg,#EDE9DE,#E4E0D4);"></div>
       <span class="char-emoji">${em}</span>
@@ -714,7 +715,7 @@ function makeChar(id) {
 
 function makeAward(id) {
   return `<div class="award-card" data-item-id="${id}">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <div class="award-trophy">🏆</div>
     <div>
       <div class="award-event" data-ekey="${id}-event">Event Name</div>
@@ -726,7 +727,7 @@ function makeAward(id) {
 
 function makeQuote(id) {
   return `<div class="quote-card" data-item-id="${id}">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <div class="q-mark">"</div>
     <p class="q-text" data-ekey="${id}-text">Add a press or jury quote here.</p>
     <div class="q-source" data-ekey="${id}-source">— Source, Year</div>
@@ -735,7 +736,7 @@ function makeQuote(id) {
 
 function makeRRSS(id) {
   return `<a href="#" class="rrss-link" data-ukey="${id}-url" data-item-id="${id}" target="_blank">
-    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}')">✕</button>
+    <button class="del-btn" onclick="event.stopPropagation();deleteItem('${id}',this)">✕</button>
     <svg class="rrss-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
     <span data-ekey="${id}-name">Link Name</span>
   </a>`;
@@ -760,20 +761,40 @@ function addItem(type) {
   toast('Added! Click to edit · Click image area to upload.');
 }
 
-// ═══════════════════════ DELETE ═══════════════════════
-function deleteItem(id) {
-  if (!confirm('Delete this item?')) return;
-  const el = document.querySelector('[data-item-id="' + id + '"]');
-  if (el) el.remove();
-  const del = JSON.parse(localStorage.getItem('hp_deleted') || '[]');
-  if (!del.includes(id)) { del.push(id); localStorage.setItem('hp_deleted', JSON.stringify(del)); }
-  // Remove from added lists
-  Object.keys(GRIDS).forEach(type => {
-    const added = JSON.parse(localStorage.getItem('hp_added_' + type) || '[]');
-    const filtered = added.filter(i => i !== id);
-    if (filtered.length !== added.length) localStorage.setItem('hp_added_' + type, JSON.stringify(filtered));
-  });
-  toast('Deleted.');
+// ═══════════════════════ DELETE (two-step, no confirm()) ═══════════════════════
+let pendingDelete = null, pendingTimer = null;
+
+function deleteItem(id, btn) {
+  if (pendingDelete === id) {
+    clearTimeout(pendingTimer);
+    pendingDelete = null;
+    const el = document.querySelector('[data-item-id="' + id + '"]');
+    if (el) {
+      el.style.transition = 'opacity .25s,transform .25s';
+      el.style.opacity = '0'; el.style.transform = 'scale(.94)';
+      setTimeout(() => el.remove(), 260);
+    }
+    const del = JSON.parse(localStorage.getItem('hp_deleted') || '[]');
+    if (!del.includes(id)) { del.push(id); localStorage.setItem('hp_deleted', JSON.stringify(del)); }
+    Object.keys(GRIDS).forEach(type => {
+      const added = JSON.parse(localStorage.getItem('hp_added_' + type) || '[]');
+      const f = added.filter(i => i !== id);
+      if (f.length !== added.length) localStorage.setItem('hp_added_' + type, JSON.stringify(f));
+    });
+    toast('Deleted. Use "Reset all" to undo.');
+    return;
+  }
+  if (pendingDelete && pendingDelete !== id) {
+    const prev = document.querySelector('.del-btn.confirming');
+    if (prev) { prev.classList.remove('confirming'); prev.textContent = '\u2715'; }
+  }
+  pendingDelete = id;
+  if (btn) { btn.classList.add('confirming'); btn.textContent = 'Delete?'; }
+  clearTimeout(pendingTimer);
+  pendingTimer = setTimeout(() => {
+    pendingDelete = null;
+    if (btn) { btn.classList.remove('confirming'); btn.textContent = '\u2715'; }
+  }, 3000);
 }
 
 // ═══════════════════════ PERSIST & RESTORE ═══════════════════════
@@ -836,12 +857,4 @@ let toastT = null;
 function toast(msg) {
   const t = document.getElementById('edit-toast');
   t.textContent = msg; t.style.opacity = '1';
-  clearTimeout(toastT);
-  toastT = setTimeout(() => { t.style.opacity = '0'; }, 3500);
-}
-
-// ═══════════════════════ INIT ═══════════════════════
-loadAll();
-</script>
-</body>
-</html>
+  clearTimeout(toastT)
