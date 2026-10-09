@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hot Potato — mockup A: Container Yard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Palette: every value is sampled from the game's assets (docs/palette.json) */
+:root{
+  --sky:#3BABD2;        /* shot-2 sky, lit */
+  --sky-deep:#1987AC;   /* shot-3 sky */
+  --blue:#154396;       /* shot-2 blue containers */
+  --green:#268741;      /* map-1-thumb green containers, lit */
+  --green-deep:#226C28; /* shot-2 green container, shaded */
+  --yellow:#E8C73B;     /* the potato, char-1-art */
+  --cyellow:#C7851A;    /* yellow container wall, char-2-art */
+  --orange:#CD9226;     /* orange containers, shot-1 */
+  --red:#DD3714;        /* the potato's sneakers */
+  --red-deep:#961B16;   /* red containers, map-1-thumb */
+  --purple:#6336C2;     /* the runner, shot-1 */
+  --concrete:#B8BDCA;   /* yard floor, map-1-thumb */
+  --concrete-lt:#DADDE3;/* floor, lit */
+  --ink:#0B1230;        /* deepest shadow, map-1-thumb */
+  --paper:#F3F2EE;
+  --display:'Big Shoulders Stencil Display', Impact, sans-serif;
+  --text:'Archivo', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --corrugation: repeating-linear-gradient(90deg, transparent 0 18px, rgba(0,0,0,.14) 18px 26px);
+  --hazard: repeating-linear-gradient(135deg, var(--yellow) 0 18px, var(--ink) 18px 36px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);color:var(--ink);background:var(--concrete-lt);line-height:1.45;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:600}
+.display{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:.005em}
+
+/* ---------- nav: cargo label ---------- */
+.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:3px solid var(--ink);display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;min-height:64px}
+.nav .brand{display:flex;align-items:center;gap:1rem;padding:0 1.25rem;border-right:3px solid var(--ink);text-decoration:none}
+.nav .brand .display{font-size:1.6rem}
+.nav .brand .mono{color:#5b6070;display:none}
+.nav ul{list-style:none;display:flex;align-items:center;gap:1.6rem;padding:0 1.5rem;overflow-x:auto}
+.nav ul a{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;text-decoration:none;white-space:nowrap}
+.nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
+.nav .side{display:flex;align-items:stretch;border-left:3px solid var(--ink)}
+.lang{display:flex;align-items:center;padding:0 1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;gap:.5rem}
+.lang b{font-weight:600}.lang span{color:#5b6070}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;border:3px solid var(--ink);padding:.7rem 1.25rem;font-size:1.25rem;line-height:1;background:var(--paper)}
+.btn-yellow{background:var(--yellow);position:relative}
+.btn-yellow::before{content:"";position:absolute;inset:0;background:var(--corrugation);pointer-events:none;opacity:.35}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.nav .btn{border:0;border-left:0;font-size:1.05rem;padding:0 1.4rem}
+
+/* ---------- hero ---------- */
+.hero{background:var(--sky);background-image:
+  radial-gradient(ellipse 16% 6% at 50% 7%, #fff 60%, transparent 61%),
+  radial-gradient(ellipse 22% 7% at 80% 11%, #fff 60%, transparent 61%),
+  radial-gradient(ellipse 12% 4.5% at 66% 24%, #fff 60%, transparent 61%),
+  linear-gradient(var(--sky), var(--sky-deep) 100%);
+  color:var(--ink);position:relative;overflow:hidden}
+.hero-grid{max-width:1360px;margin:0 auto;padding:clamp(2rem,5vw,4.5rem) clamp(1rem,4vw,3rem) clamp(2.5rem,6vw,5rem);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,6fr);gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.hero h1{font-size:clamp(4.6rem,13.5vw,12rem);color:var(--paper);text-shadow:0 .06em 0 var(--ink);margin:.1em 0 .25em}
+.hero h1 span{display:block}
+.hero h1 .pot{color:var(--yellow)}
+.hero .kicker{color:var(--ink);background:var(--paper);display:inline-block;padding:.45rem .7rem;border:2px solid var(--ink)}
+.hero p.pitch{font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500;max-width:30ch;margin:0 0 1.6rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-bottom:2rem}
+.btn .play{width:0;height:0;border-left:.7em solid currentColor;border-top:.42em solid transparent;border-bottom:.42em solid transparent}
+.stamps{display:flex;flex-wrap:wrap;gap:.6rem .8rem}
+.stamp{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--ink);padding:.35rem .55rem;background:rgba(243,242,238,.75);display:inline-grid;line-height:1.2}
+.stamp b{font-weight:600}
+.stamp:nth-child(2){transform:rotate(-2deg)}
+.stamp:nth-child(3){transform:rotate(1.5deg)}
+
+/* the container: a real box with doors that open on the trailer */
+.container-box{position:relative;aspect-ratio:16/10.5;background:var(--green-deep);border:3px solid var(--ink);box-shadow:14px 14px 0 rgba(11,18,48,.35)}
+.container-box .frame{position:absolute;inset:0;padding:14px;background:var(--green);background-image:var(--corrugation)}
+.container-box .window{position:relative;width:100%;height:100%;overflow:hidden;background:var(--ink);border:3px solid var(--ink)}
+.container-box .window img{width:100%;height:100%;object-fit:cover}
+.plate{position:absolute;top:-3px;left:24px;background:var(--paper);border:3px solid var(--ink);border-top:0;padding:.35rem .6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;font-weight:600;z-index:3}
+.door{position:absolute;top:14px;bottom:14px;width:calc(50% - 14px);background:var(--green);background-image:var(--corrugation);border:3px solid var(--ink);z-index:2;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.door::after{content:"";position:absolute;top:18%;bottom:18%;width:10px;background:var(--ink);opacity:.9}
+.door.l{left:14px;transform-origin:left center;transform:perspective(1400px) rotateY(-96deg)}
+.door.l::after{right:14px}
+.door.r{right:14px;transform-origin:right center;transform:perspective(1400px) rotateY(96deg)}
+.door.r::after{left:14px}
+.container-box:hover .door.l{transform:perspective(1400px) rotateY(-150deg)}
+.container-box:hover .door.r{transform:perspective(1400px) rotateY(150deg)}
+.trailer-cta{position:absolute;right:28px;bottom:28px;z-index:4;background:var(--yellow);border:3px solid var(--ink);display:flex;align-items:center;gap:.7rem;padding:.6rem .9rem;text-decoration:none;font-family:var(--display);font-weight:900;font-size:1.2rem;text-transform:uppercase}
+.trailer-cta:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.hazard{height:14px;background:var(--hazard);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+
+/* ---------- modes: the manifest ---------- */
+.section{max-width:1360px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem)}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:1rem 2rem;align-items:end;margin-bottom:2.2rem}
+.sec-head .code{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;font-weight:600;color:#434a5e;writing-mode:vertical-rl;transform:rotate(180deg);border-right:3px solid var(--ink);padding-right:.5rem;align-self:stretch}
+.sec-head h2{font-size:clamp(3.2rem,7vw,6rem)}
+.sec-head p{font-size:1.15rem;max-width:40ch;color:#2a3047}
+.modes{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(1.5rem,3vw,3rem);align-items:start}
+.yard{position:relative;border:3px solid var(--ink);background:var(--blue);padding:12px;box-shadow:12px 12px 0 var(--ink)}
+.yard img{width:100%;aspect-ratio:4/3;object-fit:cover;border:3px solid var(--ink)}
+.yard .plate{left:auto;right:24px}
+.yard figcaption{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);padding:.7rem .2rem 0;font-weight:600}
+table.manifest{width:100%;border-collapse:collapse;background:var(--paper);border:3px solid var(--ink)}
+.manifest th{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:.7rem .9rem;border-bottom:3px solid var(--ink);color:#434a5e;background:var(--concrete)}
+.manifest td{padding:1.1rem .9rem;border-bottom:2px solid var(--ink);vertical-align:top}
+.manifest tr:last-child td{border-bottom:0}
+.manifest .no{font-family:var(--mono);font-weight:600;color:#434a5e;width:3.2rem}
+.manifest .name{font-family:var(--display);font-weight:900;font-size:1.9rem;line-height:.95;text-transform:uppercase;width:34%}
+.manifest .rules{color:#2a3047;max-width:38ch}
+.status{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.35rem .55rem;border:2px solid var(--ink);white-space:nowrap}
+.status.beta{background:var(--yellow)}
+.status.dev{border-style:dashed;color:#434a5e;background:transparent}
+.todo{display:inline-block;border:2px dashed var(--red);color:var(--red-deep);padding:.3rem .5rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em}
+
+/* ---------- footer strip ---------- */
+.strip{background:var(--ink);color:var(--paper);display:flex;flex-wrap:wrap;gap:1rem 2.5rem;align-items:center;justify-content:space-between;padding:1.25rem clamp(1rem,4vw,3rem)}
+.strip ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.4rem}
+.strip a{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.strip a:hover{text-decoration:underline;text-underline-offset:4px}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .modes{grid-template-columns:1fr}
+  .manifest .name{font-size:1.5rem}
+}
+@media (max-width:640px){
+  .nav{grid-template-columns:1fr auto}
+  .nav ul{display:none}
+  .nav .brand .display{font-size:1.35rem}
+  .nav .btn{font-size:.95rem;padding:0 1rem}
+  .hero h1{font-size:clamp(3.6rem,22vw,6rem)}
+  .hero{background-image:radial-gradient(ellipse 34% 2.2% at 82% 4%, #fff 60%, transparent 61%),linear-gradient(var(--sky), var(--sky-deep) 100%)}
+  .sec-head{grid-template-columns:1fr}
+  .sec-head .code{writing-mode:horizontal-tb;transform:none;border-right:0;border-bottom:3px solid var(--ink);padding:0 0 .4rem}
+  .manifest thead{display:none}
+  .manifest tr{display:grid;grid-template-columns:3rem 1fr;gap:.3rem .6rem;padding:.9rem .9rem;border-bottom:2px solid var(--ink)}
+  .manifest td{display:block;padding:0;border:0}
+  .manifest .no{grid-row:1/3}
+  .manifest .name{width:auto}
+  .manifest .rules{grid-column:2}
+  .manifest .st{grid-column:2;margin:.1rem 0 .3rem}
+  .trailer-cta{right:18px;bottom:18px;font-size:1rem}
+}
+@media (max-width:420px){
+  .nav .brand{padding:0 .8rem}
+  .nav .brand .display{font-size:1.1rem}
+  .lang{padding:0 .5rem}
+  .nav .btn{font-size:.8rem;padding:0 .6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .door{transition:none}
+  .btn:hover,.trailer-cta:hover{transform:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="display">Hot Potato</span><span class="mono">HPTU 365019 0</span></a>
+  <ul>
+    <li><a href="#how-it-plays">How it plays</a></li>
+    <li><a href="#modes">Modes</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#press-kit">Press &amp; contact</a></li>
+  </ul>
+  <div class="side">
+    <div class="lang" aria-label="Language"><b>EN</b><span>/</span><span>ES</span></div>
+    <a class="btn btn-yellow" href="https://store.steampowered.com/app/3650190/">Wishlist on Steam</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <p class="mono kicker">Multiplayer party brawler · Unreal Engine 5 · Steam</p>
+      <h1 class="display"><span>Hot</span><span class="pot">Potato</span></h1>
+      <p class="pitch">Get tagged and you're the potato. Pass it on before the clock hits zero.</p>
+      <div class="ctas">
+        <a class="btn btn-yellow" href="https://store.steampowered.com/app/3650190/">Wishlist on Steam</a>
+        <a class="btn" href="#trailer"><span class="play" aria-hidden="true"></span>Watch the trailer</a>
+      </div>
+      <ul class="stamps" aria-label="Awards">
+        <li class="stamp"><b>3rd Jury Award</b><span>Match in Games 2025</span></li>
+        <li class="stamp"><b>Audience Award</b><span>Match in Games 2025</span></li>
+        <li class="stamp"><b>Best Idea Award</b><span>CYL Game Show 2025</span></li>
+      </ul>
+    </div>
+    <figure class="container-box" id="trailer">
+      <div class="frame">
+        <div class="window">
+          <img src="../assets/img/shot-1776779423012-1200.webp" srcset="../assets/img/shot-1776779423012-1200.webp 1200w, ../assets/img/shot-1776779423012-2400.webp 2193w" sizes="(max-width:980px) 100vw, 45vw" width="2193" height="1234" alt="The runner jumps off a green container while the potato character hides inside it">
+        </div>
+      </div>
+      <span class="plate">HPTU 365019 0 · 45G1</span>
+      <div class="door l" aria-hidden="true"></div>
+      <div class="door r" aria-hidden="true"></div>
+      <a class="trailer-cta" href="https://www.youtube.com/watch?v=PpLcHtBJhDs"><span class="play" style="width:0;height:0;border-left:.7em solid currentColor;border-top:.42em solid transparent;border-bottom:.42em solid transparent" aria-hidden="true"></span>Trailer</a>
+    </figure>
+  </div>
+</section>
+<div class="hazard" aria-hidden="true"></div>
+
+<section class="section" id="modes">
+  <div class="sec-head">
+    <span class="code">HPTU 365019 1 · Manifest</span>
+    <div>
+      <h2 class="display">Modes</h2>
+      <p>One is playable today. Two are on the bench.</p>
+    </div>
+  </div>
+  <div class="modes">
+    <figure class="yard">
+      <img src="../assets/img/map-1-thumb-1200.webp" srcset="../assets/img/map-1-thumb-1200.webp 1200w, ../assets/img/map-1-thumb-2400.webp 2400w" sizes="(max-width:980px) 100vw, 40vw" width="2570" height="1252" alt="Overview of the container yard arena during a match">
+      <span class="plate">Yard 01</span>
+      <figcaption>Tag, you're it — the container yard, mid-round</figcaption>
+    </figure>
+    <table class="manifest">
+      <thead><tr><th>No.</th><th>Mode</th><th>Status</th><th>Rules</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="no">01</td>
+          <td class="name">Tag, you're it</td>
+          <td class="st"><span class="status beta">Beta</span></td>
+          <td class="rules">Classic rules: one potato, everybody runs, whoever holds it at zero is out.</td>
+        </tr>
+        <tr>
+          <td class="no">02</td>
+          <td class="name">Infected</td>
+          <td class="st"><span class="status dev">In development</span></td>
+          <td class="rules"><span class="todo">TODO: rules in one line (from the team)</span></td>
+        </tr>
+        <tr>
+          <td class="no">03</td>
+          <td class="name">Team deathmatch</td>
+          <td class="st"><span class="status dev">In development</span></td>
+          <td class="rules"><span class="todo">TODO: rules in one line (from the team)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="strip">
+  <span class="mono">Wild Alchemists · Madrid</span>
+  <ul>
+    <li><a href="https://store.steampowered.com/app/3650190/">Steam</a></li>
+    <li><a href="https://discord.gg/tNm9bszS">Discord</a></li>
+    <li><a href="https://www.instagram.com/wild.alchemists/">Instagram</a></li>
+    <li><a href="https://x.com/wildalchemists">X</a></li>
+    <li><a href="mailto:hello@wildalchemists.com">hello@wildalchemists.com</a></li>
+  </ul>
+</footer>
+</body>
+</html>

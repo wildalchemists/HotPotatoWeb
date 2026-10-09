@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hot Potato — mockup C: Match Broadcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:wght@400;500;700&family=Chivo+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Palette: sampled from the game's assets (docs/palette.json) */
+:root{
+  --ink:#0B1230;      /* deepest shadow in map-1-thumb */
+  --ink-2:#121B45;
+  --line:#2A3566;
+  --sky:#3BABD2;      /* shot-2 sky */
+  --yellow:#E8C73B;   /* the potato */
+  --purple:#6336C2;   /* the runner */
+  --purple-lit:#A744CD;/* runner highlights, shot-3 */
+  --red:#DD3714;      /* sneakers */
+  --green:#268741; --blue:#154396; --concrete:#B8BDCA;
+  --paper:#F3F2EE;
+  --display:'Anton', Impact, sans-serif;
+  --text:'Chivo', system-ui, sans-serif;
+  --mono:'Chivo Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);color:var(--paper);background:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.display{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;line-height:.92;font-weight:400}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;font-weight:600}
+
+/* the fuse: scroll progress burns across the top of the page */
+.fuse{position:fixed;top:0;left:0;height:5px;width:100%;background:var(--yellow);z-index:40;transform-origin:left;box-shadow:0 0 12px rgba(232,199,59,.9)}
+.fuse::after{content:"";position:absolute;right:-6px;top:-5px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 16px 6px rgba(232,199,59,.95)}
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .fuse{animation:burn linear both;animation-timeline:scroll(root)}
+    @keyframes burn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  }
+}
+
+/* ---------- nav as a scorebar ---------- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(11,18,48,.92);backdrop-filter:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1.5rem;padding:.6rem clamp(1rem,3vw,2rem)}
+.nav .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.nav .brand .display{font-size:1.5rem}
+.live{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;font-weight:600;color:var(--paper);background:var(--red);padding:.3rem .55rem}
+.live i{width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block}
+.nav ul{list-style:none;display:flex;gap:1.3rem;margin-left:auto}
+.nav ul a{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:#C9CDE3}
+.nav ul a:hover{color:var(--yellow)}
+.lang{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;color:#8F97BD}.lang b{color:var(--paper)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-size:1.2rem;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;padding:.65rem 1.1rem;line-height:1;border:2px solid transparent}
+.btn-y{background:var(--yellow);color:var(--ink)}
+.btn-y:hover{background:#fff}
+.btn-o{border-color:var(--paper)}
+.btn-o:hover{background:var(--paper);color:var(--ink)}
+.play{width:0;height:0;border-left:.7em solid currentColor;border-top:.42em solid transparent;border-bottom:.42em solid transparent}
+
+/* ---------- hero: the live feed ---------- */
+.feed{position:relative;min-height:min(92vh,900px);overflow:hidden;display:grid;align-items:end}
+.feed > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.feed::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,18,48,.15) 0%, rgba(11,18,48,0) 25%, rgba(11,18,48,0) 45%, rgba(11,18,48,.92) 100%);pointer-events:none}
+.hud{position:absolute;left:0;right:0;top:0;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;padding:1.2rem clamp(1rem,3vw,2rem);gap:1rem}
+.hud .round{justify-self:start;background:rgba(11,18,48,.85);padding:.5rem .8rem;display:grid;gap:.15rem}
+.hud .round .mono{color:#C9CDE3}
+.hud .round b{font-family:var(--display);font-size:1.4rem;line-height:1}
+.timer{justify-self:center;text-align:center;background:rgba(11,18,48,.85);padding:.5rem 1.2rem .7rem;min-width:170px}
+.timer .t{font-family:var(--display);font-size:clamp(2.6rem,5vw,4rem);line-height:1;color:var(--yellow);font-variant-numeric:tabular-nums}
+.timer .bar{height:6px;background:rgba(255,255,255,.18);margin-top:.4rem;position:relative;overflow:visible}
+.timer .bar i{position:absolute;left:0;top:0;bottom:0;width:68%;background:var(--yellow);box-shadow:0 0 10px rgba(232,199,59,.9)}
+.hud .kicker{justify-self:end;text-align:right;background:rgba(11,18,48,.85);padding:.55rem .8rem;color:#C9CDE3;max-width:28ch}
+.callout{position:absolute;left:50%;top:33%;z-index:2;background:var(--purple);color:var(--paper);padding:.55rem 1rem .5rem;font-family:var(--display);font-size:clamp(1.6rem,3.4vw,2.8rem);text-transform:uppercase;transform:rotate(-4deg);box-shadow:0 10px 24px rgba(11,18,48,.5)}
+.callout::after{content:"";position:absolute;right:34px;bottom:-14px;border-left:12px solid transparent;border-right:12px solid transparent;border-top:16px solid var(--purple)}
+@media (prefers-reduced-motion:no-preference){
+  .callout{animation:pop .5s .4s cubic-bezier(.2,1.6,.4,1) both}
+  @keyframes pop{from{transform:rotate(-4deg) scale(.6);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
+}
+.lower{position:relative;z-index:2;max-width:1360px;width:100%;margin:0 auto;padding:clamp(6rem,14vh,10rem) clamp(1rem,4vw,3rem) clamp(2rem,5vw,3.5rem);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2rem;align-items:end}
+.lower h1{font-size:clamp(4.4rem,11.5vw,10rem);text-shadow:0 8px 30px rgba(11,18,48,.7)}
+.lower h1 span{color:var(--yellow)}
+.lower .pitch{font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500;max-width:34ch;margin:.6rem 0 1.4rem;text-shadow:0 2px 12px rgba(11,18,48,.8)}
+.ctas{display:flex;flex-wrap:wrap;gap:.8rem}
+.card{background:rgba(11,18,48,.85);border:1px solid var(--line);padding:1rem 1.1rem;display:grid;gap:.6rem;justify-self:end;width:100%;max-width:380px}
+.card .mono{color:#8F97BD}
+.card ul{list-style:none;display:grid;gap:.5rem}
+.card li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:baseline;border-top:1px solid var(--line);padding-top:.5rem}
+.card li .display{font-size:1.15rem;color:var(--yellow)}
+.card li span{font-size:.9rem;color:#C9CDE3}
+.card li b{display:block;color:var(--paper);font-weight:700}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--yellow);color:var(--ink);overflow:hidden;white-space:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.ticker div{display:inline-block;padding:.55rem 0;font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.ticker span{padding:0 1.6rem}
+@media (prefers-reduced-motion:no-preference){
+  .ticker div{animation:tick 28s linear infinite}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+}
+
+/* ---------- modes: the standings ---------- */
+.section{max-width:1360px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem 2rem;margin-bottom:1.6rem;border-bottom:2px solid var(--paper);padding-bottom:1rem}
+.sec-head h2{font-size:clamp(3.4rem,7vw,6rem)}
+.sec-head p{font-size:1.15rem;color:#C9CDE3;max-width:40ch}
+.standings{list-style:none;display:grid;gap:2px}
+.row{display:grid;grid-template-columns:4.5rem minmax(0,2.2fr) auto minmax(0,3fr);gap:1.2rem;align-items:center;background:var(--ink-2);border:1px solid var(--line);padding:1.1rem 1.3rem}
+.row .rank{font-family:var(--display);font-size:2.4rem;color:var(--yellow);line-height:1}
+.row .name{font-family:var(--display);font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:.95;text-transform:uppercase}
+.row .rules{color:#C9CDE3;font-size:1rem}
+.pill{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.4rem .6rem;border:2px solid var(--paper);white-space:nowrap}
+.pill.beta{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.pill.dev{color:#8F97BD;border-color:#4A5588}
+.row.lead{grid-template-columns:4.5rem minmax(0,2.2fr) auto minmax(0,3fr) minmax(0,3fr);background:linear-gradient(90deg, var(--ink-2), #1A2456)}
+.row.lead .replay{position:relative;border:1px solid var(--line);aspect-ratio:16/9}
+.row.lead .replay img{width:100%;height:100%;object-fit:cover}
+.row.lead .replay a{position:absolute;left:0;bottom:0;display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);padding:.4rem .7rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;font-weight:600}
+.row.lead .replay a:hover{color:var(--yellow)}
+.todo{display:inline-block;border:1px dashed var(--red);color:#FF8A6B;padding:.3rem .5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em}
+
+/* ---------- footer strip ---------- */
+.strip{border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem 2.5rem;align-items:center;justify-content:space-between;padding:1.25rem clamp(1rem,4vw,3rem)}
+.strip ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.4rem}
+.strip a{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#C9CDE3}
+.strip a:hover{color:var(--yellow)}
+
+@media (max-width:900px){.nav ul{display:none}.lang{margin-left:auto}}
+@media (max-width:980px){
+  .lower{grid-template-columns:1fr}
+  .card{justify-self:start;max-width:none}
+  .row,.row.lead{grid-template-columns:3.2rem 1fr;gap:.5rem .9rem}
+  .row .rank{grid-row:1/4;font-size:1.8rem}
+  .row .rules,.row .st,.row .replay{grid-column:2}
+  .row.lead .replay{max-width:420px}
+}
+@media (max-width:640px){
+  .nav ul,.hud .kicker{display:none}
+  .nav{gap:.7rem}
+  .nav .brand .display{font-size:1.15rem}
+  .nav .btn{font-size:1rem;padding:.5rem .7rem}
+  .hud{grid-template-columns:auto 1fr;gap:.6rem}
+  .timer{justify-self:end;min-width:0;padding:.4rem .8rem .5rem}
+  .callout{top:19%;left:6%}
+  .lower h1{font-size:clamp(4rem,21vw,5.4rem)}
+  .feed{min-height:auto}
+  .lower{padding-top:14rem}
+}
+@media (max-width:420px){.live{display:none}}
+</style>
+</head>
+<body>
+<div class="fuse" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="display">Hot Potato</span><span class="live"><i></i>Live</span></a>
+  <ul>
+    <li><a href="#how-it-plays">How it plays</a></li>
+    <li><a href="#modes">Modes</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#press-kit">Press &amp; contact</a></li>
+  </ul>
+  <span class="lang"><b>EN</b> / ES</span>
+  <a class="btn btn-y" href="https://store.steampowered.com/app/3650190/">Wishlist</a>
+</header>
+
+<section class="feed" id="top">
+  <img src="../assets/img/map-1-thumb-1200.webp" srcset="../assets/img/map-1-thumb-1200.webp 1200w, ../assets/img/map-1-thumb-2400.webp 2400w" sizes="100vw" width="2570" height="1252" alt="A full match in the container yard: eight runners scatter while the potato closes in" fetchpriority="high">
+  <div class="hud" aria-hidden="true">
+    <div class="round"><span class="mono">Round</span><b>3 / 5</b></div>
+    <div class="timer"><div class="t">0:42</div><div class="bar"><i></i></div></div>
+    <div class="kicker mono">Multiplayer party brawler · Unreal Engine 5 · Steam</div>
+  </div>
+  <div class="callout" aria-hidden="true">You're it</div>
+  <div class="lower">
+    <div>
+      <h1 class="display">Hot <span>Potato</span></h1>
+      <p class="pitch">Get tagged and you're the potato. Pass it on before the clock hits zero.</p>
+      <div class="ctas">
+        <a class="btn btn-y" href="https://store.steampowered.com/app/3650190/">Wishlist on Steam</a>
+        <a class="btn btn-o" href="#trailer"><span class="play" aria-hidden="true"></span>Watch the trailer</a>
+      </div>
+    </div>
+    <aside class="card" aria-label="Awards">
+      <span class="mono">Awards · 2025 season</span>
+      <ul>
+        <li><span class="display">01</span><span><b>3rd Jury Award</b>Match in Games 2025</span></li>
+        <li><span class="display">02</span><span><b>Audience Award</b>Match in Games 2025</span></li>
+        <li><span class="display">03</span><span><b>Best Idea Award</b>CYL Game Show 2025</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div>
+    <span>Match in Games 2025 — 3rd Jury Award</span><span>·</span><span>Match in Games 2025 — Audience Award</span><span>·</span><span>CYL Game Show 2025 — Best Idea Award</span><span>·</span><span>Wishlist on Steam · app 3650190</span><span>·</span>
+    <span>Match in Games 2025 — 3rd Jury Award</span><span>·</span><span>Match in Games 2025 — Audience Award</span><span>·</span><span>CYL Game Show 2025 — Best Idea Award</span><span>·</span><span>Wishlist on Steam · app 3650190</span><span>·</span>
+  </div>
+</div>
+
+<section class="section" id="modes">
+  <div class="sec-head">
+    <h2 class="display">Modes</h2>
+    <p>One is playable today. Two are on the bench.</p>
+  </div>
+  <ol class="standings">
+    <li class="row lead">
+      <span class="rank">01</span>
+      <span class="name">Tag, you're it</span>
+      <span class="st"><span class="pill beta">Beta</span></span>
+      <span class="rules">Classic rules: one potato, everybody runs, whoever holds it at zero is out.</span>
+      <figure class="replay">
+        <img src="../assets/img/shot-3-1200.webp" srcset="../assets/img/shot-3-1200.webp 1200w, ../assets/img/shot-3-2400.webp 2193w" sizes="(max-width:980px) 90vw, 25vw" width="2193" height="1234" alt="The runner slides down a red container roof with the potato right behind">
+        <a href="#gallery" id="trailer"><span class="play" aria-hidden="true"></span>Replay</a>
+      </figure>
+    </li>
+    <li class="row">
+      <span class="rank">02</span>
+      <span class="name">Infected</span>
+      <span class="st"><span class="pill dev">In development</span></span>
+      <span class="rules"><span class="todo">TODO: rules in one line (from the team)</span></span>
+    </li>
+    <li class="row">
+      <span class="rank">03</span>
+      <span class="name">Team deathmatch</span>
+      <span class="st"><span class="pill dev">In development</span></span>
+      <span class="rules"><span class="todo">TODO: rules in one line (from the team)</span></span>
+    </li>
+  </ol>
+</section>
+
+<footer class="strip">
+  <span class="mono">Wild Alchemists · Madrid</span>
+  <ul>
+    <li><a href="https://store.steampowered.com/app/3650190/">Steam</a></li>
+    <li><a href="https://discord.gg/tNm9bszS">Discord</a></li>
+    <li><a href="https://www.instagram.com/wild.alchemists/">Instagram</a></li>
+    <li><a href="https://x.com/wildalchemists">X</a></li>
+    <li><a href="mailto:hello@wildalchemists.com">hello@wildalchemists.com</a></li>
+  </ul>
+</footer>
+</body>
+</html>

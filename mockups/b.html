@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hot Potato — mockup B: Tagged</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&family=Rubik:wght@400;500;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+/* Palette: sampled from the game's assets (docs/palette.json); the two "wall" reds/teals come from the key art after a brightness lift */
+:root{
+  --wall-red:#A51F1B;    /* between map-1-thumb red containers (#961B16) and the key art's HOT container */
+  --wall-red-2:#8E1A17;
+  --wall-teal:#2E8A86;   /* the POTATO container in the key art, lifted */
+  --wall-yellow:#E8C73B; /* the potato, char-1-art */
+  --wall-yellow-2:#C7851A;/* yellow container wall, char-2-art */
+  --wall-purple:#6336C2; /* the runner, shot-1 */
+  --wall-purple-2:#4F2AA0;
+  --blue:#154396; --green:#268741; --sky:#3BABD2; --red:#DD3714;
+  --concrete:#B8BDCA; --ink:#0B1230; --paper:#F4F2EC; --tape:rgba(214,196,150,.75);
+  --spray:'Rubik Spray Paint', 'Rubik', sans-serif;
+  --text:'Rubik', system-ui, sans-serif;
+  --marker:'Permanent Marker', cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);color:var(--ink);background:var(--concrete);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+.spray{font-family:var(--spray);text-transform:uppercase;line-height:.9;font-weight:400}
+.marker{font-family:var(--marker)}
+.corrugated{background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.16) 0 10px, transparent 10px 34px)}
+
+/* ---------- nav: a strip of tape across the top ---------- */
+.nav{position:sticky;top:0;z-index:20;background:var(--paper);display:flex;align-items:center;gap:1.5rem;padding:.7rem clamp(1rem,3vw,2rem);box-shadow:0 4px 0 var(--ink)}
+.nav .brand{font-family:var(--spray);font-size:1.5rem;text-transform:uppercase;text-decoration:none;line-height:1}
+.nav ul{list-style:none;display:flex;gap:1.3rem;margin-left:auto}
+.nav ul a{font-weight:700;font-size:.9rem;text-decoration:none}
+.nav ul a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.lang{font-weight:700;font-size:.9rem;color:#555c70}.lang b{color:var(--ink)}
+.sticker{display:inline-block;background:var(--paper);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:.55rem .9rem;text-decoration:none;font-weight:900;text-transform:uppercase;letter-spacing:.02em;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.sticker.y{background:var(--wall-yellow)}
+.sticker:hover{transform:rotate(0) translate(-2px,-2px)!important}
+.nav .sticker{transform:rotate(-2deg);font-size:.95rem}
+
+/* ---------- hero: the red wall ---------- */
+.hero{background:var(--wall-red);color:var(--paper);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 12px, transparent 12px 40px);pointer-events:none}
+.hero-grid{position:relative;max-width:1360px;margin:0 auto;padding:clamp(2.5rem,5vw,5rem) clamp(1rem,4vw,3rem) clamp(3rem,6vw,6rem);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);align-items:center}
+.kicker{display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.4rem .7rem;transform:rotate(-1.5deg)}
+.hero h1{font-size:clamp(4.4rem,13vw,11.5rem);margin:.15em 0 .2em;color:var(--paper);text-shadow:.045em .045em 0 var(--ink), -.012em -.012em 0 var(--ink)}
+.hero h1 .pot{color:var(--wall-yellow)}
+.pitch{display:inline-block;background:var(--paper);color:var(--ink);font-weight:700;font-size:clamp(1.1rem,1.7vw,1.45rem);padding:.7rem 1rem;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);max-width:30ch;transform:rotate(-1deg);margin:0 0 1.8rem}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 2rem;margin-bottom:2rem}
+.ctas .sticker.y{font-size:1.35rem;padding:.8rem 1.2rem;transform:rotate(1.5deg)}
+.circled{position:relative;display:inline-block;font-family:var(--marker);font-size:1.5rem;color:var(--paper);text-decoration:none;padding:.5rem 1.4rem}
+.circled svg{position:absolute;inset:-18% -10%;width:120%;height:136%;pointer-events:none;overflow:visible}
+.circled svg path{fill:none;stroke:var(--paper);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:0}
+.circled .arrow{position:absolute;left:-74px;top:-10px;width:78px;height:60px;overflow:visible}
+.circled .arrow path{fill:none;stroke:var(--wall-yellow);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.laurels{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;list-style:none}
+.laurels li{font-weight:700;text-transform:uppercase;font-size:.72rem;letter-spacing:.08em;line-height:1.25;color:rgba(244,242,236,.82);padding:.3rem 0}
+.laurels li b{display:block;font-size:1rem;font-weight:900;color:var(--paper)}
+.laurels li:nth-child(2){transform:rotate(2deg)}
+.laurels li:nth-child(3){transform:rotate(-1.5deg)}
+
+/* posters pasted on the wall */
+.wallpile{position:relative;min-height:560px}
+.poster{position:absolute;border:10px solid var(--paper);box-shadow:0 18px 30px rgba(11,18,48,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.poster img{width:100%;height:100%;object-fit:cover}
+.poster .tape{position:absolute;width:92px;height:28px;background:var(--tape);transform:rotate(-38deg);left:-30px;top:-16px}
+.poster .tape.r{left:auto;right:-30px;transform:rotate(38deg)}
+.poster.key{right:0;top:56px;width:min(78%,520px);aspect-ratio:1400/891;transform:rotate(3deg)}
+.poster.shot{left:0;bottom:0;width:min(62%,420px);aspect-ratio:16/9;transform:rotate(-4deg);border-width:8px}
+.poster:hover{transform:rotate(0) scale(1.02)}
+.note{position:absolute;left:0;top:-8px;z-index:3;font-family:var(--marker);font-size:1.3rem;color:var(--paper);transform:rotate(-5deg);line-height:1.1;text-shadow:2px 2px 0 var(--ink)}
+.note svg{position:absolute;left:98%;top:40%;width:110px;height:80px;overflow:visible}
+.note svg path{fill:none;stroke:var(--paper);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- roles: two tagged walls ---------- */
+.roles-head{background:var(--paper);padding:clamp(2rem,4vw,3rem) clamp(1rem,4vw,3rem) 1.2rem;border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)}
+.roles-head .in{max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;gap:1rem 3rem}
+.roles-head h2{font-size:clamp(3.6rem,8vw,7rem)}
+.roles-head p{font-weight:700;font-size:1.2rem;background:var(--wall-yellow);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:.5rem .9rem;transform:rotate(-1.5deg)}
+.walls{display:grid;grid-template-columns:1fr 1fr}
+.wall{position:relative;padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,3rem) clamp(3rem,5vw,5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.5rem;align-items:center;overflow:hidden}
+.wall::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 12px, transparent 12px 40px);pointer-events:none}
+.wall.yellow{background:var(--wall-yellow);color:var(--ink)}
+.wall.purple{background:var(--wall-purple);color:var(--paper)}
+.wall > *{position:relative}
+.wall h3{font-size:clamp(2.6rem,4.6vw,4.2rem);text-shadow:.04em .04em 0 rgba(11,18,48,.35)}
+.wall.purple h3{text-shadow:.04em .04em 0 var(--ink)}
+.wall .role{font-family:var(--marker);font-size:clamp(1.4rem,2vw,1.9rem);margin:.4rem 0 .6rem;transform:rotate(-2deg);display:inline-block}
+.wall p{font-weight:500;font-size:1.1rem;max-width:30ch}
+.wall .poster{position:relative;aspect-ratio:4/5;width:100%;max-width:440px;justify-self:end}
+.wall.yellow .poster{transform:rotate(-2.5deg)}
+.wall.purple .poster{transform:rotate(2.5deg)}
+.wall .arrow{position:absolute;width:140px;height:80px;overflow:visible;right:-10%;top:35%}
+.wall .arrow path{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.wall .tag{position:absolute;right:8%;bottom:6%;font-family:var(--spray);font-size:clamp(2rem,4vw,3.4rem);text-transform:uppercase;transform:rotate(-8deg);opacity:.9}
+.wall.yellow .tag{color:var(--wall-purple)}
+.wall.purple .tag{color:var(--wall-yellow)}
+
+/* ---------- footer strip ---------- */
+.strip{background:var(--ink);color:var(--paper);display:flex;flex-wrap:wrap;gap:1rem 2.5rem;align-items:center;justify-content:space-between;padding:1.25rem clamp(1rem,4vw,3rem);font-weight:700;font-size:.9rem}
+.strip ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.4rem}
+.strip a{text-decoration:none}
+.strip a:hover{text-decoration:underline;text-underline-offset:4px}
+
+@media (prefers-reduced-motion:no-preference){
+  .circled svg path{stroke-dashoffset:900;animation:draw 1.1s .5s ease-out forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+@media (max-width:1100px){.walls{grid-template-columns:1fr}}
+@media (max-width:900px){.nav ul{display:none}.nav .sticker{margin-left:auto}}
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .wallpile{min-height:460px}
+}
+@media (max-width:640px){
+  .nav ul{display:none}
+  .nav .brand{font-size:1.25rem}
+  .nav .sticker{font-size:.8rem;padding:.45rem .7rem;margin-left:auto}
+  .hero h1{font-size:clamp(4.2rem,22vw,5.6rem)}
+  .wallpile{min-height:380px}
+  .poster.key{width:88%;top:48px}
+  .poster.shot{width:70%}
+  .note{font-size:1.1rem}
+  .wall{grid-template-columns:1fr}
+  .wall .poster{justify-self:start;max-width:86%}
+  .wall .arrow{display:none}
+  .circled .arrow{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top">Hot Potato</a>
+  <ul>
+    <li><a href="#how-it-plays">How it plays</a></li>
+    <li><a href="#modes">Modes</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#press-kit">Press &amp; contact</a></li>
+  </ul>
+  <span class="lang"><b>EN</b> / ES</span>
+  <a class="sticker y" href="https://store.steampowered.com/app/3650190/">Wishlist on Steam</a>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <span class="kicker">Multiplayer party brawler · Unreal Engine 5 · Steam</span>
+      <h1 class="spray">Hot <span class="pot">Potato</span></h1>
+      <p class="pitch">Get tagged and you're the potato. Pass it on before the clock hits zero.</p>
+      <div class="ctas">
+        <a class="sticker y" href="https://store.steampowered.com/app/3650190/">Wishlist on Steam</a>
+        <a class="circled" href="#trailer">
+          <svg viewBox="0 0 260 100" aria-hidden="true"><path d="M14 48 C 30 6, 220 -4, 246 40 C 262 72, 200 98, 96 92 C 36 88, -4 70, 18 42 C 24 34, 40 30, 52 30"/></svg>
+          <svg class="arrow" viewBox="0 0 80 60" aria-hidden="true"><path d="M4 54 C 20 44, 30 20, 62 10"/><path d="M50 6 L 64 9 L 58 22"/></svg>
+          watch the trailer
+        </a>
+      </div>
+      <ul class="laurels" aria-label="Awards">
+        <li><b>3rd Jury Award</b>Match in Games 2025</li>
+        <li><b>Audience Award</b>Match in Games 2025</li>
+        <li><b>Best Idea Award</b>CYL Game Show 2025</li>
+      </ul>
+    </div>
+    <div class="wallpile">
+      <span class="note">the actual logo,<br>sprayed on a container
+        <svg viewBox="0 0 120 90" aria-hidden="true"><path d="M4 6 C 30 40, 60 50, 108 46"/><path d="M96 34 L 110 46 L 94 58"/></svg>
+      </span>
+      <figure class="poster key" id="trailer">
+        <img src="assets/keyart-logo-crop.jpg" width="1400" height="891" alt="Key art crop: the graffiti HOT POTATO logo sprayed on a red and a teal container, the runner peeking from the left">
+        <span class="tape" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+      </figure>
+      <figure class="poster shot">
+        <img src="../assets/img/shot-2-1200.webp" srcset="../assets/img/shot-2-1200.webp 1200w, ../assets/img/shot-2-2400.webp 2193w" sizes="(max-width:980px) 70vw, 30vw" width="2193" height="1234" alt="The runner and the glowing potato leap between blue and green containers">
+        <span class="tape" aria-hidden="true"></span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="roles-head">
+    <div class="in">
+      <h2 class="spray">Roles</h2>
+      <p>Two sides of the same round. You will play both.</p>
+    </div>
+  </div>
+  <div class="walls">
+    <article class="wall yellow">
+      <div>
+        <h3 class="spray">The Potato</h3>
+        <span class="role">chase the rest</span>
+        <p>Catch another player to pass the potato on.</p>
+        <svg class="arrow" viewBox="0 0 140 80" aria-hidden="true"><path d="M6 60 C 40 70, 80 10, 128 24"/><path d="M112 10 L 130 24 L 114 40"/></svg>
+      </div>
+      <figure class="poster">
+        <img src="../assets/img/char-1-art-1200.webp" srcset="../assets/img/char-1-art-1200.webp 1200w, ../assets/img/char-1-art-2400.webp 2193w" sizes="(max-width:640px) 86vw, 30vw" width="2193" height="1234" alt="The potato: a chunky yellow character with an angry face and red sneakers" style="object-position:50% 60%">
+        <span class="tape" aria-hidden="true"></span><span class="tape r" aria-hidden="true"></span>
+      </figure>
+      <span class="tag" aria-hidden="true">you're it</span>
+    </article>
+    <article class="wall purple">
+      <div>
+        <h3 class="spray">The Runner</h3>
+        <span class="role">don't become the potato</span>
+        <p>Keep moving, keep your distance, don't get tagged.</p>
+        <svg class="arrow" viewBox="0 0 140 80" aria-hidden="true"><path d="M6 20 C 40 10, 80 70, 128 56"/><path d="M112 40 L 130 56 L 112 70"/></svg>
+      </div>
+      <figure class="poster">
+        <img src="../assets/img/char-2-art-1200.webp" srcset="../assets/img/char-2-art-1200.webp 1200w, ../assets/img/char-2-art-2400.webp 2570w" sizes="(max-width:640px) 86vw, 30vw" width="2570" height="1289" alt="The runner: a kid in a purple cap and purple-and-yellow outfit in front of a yellow container" style="object-position:42% 60%">
+        <span class="tape" aria-hidden="true"></span>
+      </figure>
+      <span class="tag" aria-hidden="true">run</span>
+    </article>
+  </div>
+</section>
+
+<footer class="strip">
+  <span>Wild Alchemists · Madrid</span>
+  <ul>
+    <li><a href="https://store.steampowered.com/app/3650190/">Steam</a></li>
+    <li><a href="https://discord.gg/tNm9bszS">Discord</a></li>
+    <li><a href="https://www.instagram.com/wild.alchemists/">Instagram</a></li>
+    <li><a href="https://x.com/wildalchemists">X</a></li>
+    <li><a href="mailto:hello@wildalchemists.com">hello@wildalchemists.com</a></li>
+  </ul>
+</footer>
+</body>
+</html>
