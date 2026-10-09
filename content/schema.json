@@ -268,6 +268,56 @@
               "type": "string"
             }
           }
+        },
+        "roadmap": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "when",
+              "what"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "when": {
+                "$ref": "#/$defs/text"
+              },
+              "what": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
+        "price": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency",
+            "public"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "approximate": {
+              "type": "boolean"
+            },
+            "public": {
+              "type": "boolean",
+              "description": "Only true prices that the team has made public are rendered."
+            },
+            "note": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -326,6 +376,9 @@
         "showAwards": {
           "type": "boolean",
           "default": true
+        },
+        "communityCta": {
+          "$ref": "#/$defs/link"
         }
       }
     },
@@ -862,6 +915,16 @@
               }
             }
           }
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "primary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "ids of the socials shown as big CTAs, in order."
         }
       }
     },

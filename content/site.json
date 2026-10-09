@@ -18,23 +18,124 @@
     "ogImage": "assets/img/og-1200x630.jpg",
     "themeColor": "#1EA7E6",
     "copyrightYear": 2026,
-    "releaseStatus": { "en": "TODO: release status (Coming soon / Demo available / date)", "es": "TODO: estado de lanzamiento" },
-    "platforms": ["TODO: platforms as listed on Steam"],
-    "players": { "en": "TODO: player count (local / online, min–max)", "es": "TODO: número de jugadores" },
-    "genreTags": ["TODO: genre tags as on Steam"],
-    "ageRating": "TODO: PEGI / age rating, or remove"
+    "releaseStatus": {
+      "en": "Early access February–March 2027 · Full release Q3 2027",
+      "es": "Acceso anticipado febrero–marzo de 2027 · Lanzamiento completo T3 2027"
+    },
+    "platforms": [
+      "TODO: platforms as listed on Steam"
+    ],
+    "players": {
+      "en": "TODO: player count (local / online, min–max)",
+      "es": "TODO: número de jugadores"
+    },
+    "genreTags": [
+      "TODO: genre tags as on Steam"
+    ],
+    "ageRating": "TODO: PEGI / age rating, or remove",
+    "roadmap": [
+      {
+        "id": "discord-beta",
+        "when": {
+          "en": "Before early access",
+          "es": "Antes del acceso anticipado"
+        },
+        "what": {
+          "en": "Closed beta on Discord",
+          "es": "Beta cerrada en Discord"
+        }
+      },
+      {
+        "id": "early-access",
+        "when": {
+          "en": "Feb–Mar 2027",
+          "es": "Feb–mar 2027"
+        },
+        "what": {
+          "en": "Early access on Steam",
+          "es": "Acceso anticipado en Steam"
+        }
+      },
+      {
+        "id": "release",
+        "when": {
+          "en": "Q3 2027",
+          "es": "T3 2027"
+        },
+        "what": {
+          "en": "Full release",
+          "es": "Lanzamiento completo"
+        }
+      }
+    ],
+    "price": {
+      "amount": "4.99",
+      "currency": "EUR",
+      "approximate": true,
+      "public": false,
+      "note": "Team said 'around 4,99, premium'. Not shown on the page until confirmed as public (meta.price.public = true)."
+    }
   },
   "nav": {
     "items": [
-      { "label": { "en": "How it plays", "es": "Cómo se juega" }, "href": "#how-it-plays" },
-      { "label": { "en": "Modes", "es": "Modos" }, "href": "#modes" },
-      { "label": { "en": "Roles", "es": "Roles" }, "href": "#roles" },
-      { "label": { "en": "Gallery", "es": "Galería" }, "href": "#gallery" },
-      { "label": { "en": "Awards", "es": "Premios" }, "href": "#awards" },
-      { "label": { "en": "Studio", "es": "Estudio" }, "href": "#studio" },
-      { "label": { "en": "Press & contact", "es": "Prensa y contacto" }, "href": "#press-kit" }
+      {
+        "label": {
+          "en": "How it plays",
+          "es": "Cómo se juega"
+        },
+        "href": "#how-it-plays"
+      },
+      {
+        "label": {
+          "en": "Modes",
+          "es": "Modos"
+        },
+        "href": "#modes"
+      },
+      {
+        "label": {
+          "en": "Roles",
+          "es": "Roles"
+        },
+        "href": "#roles"
+      },
+      {
+        "label": {
+          "en": "Gallery",
+          "es": "Galería"
+        },
+        "href": "#gallery"
+      },
+      {
+        "label": {
+          "en": "Awards",
+          "es": "Premios"
+        },
+        "href": "#awards"
+      },
+      {
+        "label": {
+          "en": "Studio",
+          "es": "Estudio"
+        },
+        "href": "#studio"
+      },
+      {
+        "label": {
+          "en": "Press & contact",
+          "es": "Prensa y contacto"
+        },
+        "href": "#press-kit"
+      }
     ],
-    "cta": { "label": { "en": "Wishlist on Steam", "es": "Lista de deseados" }, "href": "https://store.steampowered.com/app/3650190/", "external": true }
+    "cta": {
+      "label": {
+        "en": "Wishlist on Steam",
+        "es": "Lista de deseados"
+      },
+      "href": "https://store.steampowered.com/app/3650190/",
+      "external": true
+    }
   },
   "hero": {
     "kicker": {
@@ -45,28 +146,61 @@
       "en": "Get tagged and you're the potato. Pass it on before the clock hits zero.",
       "es": "Si te pillan, eres la patata. Pásala antes de que el reloj llegue a cero."
     },
-    "primaryCta": { "label": { "en": "Wishlist on Steam", "es": "Añadir a tu lista de deseados" }, "href": "https://store.steampowered.com/app/3650190/", "external": true },
-    "secondaryCta": { "label": { "en": "Watch the trailer", "es": "Ver el tráiler" }, "href": "#trailer" },
+    "primaryCta": {
+      "label": {
+        "en": "Wishlist on Steam",
+        "es": "Añadir a tu lista de deseados"
+      },
+      "href": "https://store.steampowered.com/app/3650190/",
+      "external": true
+    },
+    "secondaryCta": {
+      "label": {
+        "en": "Watch the trailer",
+        "es": "Ver el tráiler"
+      },
+      "href": "#trailer"
+    },
     "keyArt": {
       "src": "hero-art",
-      "widths": [1200, 2400],
+      "widths": [
+        1200,
+        2400
+      ],
       "width": 1414,
       "height": 2000,
       "alt": {
         "en": "Key art: the runner in a purple cap leans away from a glowing potato character in front of containers tagged HOT POTATO",
         "es": "Arte principal: el corredor con gorra morada se aparta de una patata encendida frente a contenedores con el grafiti HOT POTATO"
       },
-      "focal": { "x": 0.5, "y": 0.45 }
+      "focal": {
+        "x": 0.5,
+        "y": 0.45
+      }
     },
     "logo": "TODO: assets/img/logo.svg (the graffiti HOT POTATO logo as a clean SVG or transparent PNG)",
-    "showAwards": true
+    "showAwards": true,
+    "communityCta": {
+      "label": {
+        "en": "Join the Discord",
+        "es": "Entra en el Discord"
+      },
+      "href": "https://discord.gg/tNm9bszS",
+      "external": true
+    }
   },
   "trailer": {
     "youtubeId": "PpLcHtBJhDs",
-    "title": { "en": "Hot Potato — trailer", "es": "Hot Potato — tráiler" },
+    "title": {
+      "en": "Hot Potato — trailer",
+      "es": "Hot Potato — tráiler"
+    },
     "poster": {
       "src": "shot-1776779423012",
-      "widths": [1200, 2400],
+      "widths": [
+        1200,
+        2400
+      ],
       "width": 2193,
       "height": 1234,
       "alt": {
@@ -76,7 +210,10 @@
     }
   },
   "howItPlays": {
-    "heading": { "en": "How it plays", "es": "Cómo se juega" },
+    "heading": {
+      "en": "How it plays",
+      "es": "Cómo se juega"
+    },
     "intro": {
       "en": "One potato, one arena, one clock. Nobody wants to be holding it when it runs out.",
       "es": "Una patata, una arena y un reloj. Nadie quiere tenerla cuando llegue a cero."
@@ -84,197 +221,714 @@
     "beats": [
       {
         "id": "tagged",
-        "title": { "en": "You get tagged", "es": "Te pillan" },
-        "body": { "en": "Whoever is the potato runs at you. One touch and now it's you.", "es": "Quien lleva la patata va a por ti. Un toque y ahora eres tú." },
-        "image": { "src": "shot-3", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The potato chases the runner down a red container roof", "es": "La patata persigue al corredor por el techo rojo de un contenedor" } }
+        "title": {
+          "en": "You get tagged",
+          "es": "Te pillan"
+        },
+        "body": {
+          "en": "Whoever is the potato runs at you. One touch and now it's you.",
+          "es": "Quien lleva la patata va a por ti. Un toque y ahora eres tú."
+        },
+        "image": {
+          "src": "shot-3",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The potato chases the runner down a red container roof",
+            "es": "La patata persigue al corredor por el techo rojo de un contenedor"
+          }
+        }
       },
       {
         "id": "its-you",
-        "title": { "en": "Now you're it", "es": "Ahora eres la patata" },
-        "body": { "en": "You turn into the potato. Everyone else runs. The clock keeps ticking.", "es": "Te conviertes en la patata. Los demás huyen. El reloj sigue corriendo." },
-        "image": { "src": "char-1-art", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The potato character stands in a yard of yellow and blue containers", "es": "La patata, de pie en un patio de contenedores amarillos y azules" } }
+        "title": {
+          "en": "Now you're it",
+          "es": "Ahora eres la patata"
+        },
+        "body": {
+          "en": "You turn into the potato. Everyone else runs. The clock keeps ticking.",
+          "es": "Te conviertes en la patata. Los demás huyen. El reloj sigue corriendo."
+        },
+        "image": {
+          "src": "char-1-art",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The potato character stands in a yard of yellow and blue containers",
+            "es": "La patata, de pie en un patio de contenedores amarillos y azules"
+          }
+        }
       },
       {
         "id": "pass-it",
-        "title": { "en": "Pass it on", "es": "Pásala" },
-        "body": { "en": "Chase, jump, corner someone, tag them. Their problem now.", "es": "Persigue, salta, acorrala a alguien y tócale. Ahora es su problema." },
-        "image": { "src": "shot-2", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The runner and the glowing potato leap between blue and green containers", "es": "El corredor y la patata encendida saltan entre contenedores azules y verdes" } }
+        "title": {
+          "en": "Pass it on",
+          "es": "Pásala"
+        },
+        "body": {
+          "en": "Chase, jump, corner someone, tag them. Their problem now.",
+          "es": "Persigue, salta, acorrala a alguien y tócale. Ahora es su problema."
+        },
+        "image": {
+          "src": "shot-2",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The runner and the glowing potato leap between blue and green containers",
+            "es": "El corredor y la patata encendida saltan entre contenedores azules y verdes"
+          }
+        }
       },
       {
         "id": "zero",
-        "title": { "en": "Don't hold it at zero", "es": "Que no te pille el cero" },
-        "body": { "en": "When the timer ends, the one holding the potato loses the round.", "es": "Cuando el tiempo se acaba, quien tenga la patata pierde la ronda." },
-        "image": { "src": "map-1-thumb", "widths": [1200, 2400], "width": 2570, "height": 1252, "alt": { "en": "A full match in the container yard: eight runners scatter while the potato closes in", "es": "Una partida completa en el patio de contenedores: ocho corredores se dispersan mientras la patata se acerca" } }
+        "title": {
+          "en": "Don't hold it at zero",
+          "es": "Que no te pille el cero"
+        },
+        "body": {
+          "en": "When the timer ends, the one holding the potato loses the round.",
+          "es": "Cuando el tiempo se acaba, quien tenga la patata pierde la ronda."
+        },
+        "image": {
+          "src": "map-1-thumb",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2570,
+          "height": 1252,
+          "alt": {
+            "en": "A full match in the container yard: eight runners scatter while the potato closes in",
+            "es": "Una partida completa en el patio de contenedores: ocho corredores se dispersan mientras la patata se acerca"
+          }
+        }
       }
     ]
   },
   "features": {
-    "heading": { "en": "What makes it different", "es": "Qué lo hace distinto" },
+    "heading": {
+      "en": "What makes it different",
+      "es": "Qué lo hace distinto"
+    },
     "visible": false,
     "items": [
-      { "id": "feature-1", "title": { "en": "TODO: mechanic 1", "es": "TODO: mecánica 1" }, "body": { "en": "TODO: one concrete sentence from the team", "es": "TODO: una frase concreta del equipo" } },
-      { "id": "feature-2", "title": { "en": "TODO: mechanic 2", "es": "TODO: mecánica 2" }, "body": { "en": "TODO", "es": "TODO" } },
-      { "id": "feature-3", "title": { "en": "TODO: mechanic 3", "es": "TODO: mecánica 3" }, "body": { "en": "TODO", "es": "TODO" } }
+      {
+        "id": "feature-1",
+        "title": {
+          "en": "TODO: mechanic 1",
+          "es": "TODO: mecánica 1"
+        },
+        "body": {
+          "en": "TODO: one concrete sentence from the team",
+          "es": "TODO: una frase concreta del equipo"
+        }
+      },
+      {
+        "id": "feature-2",
+        "title": {
+          "en": "TODO: mechanic 2",
+          "es": "TODO: mecánica 2"
+        },
+        "body": {
+          "en": "TODO",
+          "es": "TODO"
+        }
+      },
+      {
+        "id": "feature-3",
+        "title": {
+          "en": "TODO: mechanic 3",
+          "es": "TODO: mecánica 3"
+        },
+        "body": {
+          "en": "TODO",
+          "es": "TODO"
+        }
+      }
     ]
   },
   "modes": {
-    "heading": { "en": "Modes", "es": "Modos" },
-    "intro": { "en": "One is playable today. Two are on the bench.", "es": "Uno ya se puede jugar. Dos están en el banquillo." },
+    "heading": {
+      "en": "Modes",
+      "es": "Modos"
+    },
+    "intro": {
+      "en": "TODO: the team says two modes are current; the old page listed one in beta and two in development. Which two?",
+      "es": "TODO: el equipo dice que hay dos modos actuales; la web antigua listaba uno en beta y dos en desarrollo. ¿Cuáles?"
+    },
     "statusLabels": {
-      "live": { "en": "Live", "es": "Disponible" },
-      "beta": { "en": "Beta", "es": "Beta" },
-      "in-development": { "en": "In development", "es": "En desarrollo" }
+      "live": {
+        "en": "Live",
+        "es": "Disponible"
+      },
+      "beta": {
+        "en": "Beta",
+        "es": "Beta"
+      },
+      "in-development": {
+        "en": "In development",
+        "es": "En desarrollo"
+      }
     },
     "items": [
       {
         "id": "tag-youre-it",
-        "name": { "en": "Tag, you're it", "es": "Tag, you're it" },
+        "name": {
+          "en": "Tag, you're it",
+          "es": "Tag, you're it"
+        },
         "status": "beta",
-        "rules": { "en": "Classic rules: one potato, everybody runs, whoever holds it at zero is out.", "es": "Las reglas de siempre: una patata, todos corren y quien la tenga a cero queda fuera." },
-        "image": { "src": "map-1-thumb", "widths": [1200, 2400], "width": 2570, "height": 1252, "alt": { "en": "Overview of the container yard arena during a match", "es": "Vista general de la arena del patio de contenedores durante una partida" } }
+        "rules": {
+          "en": "Classic rules: one potato, everybody runs, whoever holds it at zero is out.",
+          "es": "Las reglas de siempre: una patata, todos corren y quien la tenga a cero queda fuera."
+        },
+        "image": {
+          "src": "map-1-thumb",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2570,
+          "height": 1252,
+          "alt": {
+            "en": "Overview of the container yard arena during a match",
+            "es": "Vista general de la arena del patio de contenedores durante una partida"
+          }
+        }
       },
       {
         "id": "infected",
-        "name": { "en": "Infected", "es": "Infected" },
+        "name": {
+          "en": "Infected",
+          "es": "Infected"
+        },
         "status": "in-development",
-        "rules": { "en": "TODO: rules in one line (from the team)", "es": "TODO: reglas en una línea (del equipo)" }
+        "rules": {
+          "en": "TODO: rules in one line (from the team)",
+          "es": "TODO: reglas en una línea (del equipo)"
+        }
       },
       {
         "id": "team-deathmatch",
-        "name": { "en": "Team deathmatch", "es": "Team deathmatch" },
+        "name": {
+          "en": "Team deathmatch",
+          "es": "Team deathmatch"
+        },
         "status": "in-development",
-        "rules": { "en": "TODO: rules in one line (from the team)", "es": "TODO: reglas en una línea (del equipo)" }
+        "rules": {
+          "en": "TODO: rules in one line (from the team)",
+          "es": "TODO: reglas en una línea (del equipo)"
+        }
       }
     ]
   },
   "characters": {
-    "heading": { "en": "Roles", "es": "Roles" },
-    "intro": { "en": "Two sides of the same round. You will play both.", "es": "Dos caras de la misma ronda. Vas a jugar las dos." },
+    "heading": {
+      "en": "Roles",
+      "es": "Roles"
+    },
+    "intro": {
+      "en": "Two sides of the same round. You will play both.",
+      "es": "Dos caras de la misma ronda. Vas a jugar las dos."
+    },
     "items": [
       {
         "id": "potato",
-        "name": { "en": "The Potato", "es": "La Patata" },
-        "role": { "en": "Chase the rest", "es": "Persigue a los demás" },
-        "line": { "en": "Catch another player to pass the potato on.", "es": "Alcanza a otro jugador para pasarle la patata." },
-        "image": { "src": "char-1-art", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The potato: a chunky yellow character with an angry face and red sneakers", "es": "La patata: un personaje amarillo y rechoncho con cara de enfado y zapatillas rojas" }, "focal": { "x": 0.5, "y": 0.6 } }
+        "name": {
+          "en": "The Potato",
+          "es": "La Patata"
+        },
+        "role": {
+          "en": "Chase the rest",
+          "es": "Persigue a los demás"
+        },
+        "line": {
+          "en": "Catch another player to pass the potato on.",
+          "es": "Alcanza a otro jugador para pasarle la patata."
+        },
+        "image": {
+          "src": "char-1-art",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The potato: a chunky yellow character with an angry face and red sneakers",
+            "es": "La patata: un personaje amarillo y rechoncho con cara de enfado y zapatillas rojas"
+          },
+          "focal": {
+            "x": 0.5,
+            "y": 0.6
+          }
+        }
       },
       {
         "id": "runner",
-        "name": { "en": "The Runner", "es": "El Corredor" },
-        "role": { "en": "Don't become the potato", "es": "No te conviertas en la patata" },
-        "line": { "en": "Keep moving, keep your distance, don't get tagged.", "es": "No pares, guarda las distancias y que no te toquen." },
-        "image": { "src": "char-2-art", "widths": [1200, 2400], "width": 2570, "height": 1289, "alt": { "en": "The runner: a kid in a purple cap and purple-and-yellow outfit in front of a yellow container", "es": "El corredor: un chaval con gorra morada y ropa morada y amarilla delante de un contenedor amarillo" }, "focal": { "x": 0.42, "y": 0.6 } }
+        "name": {
+          "en": "The Runner",
+          "es": "El Corredor"
+        },
+        "role": {
+          "en": "Don't become the potato",
+          "es": "No te conviertas en la patata"
+        },
+        "line": {
+          "en": "Keep moving, keep your distance, don't get tagged.",
+          "es": "No pares, guarda las distancias y que no te toquen."
+        },
+        "image": {
+          "src": "char-2-art",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2570,
+          "height": 1289,
+          "alt": {
+            "en": "The runner: a kid in a purple cap and purple-and-yellow outfit in front of a yellow container",
+            "es": "El corredor: un chaval con gorra morada y ropa morada y amarilla delante de un contenedor amarillo"
+          },
+          "focal": {
+            "x": 0.42,
+            "y": 0.6
+          }
+        }
       }
     ]
   },
   "gallery": {
-    "heading": { "en": "Screenshots", "es": "Capturas" },
+    "heading": {
+      "en": "Screenshots",
+      "es": "Capturas"
+    },
     "items": [
-      { "id": "shot-2", "image": { "src": "shot-2", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The runner and the glowing potato leap between blue and green containers", "es": "El corredor y la patata encendida saltan entre contenedores azules y verdes" } } },
-      { "id": "shot-3", "image": { "src": "shot-3", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The runner slides down a red container roof with the potato right behind", "es": "El corredor se desliza por el techo rojo de un contenedor con la patata justo detrás" } } },
-      { "id": "shot-1", "image": { "src": "shot-1776779423012", "widths": [1200, 2400], "width": 2193, "height": 1234, "alt": { "en": "The runner jumps off a green container while the potato hides inside it", "es": "El corredor salta desde un contenedor verde mientras la patata se esconde dentro" } } },
-      { "id": "shot-yard", "image": { "src": "map-1-thumb", "widths": [1200, 2400], "width": 2570, "height": 1252, "alt": { "en": "A full match in the container yard arena", "es": "Una partida completa en la arena del patio de contenedores" } } }
+      {
+        "id": "shot-2",
+        "image": {
+          "src": "shot-2",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The runner and the glowing potato leap between blue and green containers",
+            "es": "El corredor y la patata encendida saltan entre contenedores azules y verdes"
+          }
+        }
+      },
+      {
+        "id": "shot-3",
+        "image": {
+          "src": "shot-3",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The runner slides down a red container roof with the potato right behind",
+            "es": "El corredor se desliza por el techo rojo de un contenedor con la patata justo detrás"
+          }
+        }
+      },
+      {
+        "id": "shot-1",
+        "image": {
+          "src": "shot-1776779423012",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The runner jumps off a green container while the potato hides inside it",
+            "es": "El corredor salta desde un contenedor verde mientras la patata se esconde dentro"
+          }
+        }
+      },
+      {
+        "id": "shot-yard",
+        "image": {
+          "src": "map-1-thumb",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2570,
+          "height": 1252,
+          "alt": {
+            "en": "A full match in the container yard arena",
+            "es": "Una partida completa en la arena del patio de contenedores"
+          }
+        }
+      }
     ]
   },
   "awards": {
-    "heading": { "en": "Awards", "es": "Premios" },
-    "intro": { "en": "Three awards from Spanish indie events in 2025.", "es": "Tres premios en eventos indie españoles en 2025." },
+    "heading": {
+      "en": "Awards",
+      "es": "Premios"
+    },
+    "intro": {
+      "en": "Three awards from Spanish indie events in 2025.",
+      "es": "Tres premios en eventos indie españoles en 2025."
+    },
     "items": [
-      { "id": "mig-2025-jury", "event": "Match in Games 2025", "award": { "en": "3rd Jury Award", "es": "3.º Premio del Jurado" }, "year": 2025 },
-      { "id": "mig-2025-audience", "event": "Match in Games 2025", "award": { "en": "Audience Award", "es": "Premio del Público" }, "year": 2025 },
-      { "id": "cyl-2025-idea", "event": "CYL Game Show 2025", "award": { "en": "Best Idea Award", "es": "Premio a la Mejor Idea" }, "year": 2025 }
+      {
+        "id": "mig-2025-jury",
+        "event": "Match in Games 2025",
+        "award": {
+          "en": "3rd Jury Award",
+          "es": "3.º Premio del Jurado"
+        },
+        "year": 2025
+      },
+      {
+        "id": "mig-2025-audience",
+        "event": "Match in Games 2025",
+        "award": {
+          "en": "Audience Award",
+          "es": "Premio del Público"
+        },
+        "year": 2025
+      },
+      {
+        "id": "cyl-2025-idea",
+        "event": "CYL Game Show 2025",
+        "award": {
+          "en": "Best Idea Award",
+          "es": "Premio a la Mejor Idea"
+        },
+        "year": 2025
+      }
     ]
   },
   "press": {
-    "heading": { "en": "Press", "es": "Prensa" },
+    "heading": {
+      "en": "Press",
+      "es": "Prensa"
+    },
     "visible": false,
     "items": []
   },
   "team": {
-    "heading": { "en": "The studio", "es": "El estudio" },
+    "heading": {
+      "en": "The studio",
+      "es": "El estudio"
+    },
     "studioName": "Wild Alchemists",
     "location": "Madrid",
     "blurb": [
       {
-        "en": "Wild Alchemists is an indie studio of about ten people that started at university. We make games to play in the same room, shouting.",
-        "es": "Wild Alchemists es un estudio indie de unas diez personas que empezó en la universidad. Hacemos juegos para jugar en la misma habitación, a gritos."
+        "en": "Wild Alchemists is an eight-person indie studio from Madrid that started at university. We make games to play in the same room, shouting.",
+        "es": "Wild Alchemists es un estudio indie de ocho personas de Madrid que empezó en la universidad. Hacemos juegos para jugar en la misma habitación, a gritos."
       },
       {
-        "en": "Hot Potato is our first game on Steam. It is built in Unreal Engine 5.",
-        "es": "Hot Potato es nuestro primer juego en Steam. Está hecho en Unreal Engine 5."
+        "en": "Hot Potato is our first game on Steam. It is built in Unreal Engine 5 and shaped with the people who play it: the beta happens on our Discord first.",
+        "es": "Hot Potato es nuestro primer juego en Steam. Está hecho en Unreal Engine 5 y se construye con la gente que lo juega: la beta pasa primero por nuestro Discord."
       }
     ],
     "stats": [
-      { "id": "people", "value": "~10", "label": { "en": "people on the team", "es": "personas en el equipo" } },
-      { "id": "awards", "value": "3", "label": { "en": "awards in 2025", "es": "premios en 2025" } }
+      {
+        "id": "people",
+        "value": "8",
+        "label": {
+          "en": "people on the team",
+          "es": "personas en el equipo"
+        }
+      },
+      {
+        "id": "programmers",
+        "value": "2",
+        "label": {
+          "en": "programmers",
+          "es": "programadores"
+        }
+      },
+      {
+        "id": "artists",
+        "value": "3",
+        "label": {
+          "en": "artists",
+          "es": "artistas"
+        }
+      },
+      {
+        "id": "design",
+        "value": "2 + 1",
+        "label": {
+          "en": "designers + producer",
+          "es": "diseñadores + productor"
+        }
+      }
     ],
     "members": [],
     "showMembers": false
   },
   "pressKit": {
-    "heading": { "en": "Press kit", "es": "Press kit" },
-    "body": { "en": "Logo, key art, screenshots and a fact sheet, in one download.", "es": "Logo, arte principal, capturas y ficha del juego en una sola descarga." },
-    "cta": { "label": { "en": "Download the press kit", "es": "Descargar el press kit" }, "href": "#TODO-press-kit-url", "external": true },
+    "heading": {
+      "en": "Press kit",
+      "es": "Press kit"
+    },
+    "body": {
+      "en": "Logo, key art, screenshots and a fact sheet, in one download.",
+      "es": "Logo, arte principal, capturas y ficha del juego en una sola descarga."
+    },
+    "cta": {
+      "label": {
+        "en": "Download the press kit",
+        "es": "Descargar el press kit"
+      },
+      "href": "#TODO-press-kit-url",
+      "external": true
+    },
     "includes": [
-      { "en": "Logo (SVG + PNG)", "es": "Logo (SVG y PNG)" },
-      { "en": "Key art", "es": "Arte principal" },
-      { "en": "Screenshots", "es": "Capturas" },
-      { "en": "Fact sheet", "es": "Ficha del juego" }
+      {
+        "en": "Logo (SVG + PNG)",
+        "es": "Logo (SVG y PNG)"
+      },
+      {
+        "en": "Key art",
+        "es": "Arte principal"
+      },
+      {
+        "en": "Screenshots",
+        "es": "Capturas"
+      },
+      {
+        "en": "Fact sheet",
+        "es": "Ficha del juego"
+      }
     ]
   },
   "socials": {
-    "heading": { "en": "Follow the game", "es": "Sigue el juego" },
+    "heading": {
+      "en": "Built with the community",
+      "es": "Se hace con la comunidad"
+    },
     "items": [
-      { "id": "steam", "network": "steam", "label": "Steam", "href": "https://store.steampowered.com/app/3650190/" },
-      { "id": "discord", "network": "discord", "label": "Discord", "href": "https://discord.gg/tNm9bszS", "handle": "TODO: replace with a permanent invite" },
-      { "id": "instagram", "network": "instagram", "label": "Instagram", "href": "https://www.instagram.com/wild.alchemists/", "handle": "@wild.alchemists" },
-      { "id": "x", "network": "x", "label": "X", "href": "https://x.com/wildalchemists", "handle": "@wildalchemists" },
-      { "id": "linkedin", "network": "linkedin", "label": "LinkedIn", "href": "https://www.linkedin.com/company/wild-alchemists/" }
+      {
+        "id": "steam",
+        "network": "steam",
+        "label": "Steam",
+        "href": "https://store.steampowered.com/app/3650190/"
+      },
+      {
+        "id": "discord",
+        "network": "discord",
+        "label": "Discord",
+        "href": "https://discord.gg/tNm9bszS",
+        "handle": "TODO: replace with a permanent invite"
+      },
+      {
+        "id": "instagram",
+        "network": "instagram",
+        "label": "Instagram",
+        "href": "https://www.instagram.com/wild.alchemists/",
+        "handle": "@wild.alchemists"
+      },
+      {
+        "id": "x",
+        "network": "x",
+        "label": "X",
+        "href": "https://x.com/wildalchemists",
+        "handle": "@wildalchemists"
+      },
+      {
+        "id": "linkedin",
+        "network": "linkedin",
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/company/wild-alchemists/"
+      }
+    ],
+    "intro": {
+      "en": "The beta runs on Discord, the clips land on Instagram, the wishlist lives on Steam.",
+      "es": "La beta va por Discord, los clips por Instagram y la lista de deseados en Steam."
+    },
+    "primary": [
+      "discord",
+      "instagram",
+      "steam"
     ]
   },
   "contact": {
-    "heading": { "en": "Contact", "es": "Contacto" },
-    "body": { "en": "Press, publishers, events, or you just want to play: write to us.", "es": "Prensa, publishers, eventos o simplemente quieres jugar: escríbenos." },
+    "heading": {
+      "en": "Contact",
+      "es": "Contacto"
+    },
+    "body": {
+      "en": "Press, publishers, events, or you want into the beta: write to us or come to the Discord.",
+      "es": "Prensa, publishers, eventos o quieres entrar en la beta: escríbenos o pásate por el Discord."
+    },
     "email": "hello@wildalchemists.com",
     "form": {
       "enabled": false,
       "fields": {
-        "name": { "en": "Name", "es": "Nombre" },
-        "email": { "en": "Email", "es": "Correo" },
-        "topic": { "en": "Topic", "es": "Asunto" },
-        "message": { "en": "Message", "es": "Mensaje" }
+        "name": {
+          "en": "Name",
+          "es": "Nombre"
+        },
+        "email": {
+          "en": "Email",
+          "es": "Correo"
+        },
+        "topic": {
+          "en": "Topic",
+          "es": "Asunto"
+        },
+        "message": {
+          "en": "Message",
+          "es": "Mensaje"
+        }
       },
       "topics": [
-        { "en": "Press", "es": "Prensa" },
-        { "en": "Business", "es": "Negocio" },
-        { "en": "Events", "es": "Eventos" },
-        { "en": "Other", "es": "Otro" }
+        {
+          "en": "Press",
+          "es": "Prensa"
+        },
+        {
+          "en": "Business",
+          "es": "Negocio"
+        },
+        {
+          "en": "Events",
+          "es": "Eventos"
+        },
+        {
+          "en": "Other",
+          "es": "Otro"
+        }
       ],
-      "submit": { "en": "Send", "es": "Enviar" },
-      "success": { "en": "Sent. We read everything, we answer most of it.", "es": "Enviado. Lo leemos todo y contestamos casi todo." },
-      "error": { "en": "That didn't go through. Email us instead: hello@wildalchemists.com", "es": "No ha llegado. Escríbenos a hello@wildalchemists.com" }
+      "submit": {
+        "en": "Send",
+        "es": "Enviar"
+      },
+      "success": {
+        "en": "Sent. We read everything, we answer most of it.",
+        "es": "Enviado. Lo leemos todo y contestamos casi todo."
+      },
+      "error": {
+        "en": "That didn't go through. Email us instead: hello@wildalchemists.com",
+        "es": "No ha llegado. Escríbenos a hello@wildalchemists.com"
+      }
     }
   },
   "footer": {
-    "copyright": { "en": "© 2026 Wild Alchemists. All rights reserved.", "es": "© 2026 Wild Alchemists. Todos los derechos reservados." },
-    "legal": { "en": "Steam and the Steam logo are trademarks of Valve Corporation.", "es": "Steam y el logotipo de Steam son marcas de Valve Corporation." },
+    "copyright": {
+      "en": "© 2026 Wild Alchemists. All rights reserved.",
+      "es": "© 2026 Wild Alchemists. Todos los derechos reservados."
+    },
+    "legal": {
+      "en": "Steam and the Steam logo are trademarks of Valve Corporation.",
+      "es": "Steam y el logotipo de Steam son marcas de Valve Corporation."
+    },
     "links": [
-      { "label": { "en": "Press kit", "es": "Press kit" }, "href": "#press-kit" },
-      { "label": { "en": "Contact", "es": "Contacto" }, "href": "#contact" }
+      {
+        "label": {
+          "en": "Press kit",
+          "es": "Press kit"
+        },
+        "href": "#press-kit"
+      },
+      {
+        "label": {
+          "en": "Contact",
+          "es": "Contacto"
+        },
+        "href": "#contact"
+      }
     ]
   },
   "ui": {
-    "skipToContent": { "en": "Skip to content", "es": "Saltar al contenido" },
-    "languageSwitch": { "en": "Español", "es": "English" },
-    "languageSwitchAria": { "en": "Read this page in Spanish", "es": "Leer esta página en inglés" },
-    "playTrailer": { "en": "Play trailer", "es": "Reproducir tráiler" },
-    "closeLightbox": { "en": "Close", "es": "Cerrar" },
-    "nextImage": { "en": "Next image", "es": "Siguiente imagen" },
-    "prevImage": { "en": "Previous image", "es": "Imagen anterior" },
-    "openMenu": { "en": "Menu", "es": "Menú" },
-    "closeMenu": { "en": "Close menu", "es": "Cerrar menú" },
-    "external": { "en": "opens in a new tab", "es": "se abre en una pestaña nueva" },
-    "statusLabel": { "en": "Status", "es": "Estado" },
-    "emailUs": { "en": "Email us", "es": "Escríbenos" }
+    "skipToContent": {
+      "en": "Skip to content",
+      "es": "Saltar al contenido"
+    },
+    "languageSwitch": {
+      "en": "Español",
+      "es": "English"
+    },
+    "languageSwitchAria": {
+      "en": "Read this page in Spanish",
+      "es": "Leer esta página en inglés"
+    },
+    "playTrailer": {
+      "en": "Play trailer",
+      "es": "Reproducir tráiler"
+    },
+    "closeLightbox": {
+      "en": "Close",
+      "es": "Cerrar"
+    },
+    "nextImage": {
+      "en": "Next image",
+      "es": "Siguiente imagen"
+    },
+    "prevImage": {
+      "en": "Previous image",
+      "es": "Imagen anterior"
+    },
+    "openMenu": {
+      "en": "Menu",
+      "es": "Menú"
+    },
+    "closeMenu": {
+      "en": "Close menu",
+      "es": "Cerrar menú"
+    },
+    "external": {
+      "en": "opens in a new tab",
+      "es": "se abre en una pestaña nueva"
+    },
+    "statusLabel": {
+      "en": "Status",
+      "es": "Estado"
+    },
+    "emailUs": {
+      "en": "Email us",
+      "es": "Escríbenos"
+    },
+    "menu": {
+      "en": "Menu",
+      "es": "Menú"
+    },
+    "roadmapLabel": {
+      "en": "Where it is",
+      "es": "En qué punto está"
+    },
+    "backToTop": {
+      "en": "Back to top",
+      "es": "Volver arriba"
+    },
+    "watchOnYoutube": {
+      "en": "Watch on YouTube",
+      "es": "Ver en YouTube"
+    },
+    "ofImages": {
+      "en": "of",
+      "es": "de"
+    },
+    "beat": {
+      "en": "Beat",
+      "es": "Paso"
+    }
   }
 }
