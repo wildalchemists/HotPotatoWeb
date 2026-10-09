@@ -176,17 +176,17 @@ a.sticker:hover,button.sticker:hover{transform:rotate(0) translate(-2px,-2px)}
 .roles-head{padding:clamp(2rem,4vw,3rem) 0 1.4rem;border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)}
 .roles-head .sec-head{margin-bottom:0}
 .walls{display:grid;grid-template-columns:1fr 1fr}
-.role{padding:clamp(2rem,4vw,4rem) var(--gutter) clamp(3rem,5vw,5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.5rem;align-items:center;overflow:hidden}
+.role{padding:clamp(2rem,4vw,4rem) var(--gutter) clamp(3rem,5vw,5rem);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:1.5rem;align-items:center;overflow:hidden}
 .role-potato{background:var(--yellow);color:var(--ink)}
 .role-runner{background:var(--purple);color:var(--paper)}
-.role .h3{font-size:clamp(2rem,3.4vw,3.6rem);overflow-wrap:break-word;text-shadow:.04em .04em 0 rgba(11,18,48,.35)}
+.role .h3{font-size:clamp(2rem,3vw,3.4rem);overflow-wrap:normal;hyphens:manual;text-shadow:.04em .04em 0 rgba(11,18,48,.35)}
 .role-runner .h3{text-shadow:.04em .04em 0 var(--ink)}
 .role-role{font-size:var(--step-1);display:inline-block;margin:.4rem 0 .6rem;transform:rotate(-2deg)}
 .role-copy{position:relative}
 .role-copy p{font-weight:500;font-size:var(--step-1);max-width:28ch}
 .role .arrow{position:absolute;width:140px;height:80px;overflow:visible;right:-12%;top:38%}
 .role .arrow path{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
-.role .poster{aspect-ratio:4/5;width:100%;max-width:440px;justify-self:end}
+.role .poster{aspect-ratio:4/5;width:100%;max-width:400px;justify-self:end}
 .role .poster img{height:100%}
 
 /* ---------- gallery ---------- */
