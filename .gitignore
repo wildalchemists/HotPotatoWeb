@@ -1,0 +1,6 @@
+# decoded legacy originals (regenerate with: node scripts/extract-legacy.mjs)
+assets/img/legacy/
+# build output
+dist/
+node_modules/
+.DS_Store
