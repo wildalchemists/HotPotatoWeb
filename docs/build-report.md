@@ -121,3 +121,5 @@ The workflow runs build + check on every push and pull request and deploys `dist
 ### CI result
 
 Run [38039076691](https://github.com/wildalchemists/HotPotatoWeb/actions/runs/38039076691) on the push of the fixed commit: build OK, check **failed with exit code 1** on the seven team TODOs, each surfaced as a GitHub error annotation; the deploy job did not run. The run took 11 seconds. That is the intended state until `content/site.json` carries the Modes intro, the two missing rule lines and the press-kit URL; the first push to `main` after that deploys.
+
+Update 2026-10-10 09:25: with the two modes filled in and the press kit in its pending state, run [38041320509](https://github.com/wildalchemists/HotPotatoWeb/actions/runs/38041320509) passed (0 errors, 23 warnings, all on unrendered TODOs and the unverified Discord invite). The branch is deployable: merge to `main` and set *Settings → Pages → Source: GitHub Actions*.
