@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="{{= lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{t meta.title}}</title>
+<meta name="description" content="{{t meta.description}}">
+<link rel="canonical" href="{{= url}}">
+<link rel="alternate" hreflang="en" href="{{= siteUrl}}">
+<link rel="alternate" hreflang="es" href="{{= siteUrl}}es/">
+<link rel="alternate" hreflang="x-default" href="{{= siteUrl}}">
+<meta name="theme-color" content="{{= meta.themeColor}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{= meta.shortName}}">
+<meta property="og:title" content="{{t meta.title}}">
+<meta property="og:description" content="{{t meta.description}}">
+<meta property="og:url" content="{{= url}}">
+<meta property="og:image" content="{{= siteUrl}}{{= meta.ogImage}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="{{#if lang == es}}es_ES{{else}}en_US{{/if}}">
+<meta property="og:locale:alternate" content="{{#if lang == es}}en_US{{else}}es_ES{{/if}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{t meta.title}}">
+<meta name="twitter:description" content="{{t meta.description}}">
+<meta name="twitter:image" content="{{= siteUrl}}{{= meta.ogImage}}">
+<link rel="icon" href="{{= base}}favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{= base}}assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="{{= base}}assets/img/apple-touch-icon.png">
+<link rel="manifest" href="{{= base}}site.webmanifest">
+<link rel="preload" as="image" href="{{= base}}assets/img/keyart-logo-1200.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-spray-paint-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-var-latin.woff2" crossorigin>
+<link rel="stylesheet" href="{{= base}}styles.css?v={{= v}}">
+<script type="application/ld+json">{{raw jsonld}}</script>
+<script>try{var l=localStorage.getItem('hp-lang');if(l&&l!=='{{= lang}}'&&!sessionStorage.getItem('hp-lang-visited')){sessionStorage.setItem('hp-lang-visited','1');location.replace('{{= otherUrl}}'+location.hash)}else{sessionStorage.setItem('hp-lang-visited','1')}}catch(e){}</script>
+</head>
+<body data-lang="{{= lang}}" data-steam-app="{{= meta.steamAppId}}">
+<a class="skip" href="#main">{{t ui.skipToContent}}</a>
+
+<header class="nav" id="top">
+  <a class="brand spray" href="{{= base}}#top" data-k="meta.shortName">{{= meta.shortName}}</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-menu" data-open="{{t ui.openMenu}}" data-close="{{t ui.closeMenu}}">{{t ui.openMenu}}</button>
+  <nav id="nav-menu" class="menu" aria-label="Main">
+    <ul data-list="nav.items">
+      {{#each nav.items as item}}<li><a href="{{= item.href}}" data-k="{{= item_path}}.label" data-href="{{= item_path}}.href">{{t item.label}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
+  <a class="lang" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" title="{{t ui.languageSwitchAria}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>
+  <a class="sticker sticker-y r3 nav-cta" href="{{= nav.cta.href}}" rel="noopener" data-k="nav.cta.label" data-href="nav.cta.href">{{t nav.cta.label}}</a>
+</header>
+
+<main id="main">
+
+<!-- 1 · HERO : the red wall -->
+<section class="hero wall wall-red" aria-labelledby="hero-title">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="kicker r1" data-k="hero.kicker">{{t hero.kicker}}</p>
+      <h1 id="hero-title" class="spray hero-title" data-k="meta.shortName">{{= meta.shortName}}</h1>
+      <p class="sticker pitch r1" data-k="hero.pitch">{{t hero.pitch}}</p>
+      <div class="ctas">
+        <a class="sticker sticker-y big r3" href="{{= hero.primaryCta.href}}" rel="noopener" data-k="hero.primaryCta.label" data-href="hero.primaryCta.href">{{t hero.primaryCta.label}}</a>
+        <a class="sticker sticker-ink r2" href="{{= hero.communityCta.href}}" rel="noopener" data-k="hero.communityCta.label" data-href="hero.communityCta.href">{{t hero.communityCta.label}}</a>
+        <a class="circled" href="{{= hero.secondaryCta.href}}" data-k="hero.secondaryCta.label" data-href="hero.secondaryCta.href">
+          <svg viewBox="0 0 260 100" aria-hidden="true" focusable="false"><path d="M14 48 C 30 6, 220 -4, 246 40 C 262 72, 200 98, 96 92 C 36 88, -4 70, 18 42 C 24 34, 40 30, 52 30"/></svg>
+          <span>{{t hero.secondaryCta.label}}</span>
+        </a>
+      </div>
+      <div class="roadmap" aria-label="{{t ui.roadmapLabel}}">
+        <span class="marker roadmap-label">{{t ui.roadmapLabel}}</span>
+        <ol data-list="meta.roadmap">
+          {{#each meta.roadmap as step}}<li class="sticker r{{= step_n}}"><b data-k="{{= step_path}}.what">{{t step.what}}</b><span data-k="{{= step_path}}.when">{{t step.when}}</span></li>
+          {{/each}}
+        </ol>
+      </div>
+      {{#if hero.showAwards}}
+      <ul class="laurels" aria-label="{{t awards.heading}}" data-list="awards.items">
+        {{#each awards.items as a}}<li><b data-k="{{= a_path}}.award">{{t a.award}}</b><span data-k="{{= a_path}}.event">{{= a.event}}</span></li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+    <div class="wallpile" aria-hidden="false">
+      <figure class="poster poster-key">
+        <img src="{{= base}}assets/img/keyart-logo-1200.webp" srcset="{{= base}}assets/img/keyart-logo-1200.webp 1200w, {{= base}}assets/img/keyart-logo-2400.webp 1414w" sizes="(max-width: 980px) 92vw, 42vw" width="1414" height="900" fetchpriority="high" decoding="async" alt="{{t hero.keyArt.alt}}" data-img="hero.keyArt">
+        <span class="tape" aria-hidden="true"></span><span class="tape tape-r" aria-hidden="true"></span>
+      </figure>
+      <figure class="poster poster-shot">
+        {{img gallery.items.0.image sizes="(max-width: 980px) 70vw, 28vw" loading="eager"}}
+        <span class="tape" aria-hidden="true"></span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · TRAILER : the ink wall -->
+<section class="wall wall-ink section" id="trailer" aria-labelledby="trailer-title">
+  <div class="in">
+    <h2 id="trailer-title" class="spray h2 light" data-k="trailer.title">{{t trailer.title}}</h2>
+    <div class="poster poster-video r2 lite-yt" data-yt="{{= trailer.youtubeId}}" data-title="{{t trailer.title}}">
+      <a class="lite-yt-link" href="https://www.youtube.com/watch?v={{= trailer.youtubeId}}" rel="noopener">
+        {{img trailer.poster sizes="(max-width: 980px) 100vw, 1100px" loading="lazy"}}
+        <span class="play-sticker sticker sticker-y r3"><span class="play" aria-hidden="true"></span>{{t ui.playTrailer}}</span>
+      </a>
+      <span class="tape" aria-hidden="true"></span><span class="tape tape-r" aria-hidden="true"></span>
+    </div>
+    <p class="marker light small"><a href="https://www.youtube.com/watch?v={{= trailer.youtubeId}}" rel="noopener">{{t ui.watchOnYoutube}}</a></p>
+  </div>
+</section>
+
+<!-- 3 · HOW IT PLAYS : the concrete wall -->
+<section class="wall wall-concrete section" id="how-it-plays" aria-labelledby="how-title">
+  <div class="in">
+    <div class="sec-head">
+      <h2 id="how-title" class="spray h2" data-k="howItPlays.heading">{{t howItPlays.heading}}</h2>
+      <p class="sticker sticker-y r1 intro" data-k="howItPlays.intro">{{t howItPlays.intro}}</p>
+    </div>
+    <ol class="beats" data-list="howItPlays.beats">
+      {{#each howItPlays.beats as beat}}
+      <li class="beat">
+        <figure class="poster r{{= beat_n}}">
+          {{img beat.image sizes="(max-width: 980px) 92vw, 46vw"}}
+          <span class="tape" aria-hidden="true"></span>
+        </figure>
+        <div class="beat-copy">
+          <span class="marker beat-n" aria-hidden="true">{{= beat_n}}</span>
+          <h3 class="spray h3" data-k="{{= beat_path}}.title">{{t beat.title}}</h3>
+          <p data-k="{{= beat_path}}.body">{{t beat.body}}</p>
+        </div>
+      </li>
+      {{/each}}
+    </ol>
+  </div>
+</section>
+
+<!-- 4 · MODES : the green wall -->
+<section class="wall wall-green section" id="modes" aria-labelledby="modes-title">
+  <div class="in">
+    <div class="sec-head">
+      <h2 id="modes-title" class="spray h2 light" data-k="modes.heading">{{t modes.heading}}</h2>
+      <p class="sticker r3 intro" data-k="modes.intro">{{t modes.intro}}</p>
+    </div>
+    <ul class="modes" data-list="modes.items">
+      {{#each modes.items as mode}}
+      <li class="mode sticker r{{= mode_n}}">
+        {{#if mode.image}}<figure class="mode-img">{{img mode.image sizes="(max-width: 980px) 92vw, 40vw"}}</figure>{{/if}}
+        <div class="mode-copy">
+          <span class="stamp stamp-{{= mode.status}}" data-k="{{= mode_path}}.status">{{status mode.status}}</span>
+          <h3 class="spray h3" data-k="{{= mode_path}}.name">{{t mode.name}}</h3>
+          <p data-k="{{= mode_path}}.rules">{{t mode.rules}}</p>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>
+
+<!-- 5 · ROLES : two tagged walls -->
+<section id="roles" aria-labelledby="roles-title">
+  <div class="roles-head wall wall-paper">
+    <div class="in sec-head">
+      <h2 id="roles-title" class="spray h2" data-k="characters.heading">{{t characters.heading}}</h2>
+      <p class="sticker sticker-y r1 intro" data-k="characters.intro">{{t characters.intro}}</p>
+    </div>
+  </div>
+  <ul class="walls" data-list="characters.items">
+    {{#each characters.items as role}}
+    <li class="wall role role-{{= role.id}}">
+      <div class="role-copy">
+        <h3 class="spray h3" data-k="{{= role_path}}.name">{{t role.name}}</h3>
+        <span class="marker role-role" data-k="{{= role_path}}.role">{{t role.role}}</span>
+        <p data-k="{{= role_path}}.line">{{t role.line}}</p>
+        <svg class="arrow" viewBox="0 0 140 80" aria-hidden="true" focusable="false"><path d="M6 60 C 40 70, 80 10, 128 24"/><path d="M112 10 L 130 24 L 114 40"/></svg>
+      </div>
+      {{#if role.image}}
+      <figure class="poster r{{#if role_first}}1{{else}}3{{/if}}">
+        {{img role.image sizes="(max-width: 640px) 86vw, (max-width: 1100px) 46vw, 30vw"}}
+        <span class="tape" aria-hidden="true"></span><span class="tape tape-r" aria-hidden="true"></span>
+      </figure>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</section>
+
+<!-- 6 · GALLERY : the blue wall -->
+<section class="wall wall-blue section" id="gallery" aria-labelledby="gallery-title">
+  <div class="in">
+    <div class="sec-head">
+      <h2 id="gallery-title" class="spray h2 light" data-k="gallery.heading">{{t gallery.heading}}</h2>
+    </div>
+    <ul class="gallery" data-list="gallery.items">
+      {{#each gallery.items as g}}
+      <li class="poster r{{= g_n}}">
+        <a href="{{imgsrc g.image}}" class="gallery-link" data-lightbox data-index="{{= g_index}}" data-w="{{= g.image.width}}" data-h="{{= g.image.height}}">
+          {{img g.image sizes="(max-width: 640px) 92vw, (max-width: 1100px) 46vw, 30vw"}}
+        </a>
+        {{#if g.caption}}<figcaption class="marker light small" data-k="{{= g_path}}.caption">{{t g.caption}}</figcaption>{{/if}}
+        <span class="tape" aria-hidden="true"></span>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>
+
+<!-- 7 · AWARDS & PRESS : the paper wall -->
+<section class="wall wall-paper section" id="awards" aria-labelledby="awards-title">
+  <div class="in">
+    <div class="sec-head">
+      <h2 id="awards-title" class="spray h2" data-k="awards.heading">{{t awards.heading}}</h2>
+      <p class="sticker sticker-y r3 intro" data-k="awards.intro">{{t awards.intro}}</p>
+    </div>
+    <ul class="awards" data-list="awards.items">
+      {{#each awards.items as a}}
+      <li class="award r{{= a_n}}">
+        <span class="award-year" aria-hidden="true">{{= a.year}}</span>
+        <b class="spray" data-k="{{= a_path}}.award">{{t a.award}}</b>
+        <span class="marker" data-k="{{= a_path}}.event">{{= a.event}}</span>
+      </li>
+      {{/each}}
+    </ul>
+    {{#if press.visible}}
+    <h3 class="spray h3" data-k="press.heading">{{t press.heading}}</h3>
+    <ul class="quotes" data-list="press.items">
+      {{#each press.items as q}}
+      <li class="sticker r{{= q_n}}"><blockquote data-k="{{= q_path}}.quote">{{t q.quote}}</blockquote><cite><a href="{{= q.url}}" rel="noopener" data-href="{{= q_path}}.url" data-k="{{= q_path}}.outlet">{{= q.outlet}}</a></cite></li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </div>
+</section>
+
+<!-- 8 · STUDIO : the concrete wall -->
+<section class="wall wall-concrete section" id="studio" aria-labelledby="studio-title">
+  <div class="in studio">
+    <div class="studio-copy">
+      <h2 id="studio-title" class="spray h2" data-k="team.heading">{{t team.heading}}</h2>
+      <p class="marker studio-name"><span data-k="team.studioName">{{= team.studioName}}</span> · <span data-k="team.location">{{= team.location}}</span></p>
+      <div data-list="team.blurb">
+        {{#each team.blurb as p}}<p class="sticker r{{= p_n}} blurb" data-k="{{= p_path}}">{{t p}}</p>
+        {{/each}}
+      </div>
+    </div>
+    <dl class="stats" data-list="team.stats">
+      {{#each team.stats as s}}
+      <div class="stat r{{= s_n}}">
+        <dt data-k="{{= s_path}}.label">{{t s.label}}</dt>
+        <dd class="marker" data-k="{{= s_path}}.value">{{= s.value}}</dd>
+      </div>
+      {{/each}}
+    </dl>
+    {{#if team.showMembers}}
+    <ul class="members" data-list="team.members">
+      {{#each team.members as m}}<li><b data-k="{{= m_path}}.name">{{= m.name}}</b> <span data-k="{{= m_path}}.role">{{t m.role}}</span></li>{{/each}}
+    </ul>
+    {{/if}}
+  </div>
+</section>
+
+<!-- 9 · PRESS KIT + SOCIALS + CONTACT : the ink wall -->
+<section class="wall wall-ink section" id="press-kit" aria-labelledby="press-title">
+  <div class="in press-grid">
+    <div class="press">
+      <h2 id="press-title" class="spray h2 light" data-k="pressKit.heading">{{t pressKit.heading}}</h2>
+      <p class="light" data-k="pressKit.body">{{t pressKit.body}}</p>
+      <ul class="includes light" data-list="pressKit.includes">
+        {{#each pressKit.includes as inc}}<li data-k="{{= inc_path}}">{{t inc}}</li>
+        {{/each}}
+      </ul>
+      {{#if pressKit.available}}<a class="sticker sticker-y r1" href="{{= pressKit.cta.href}}" rel="noopener" data-k="pressKit.cta.label" data-href="pressKit.cta.href">{{t pressKit.cta.label}}</a>{{else}}<p class="sticker note r1" data-k="pressKit.pending">{{t pressKit.pending}}</p>{{/if}}
+    </div>
+
+    <div class="community" id="community">
+      <h2 class="spray h2 light" data-k="socials.heading">{{t socials.heading}}</h2>
+      <p class="light" data-k="socials.intro">{{t socials.intro}}</p>
+      <ul class="social-big" data-list="socials.items">
+        {{#each socials.items as s}}
+        <li><a class="sticker r{{= s_n}} social social-{{= s.network}}" href="{{= s.href}}" rel="noopener me" data-k="{{= s_path}}.label" data-href="{{= s_path}}.href"><span class="social-name">{{= s.label}}</span>{{#if s.handle}}<span class="social-handle">{{= s.handle}}</span>{{/if}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class="contact" id="contact">
+      <h2 class="spray h2 light" data-k="contact.heading">{{t contact.heading}}</h2>
+      <p class="light" data-k="contact.body">{{t contact.body}}</p>
+      <p><a class="sticker r2 email" href="mailto:{{= contact.email}}" data-k="contact.email">{{= contact.email}}</a></p>
+      <form class="contact-form" action="mailto:{{= contact.email}}" method="post" enctype="text/plain" data-mailto="{{= contact.email}}">
+        <label><span data-k="contact.form.fields.name">{{t contact.form.fields.name}}</span><input name="name" type="text" autocomplete="name" required></label>
+        <label><span data-k="contact.form.fields.email">{{t contact.form.fields.email}}</span><input name="email" type="email" autocomplete="email" required></label>
+        <label><span data-k="contact.form.fields.topic">{{t contact.form.fields.topic}}</span>
+          <select name="topic" data-list="contact.form.topics">{{#each contact.form.topics as tp}}<option data-k="{{= tp_path}}">{{t tp}}</option>{{/each}}</select></label>
+        <label><span data-k="contact.form.fields.message">{{t contact.form.fields.message}}</span><textarea name="message" rows="5" required></textarea></label>
+        <button class="sticker sticker-y r3" type="submit" data-k="contact.form.submit">{{t contact.form.submit}}</button>
+        <p class="form-note light small" hidden data-success="{{t contact.form.success}}" data-error="{{t contact.form.error}}"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer wall wall-ink">
+  <div class="in footer-in">
+    <p class="light" data-k="footer.copyright">{{t footer.copyright}}</p>
+    <p class="light small" data-k="footer.legal">{{t footer.legal}}</p>
+    <ul class="footer-links" data-list="footer.links">
+      {{#each footer.links as l}}<li><a href="{{= l.href}}" data-k="{{= l_path}}.label" data-href="{{= l_path}}.href">{{t l.label}}</a></li>
+      {{/each}}
+      <li><a href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a></li>
+      <li><a href="#top">{{t ui.backToTop}}</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="{{t gallery.heading}}">
+  <button class="lb-close sticker" type="button" data-lb-close>{{t ui.closeLightbox}}</button>
+  <button class="lb-prev sticker" type="button" data-lb-prev><span aria-hidden="true">&larr;</span><span class="vh">{{t ui.prevImage}}</span></button>
+  <figure class="lb-figure"><img alt="" decoding="async"><figcaption class="marker light"></figcaption></figure>
+  <button class="lb-next sticker" type="button" data-lb-next><span aria-hidden="true">&rarr;</span><span class="vh">{{t ui.nextImage}}</span></button>
+  <span class="lb-count mono light" data-of="{{t ui.ofImages}}"></span>
+</div>
+
+<script src="{{= base}}main.js?v={{= v}}" defer></script>
+</body>
+</html>

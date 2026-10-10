@@ -1,0 +1,779 @@
+{
+  "source": "legacy/index.html",
+  "extractedAt": "2026-10-09T22:17:09.645Z",
+  "title": "Hot Potato — Party Brawler",
+  "fonts": [
+    "family=Lilita+One&family=Special+Elite&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+  ],
+  "iframes": [
+    "https://www.youtube.com/embed/PpLcHtBJhDs?rel=0&modestbranding=1"
+  ],
+  "images": [
+    {
+      "key": "hero-art",
+      "format": "png",
+      "bytes": 1746061,
+      "width": 1414,
+      "height": 2000,
+      "original": "assets/img/legacy/hero-art.png",
+      "webp": {
+        "1200": "assets/img/hero-art-1200.webp",
+        "2400": "assets/img/hero-art-2400.webp"
+      }
+    },
+    {
+      "key": "shot-2",
+      "format": "png",
+      "bytes": 3171094,
+      "width": 2193,
+      "height": 1234,
+      "original": "assets/img/legacy/shot-2.png",
+      "webp": {
+        "1200": "assets/img/shot-2-1200.webp",
+        "2400": "assets/img/shot-2-2400.webp"
+      }
+    },
+    {
+      "key": "shot-3",
+      "format": "png",
+      "bytes": 2853030,
+      "width": 2193,
+      "height": 1234,
+      "original": "assets/img/legacy/shot-3.png",
+      "webp": {
+        "1200": "assets/img/shot-3-1200.webp",
+        "2400": "assets/img/shot-3-2400.webp"
+      }
+    },
+    {
+      "key": "shot-1776779423012",
+      "format": "png",
+      "bytes": 2698068,
+      "width": 2193,
+      "height": 1234,
+      "original": "assets/img/legacy/shot-1776779423012.png",
+      "webp": {
+        "1200": "assets/img/shot-1776779423012-1200.webp",
+        "2400": "assets/img/shot-1776779423012-2400.webp"
+      }
+    },
+    {
+      "key": "map-1-thumb",
+      "format": "png",
+      "bytes": 4171647,
+      "width": 2570,
+      "height": 1252,
+      "original": "assets/img/legacy/map-1-thumb.png",
+      "webp": {
+        "1200": "assets/img/map-1-thumb-1200.webp",
+        "2400": "assets/img/map-1-thumb-2400.webp"
+      }
+    },
+    {
+      "key": "char-1-art",
+      "format": "png",
+      "bytes": 3488020,
+      "width": 2193,
+      "height": 1234,
+      "original": "assets/img/legacy/char-1-art.png",
+      "webp": {
+        "1200": "assets/img/char-1-art-1200.webp",
+        "2400": "assets/img/char-1-art-2400.webp"
+      }
+    },
+    {
+      "key": "char-2-art",
+      "format": "png",
+      "bytes": 3966934,
+      "width": 2570,
+      "height": 1289,
+      "original": "assets/img/legacy/char-2-art.png",
+      "webp": {
+        "1200": "assets/img/char-2-art-1200.webp",
+        "2400": "assets/img/char-2-art-2400.webp"
+      }
+    }
+  ],
+  "strings": [
+    {
+      "tag": "a",
+      "en": "Gameplay",
+      "es": "Gameplay"
+    },
+    {
+      "tag": "a",
+      "en": "Maps",
+      "es": "Mapas"
+    },
+    {
+      "tag": "a",
+      "en": "Characters",
+      "es": "Personajes"
+    },
+    {
+      "tag": "a",
+      "en": "Awards",
+      "es": "Premios"
+    },
+    {
+      "tag": "a",
+      "en": "Team",
+      "es": "Equipo"
+    },
+    {
+      "tag": "a",
+      "en": "Contact",
+      "es": "Contacto"
+    },
+    {
+      "tag": "div",
+      "ekey": "hero-eyebrow",
+      "class": "hero-eyebrow",
+      "en": "🎮 Chaotic Multiplayer Party Brawler",
+      "es": "🎮 Party Brawler Multijugador Caótico"
+    },
+    {
+      "tag": "p",
+      "ekey": "hero-tagline",
+      "class": "hero-tagline",
+      "en": "A chaotic multiplayer party brawl to avoid being \"it\" at the end of the match.",
+      "es": "Un party brawler multijugador caótico donde debes evitar ser el último en sostener la patata."
+    },
+    {
+      "tag": "a",
+      "ukey": "url-steam-wishlist",
+      "class": "btn-primary",
+      "en": "▶ Wishlist on Steam",
+      "es": "▶ Añadir a Steam"
+    },
+    {
+      "tag": "a",
+      "class": "btn-outline",
+      "en": "Watch Trailer",
+      "es": "Ver Tráiler"
+    },
+    {
+      "tag": "div",
+      "ekey": "laurel-1",
+      "class": "laurel-text",
+      "en": "3rd Jury Award",
+      "es": "3er Premio del Jurado"
+    },
+    {
+      "tag": "div",
+      "ekey": "laurel-2",
+      "class": "laurel-text",
+      "en": "Best Idea Award",
+      "es": "Premio Mejor Idea"
+    },
+    {
+      "tag": "div",
+      "ekey": "laurel-3",
+      "class": "laurel-text",
+      "en": "Audience Award",
+      "es": "Premio del Público"
+    },
+    {
+      "tag": "a",
+      "class": "trailer-pill",
+      "en": "▶ Watch Official Trailer",
+      "es": "▶ Ver Tráiler Oficial"
+    },
+    {
+      "tag": "div",
+      "ekey": "gameplay-label",
+      "class": "sec-label sec-label-lt",
+      "en": "In Action",
+      "es": "En Acción"
+    },
+    {
+      "tag": "p",
+      "ekey": "gameplay-sub",
+      "class": "sec-sub sec-sub-lt",
+      "en": "Watch the chaos unfold. Fast rounds, explosive passes, and nowhere to hide.",
+      "es": "Observa el caos en acción. Partidas rápidas, pases explosivos y sin escapatoria."
+    },
+    {
+      "tag": "div",
+      "class": "sec-label",
+      "en": "Gallery",
+      "es": "Galería"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Screenshots",
+      "es": "Capturas"
+    },
+    {
+      "tag": "p",
+      "ekey": "shots-sub",
+      "class": "sec-sub",
+      "en": "Moments captured from the heat of battle.",
+      "es": "Momentos capturados en el fragor de la batalla."
+    },
+    {
+      "tag": "span",
+      "ekey": "shot-1776779423012-lbl",
+      "class": "shot-label",
+      "en": "New Screenshot"
+    },
+    {
+      "tag": "div",
+      "class": "sec-label sec-label-lt",
+      "en": "Arenas & Rules",
+      "es": "Arenas y Reglas"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Maps & Modes",
+      "es": "Mapas y Modos"
+    },
+    {
+      "tag": "p",
+      "ekey": "maps-sub",
+      "class": "sec-sub sec-sub-lt",
+      "en": "Every arena brings a new flavor of chaos.",
+      "es": "Cada arena trae un nuevo sabor de caos."
+    },
+    {
+      "tag": "div",
+      "ekey": "map-1-mode",
+      "class": "map-mode",
+      "en": "Beta release",
+      "es": "Modo Clásico"
+    },
+    {
+      "tag": "div",
+      "ekey": "map-1-name",
+      "class": "map-name",
+      "en": "Tag You're it",
+      "es": "Nombre del Mapa"
+    },
+    {
+      "tag": "p",
+      "ekey": "map-1-desc",
+      "class": "map-desc",
+      "en": "Short description of this arena.",
+      "es": "Descripción corta de esta arena."
+    },
+    {
+      "tag": "div",
+      "ekey": "map-2-mode",
+      "class": "map-mode",
+      "en": "In development",
+      "es": "Muerte Súbita"
+    },
+    {
+      "tag": "div",
+      "ekey": "map-2-name",
+      "class": "map-name",
+      "en": "Infected",
+      "es": "Nombre del Mapa"
+    },
+    {
+      "tag": "p",
+      "ekey": "map-2-desc",
+      "class": "map-desc",
+      "en": "In development",
+      "es": "Descripción corta de esta arena."
+    },
+    {
+      "tag": "div",
+      "ekey": "map-3-mode",
+      "class": "map-mode",
+      "en": "In Development",
+      "es": "Modo Equipo"
+    },
+    {
+      "tag": "div",
+      "ekey": "map-3-name",
+      "class": "map-name",
+      "en": "Team deathmatch",
+      "es": "Nombre del Mapa"
+    },
+    {
+      "tag": "p",
+      "ekey": "map-3-desc",
+      "class": "map-desc",
+      "en": "In development",
+      "es": "Descripción corta de esta arena."
+    },
+    {
+      "tag": "div",
+      "class": "sec-label",
+      "en": "The Roster",
+      "es": "El Plantel"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Characters",
+      "es": "Personajes"
+    },
+    {
+      "tag": "p",
+      "ekey": "chars-sub",
+      "class": "sec-sub",
+      "en": "Will you be it?",
+      "es": "Elige tu luchador. Cada uno juega de forma completamente distinta."
+    },
+    {
+      "tag": "div",
+      "ekey": "char-1-name",
+      "class": "char-name",
+      "en": "Potato",
+      "es": "Nombre"
+    },
+    {
+      "tag": "div",
+      "ekey": "char-1-role",
+      "class": "char-role",
+      "en": "Chase the rest",
+      "es": "Rol / Arquetipo"
+    },
+    {
+      "tag": "p",
+      "ekey": "char-1-desc",
+      "class": "char-desc",
+      "en": "Catch other players to pass the potato",
+      "es": "Una frase sobre su estilo de juego."
+    },
+    {
+      "tag": "div",
+      "ekey": "char-2-name",
+      "class": "char-name",
+      "en": "Runner",
+      "es": "Nombre"
+    },
+    {
+      "tag": "div",
+      "ekey": "char-2-role",
+      "class": "char-role",
+      "en": "Avoid being the potato",
+      "es": "Rol / Arquetipo"
+    },
+    {
+      "tag": "p",
+      "ekey": "char-2-desc",
+      "class": "char-desc",
+      "en": "Avoid being tagged!",
+      "es": "Una frase sobre su estilo de juego."
+    },
+    {
+      "tag": "div",
+      "class": "sec-label sec-label-lt",
+      "en": "Recognition",
+      "es": "Reconocimientos"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Awards & Press",
+      "es": "Premios y Prensa"
+    },
+    {
+      "tag": "p",
+      "ekey": "awards-sub",
+      "class": "sec-sub sec-sub-lt",
+      "en": "Recognized at Spain's indie game events — three times.",
+      "es": "Reconocido en los principales eventos indie de España — tres veces."
+    },
+    {
+      "tag": "div",
+      "ekey": "award-1-event",
+      "class": "award-event",
+      "en": "Match in Games 2025"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-1-name",
+      "class": "award-name",
+      "en": "3rd Jury Award",
+      "es": "3er Premio del Jurado"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-1-year",
+      "class": "award-year",
+      "en": "2025"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-2-event",
+      "class": "award-event",
+      "en": "CYL Game Show 2025"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-2-name",
+      "class": "award-name",
+      "en": "Best Idea Award",
+      "es": "Premio a la Mejor Idea"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-2-year",
+      "class": "award-year",
+      "en": "2025"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-3-event",
+      "class": "award-event",
+      "en": "Match in Games 2025"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-3-name",
+      "class": "award-name",
+      "en": "Audience Award",
+      "es": "Premio del Público"
+    },
+    {
+      "tag": "div",
+      "ekey": "award-3-year",
+      "class": "award-year",
+      "en": "2025"
+    },
+    {
+      "tag": "div",
+      "class": "sec-label",
+      "en": "Who We Are",
+      "es": "Quiénes Somos"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "About the Team",
+      "es": "Sobre el Equipo"
+    },
+    {
+      "tag": "p",
+      "ekey": "team-p1",
+      "en": "We're a ~10-person indie studio born at university, united by one obsession: making games that are impossibly fun to play with friends.",
+      "es": "Somos un estudio indie de ~10 personas nacido en la universidad, unidos por una obsesión: hacer juegos imposiblemente divertidos para jugar con amigos."
+    },
+    {
+      "tag": "p",
+      "ekey": "team-p2",
+      "en": "Hot Potato is our love letter to party games — frenetic, unpredictable, and always funnier than the round before.",
+      "es": "Hot Potato es nuestra carta de amor a los party games: frenético, impredecible y siempre más divertido que la partida anterior."
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-1-num",
+      "class": "stat-num",
+      "en": "~10"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-1-lbl",
+      "class": "stat-label",
+      "en": "Team members",
+      "es": "Miembros"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-2-num",
+      "class": "stat-num",
+      "en": "3"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-2-lbl",
+      "class": "stat-label",
+      "en": "Awards won",
+      "es": "Premios"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-3-num",
+      "class": "stat-num",
+      "en": "∞"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-3-lbl",
+      "class": "stat-label",
+      "en": "Hours of fun",
+      "es": "Horas de diversión"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-4-num",
+      "class": "stat-num",
+      "en": "1"
+    },
+    {
+      "tag": "span",
+      "ekey": "stat-4-lbl",
+      "class": "stat-label",
+      "en": "Legendary potato",
+      "es": "Patata legendaria"
+    },
+    {
+      "tag": "h3",
+      "ekey": "pk-title",
+      "en": "Press Kit"
+    },
+    {
+      "tag": "p",
+      "ekey": "pk-desc",
+      "en": "Logos, screenshots, key art, and a full game fact sheet.",
+      "es": "Logos, capturas, arte clave y ficha del juego — todo lo que necesitas para cubrir Hot Potato."
+    },
+    {
+      "tag": "a",
+      "ukey": "url-presskit",
+      "class": "btn-gold",
+      "en": "⬇ Download Press Kit",
+      "es": "⬇ Descargar Press Kit"
+    },
+    {
+      "tag": "div",
+      "class": "sec-label",
+      "en": "Find Us",
+      "es": "Encuéntranos"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Follow the Heat",
+      "es": "Sigue el Calor"
+    },
+    {
+      "tag": "p",
+      "ekey": "rrss-sub",
+      "class": "sec-sub",
+      "en": "Stay updated on news, events, and behind-the-scenes content.",
+      "es": "Mantente al día con noticias, eventos y contenido detrás de cámaras."
+    },
+    {
+      "tag": "div",
+      "class": "sec-label",
+      "en": "Get in Touch",
+      "es": "Ponte en Contacto"
+    },
+    {
+      "tag": "h2",
+      "class": "sec-title",
+      "en": "Contact",
+      "es": "Contacto"
+    },
+    {
+      "tag": "h3",
+      "ekey": "contact-h3",
+      "en": "Let's talk!",
+      "es": "¡Hablemos!"
+    },
+    {
+      "tag": "p",
+      "ekey": "contact-p",
+      "en": "Whether you're press, a publisher, a fellow dev, or just a fan — we'd love to hear from you.",
+      "es": "Seas prensa, publisher, desarrollador o fan — nos encantaría saber de ti."
+    },
+    {
+      "tag": "a",
+      "ekey": "contact-email",
+      "ukey": "url-email",
+      "class": "contact-email",
+      "en": "[email protected]"
+    },
+    {
+      "tag": "button",
+      "class": "btn-primary",
+      "en": "Send Message",
+      "es": "Enviar Mensaje"
+    },
+    {
+      "tag": "div",
+      "class": "footer-copy",
+      "en": "© 2025 Wild Alchemists. All rights reserved.",
+      "es": "© 2025 Wild Alchemists. Todos los derechos reservados."
+    }
+  ],
+  "ekeyOnly": [
+    {
+      "tag": "span",
+      "ekey": "${id}-lbl",
+      "text": "New Screenshot"
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-mode",
+      "text": "Mode Name"
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-name",
+      "text": "Map Name"
+    },
+    {
+      "tag": "p",
+      "ekey": "${id}-desc",
+      "text": "Short description."
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-name",
+      "text": "Character Name"
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-role",
+      "text": "Role"
+    },
+    {
+      "tag": "p",
+      "ekey": "${id}-desc",
+      "text": "One-liner."
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-event",
+      "text": "Event Name"
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-name",
+      "text": "Award Name"
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-year",
+      "text": "2025"
+    },
+    {
+      "tag": "p",
+      "ekey": "${id}-text",
+      "text": "Add a quote here."
+    },
+    {
+      "tag": "div",
+      "ekey": "${id}-source",
+      "text": "— Source, Year"
+    },
+    {
+      "tag": "span",
+      "ekey": "${id}-name",
+      "text": "Link Name"
+    }
+  ],
+  "placeholders": [
+    {
+      "tag": "input",
+      "en": "Name",
+      "es": "Nombre"
+    },
+    {
+      "tag": "input",
+      "en": "Subject (Press, Business, General…)",
+      "es": "Asunto"
+    },
+    {
+      "tag": "textarea",
+      "en": "Message",
+      "es": "Mensaje"
+    }
+  ],
+  "links": [
+    {
+      "href": "#hero",
+      "class": "nav-logo"
+    },
+    {
+      "href": "#gameplay",
+      "en": "Gameplay",
+      "es": "Gameplay"
+    },
+    {
+      "href": "#maps",
+      "en": "Maps",
+      "es": "Mapas"
+    },
+    {
+      "href": "#characters",
+      "en": "Characters",
+      "es": "Personajes"
+    },
+    {
+      "href": "#awards",
+      "en": "Awards",
+      "es": "Premios"
+    },
+    {
+      "href": "#team",
+      "en": "Team",
+      "es": "Equipo"
+    },
+    {
+      "href": "#contact",
+      "en": "Contact",
+      "es": "Contacto"
+    },
+    {
+      "href": "https://store.steampowered.com",
+      "ukey": "url-steam-wishlist",
+      "class": "btn-primary",
+      "en": "▶ Wishlist on Steam",
+      "es": "▶ Añadir a Steam"
+    },
+    {
+      "href": "#gameplay",
+      "class": "btn-outline",
+      "en": "Watch Trailer",
+      "es": "Ver Tráiler"
+    },
+    {
+      "href": "#gameplay",
+      "class": "trailer-pill",
+      "en": "▶ Watch Official Trailer",
+      "es": "▶ Ver Tráiler Oficial"
+    },
+    {
+      "href": "#",
+      "ukey": "url-presskit",
+      "class": "btn-gold",
+      "en": "⬇ Download Press Kit",
+      "es": "⬇ Descargar Press Kit"
+    },
+    {
+      "href": "https://www.instagram.com/wild.alchemists/",
+      "ukey": "url-instagram",
+      "class": "rrss-link"
+    },
+    {
+      "href": "https://x.com/wildalchemists",
+      "ukey": "url-twitter",
+      "class": "rrss-link"
+    },
+    {
+      "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
+      "ukey": "url-steam",
+      "class": "rrss-link"
+    },
+    {
+      "href": "https://discord.gg/tNm9bszS",
+      "ukey": "url-discord",
+      "class": "rrss-link"
+    },
+    {
+      "href": "https://www.linkedin.com/company/wild-alchemists/?viewAsMember=true",
+      "ukey": "url-linkedin",
+      "class": "rrss-link"
+    },
+    {
+      "href": "/cdn-cgi/l/email-protection#6b030e0707042b1c02070f0a0708030e0602181f1845080406",
+      "ukey": "url-email",
+      "class": "contact-email",
+      "en": "[email protected]"
+    },
+    {
+      "href": "#",
+      "ukey": "${id}-url",
+      "class": "rrss-link"
+    }
+  ]
+}

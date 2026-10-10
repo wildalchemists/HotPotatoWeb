@@ -1,0 +1,1064 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wildalchemists.github.io/HotPotatoWeb/content/schema.json",
+  "title": "Hot Potato site content",
+  "description": "Single source of truth for the public site. Every user-facing string is bilingual (en + es). Images are referenced by base name: assets/img/<src>-<width>.webp.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "nav",
+    "hero",
+    "trailer",
+    "howItPlays",
+    "features",
+    "modes",
+    "characters",
+    "gallery",
+    "awards",
+    "press",
+    "team",
+    "pressKit",
+    "socials",
+    "contact",
+    "footer",
+    "ui"
+  ],
+  "$defs": {
+    "text": {
+      "type": "object",
+      "description": "A bilingual string. A value starting with \"TODO\" is a known gap and blocks publishing.",
+      "required": [
+        "en",
+        "es"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "es": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "shortText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/text"
+        }
+      ],
+      "properties": {
+        "en": {
+          "maxLength": 110
+        },
+        "es": {
+          "maxLength": 130
+        }
+      }
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^(https?://|mailto:|#|/)"
+    },
+    "image": {
+      "type": "object",
+      "required": [
+        "src",
+        "width",
+        "height",
+        "alt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "src": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "description": "Base name under assets/img/, without size suffix or extension."
+        },
+        "widths": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "enum": [
+              1200,
+              2400
+            ]
+          },
+          "default": [
+            1200,
+            2400
+          ],
+          "uniqueItems": true
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Intrinsic width of the largest variant (layout-shift prevention)."
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "alt": {
+          "$ref": "#/$defs/text"
+        },
+        "focal": {
+          "type": "object",
+          "description": "Crop focal point, 0–1 from the top-left.",
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": [
+        "label",
+        "href"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "href": {
+          "$ref": "#/$defs/url"
+        },
+        "external": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "live",
+        "beta",
+        "in-development"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Editor hint; always ./schema.json."
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "officialName",
+        "shortName",
+        "title",
+        "description",
+        "siteUrl",
+        "steamAppId",
+        "steamUrl",
+        "ogImage"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "officialName": {
+          "type": "string",
+          "description": "Exact name incl. subtitle, as on Steam."
+        },
+        "shortName": {
+          "type": "string"
+        },
+        "studio": {
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/text",
+          "description": "<title> and og:title."
+        },
+        "description": {
+          "$ref": "#/$defs/text",
+          "description": "meta description, ≤ 160 characters."
+        },
+        "siteUrl": {
+          "$ref": "#/$defs/url"
+        },
+        "steamAppId": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "steamUrl": {
+          "$ref": "#/$defs/url"
+        },
+        "ogImage": {
+          "type": "string",
+          "description": "Path to the 1200×630 share image, generated by the build."
+        },
+        "themeColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "copyrightYear": {
+          "type": "integer",
+          "minimum": 2020
+        },
+        "releaseStatus": {
+          "$ref": "#/$defs/text",
+          "description": "What a player sees next to the CTA: Coming soon / Demo available / Out now."
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "players": {
+          "$ref": "#/$defs/text"
+        },
+        "genreTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ageRating": {
+          "type": "string"
+        },
+        "firebase": {
+          "type": "object",
+          "description": "Public Firebase web config (not a secret). Absent → contact form degrades to mailto.",
+          "required": [
+            "apiKey",
+            "authDomain",
+            "projectId",
+            "appId"
+          ],
+          "properties": {
+            "apiKey": {
+              "type": "string"
+            },
+            "authDomain": {
+              "type": "string"
+            },
+            "projectId": {
+              "type": "string"
+            },
+            "appId": {
+              "type": "string"
+            },
+            "appCheckSiteKey": {
+              "type": "string"
+            }
+          }
+        },
+        "roadmap": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "when",
+              "what"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "when": {
+                "$ref": "#/$defs/text"
+              },
+              "what": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
+        "price": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency",
+            "public"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "approximate": {
+              "type": "boolean"
+            },
+            "public": {
+              "type": "boolean",
+              "description": "Only true prices that the team has made public are rendered."
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "nav": {
+      "type": "object",
+      "required": [
+        "items",
+        "cta"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "cta": {
+          "$ref": "#/$defs/link"
+        }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "required": [
+        "kicker",
+        "pitch",
+        "primaryCta",
+        "secondaryCta",
+        "keyArt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kicker": {
+          "$ref": "#/$defs/shortText",
+          "description": "One line above the logo: genre + player count, facts only."
+        },
+        "pitch": {
+          "$ref": "#/$defs/shortText"
+        },
+        "primaryCta": {
+          "$ref": "#/$defs/link"
+        },
+        "secondaryCta": {
+          "$ref": "#/$defs/link"
+        },
+        "keyArt": {
+          "$ref": "#/$defs/image"
+        },
+        "logo": {
+          "type": "string",
+          "description": "Path to the logo SVG/PNG once the team provides it."
+        },
+        "showAwards": {
+          "type": "boolean",
+          "default": true
+        },
+        "communityCta": {
+          "$ref": "#/$defs/link"
+        }
+      }
+    },
+    "trailer": {
+      "type": "object",
+      "required": [
+        "youtubeId",
+        "title",
+        "poster"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "youtubeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{11}$"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "poster": {
+          "$ref": "#/$defs/image"
+        },
+        "loop": {
+          "type": "object",
+          "description": "Optional short muted gameplay loop.",
+          "properties": {
+            "webm": {
+              "type": "string"
+            },
+            "mp4": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "howItPlays": {
+      "type": "object",
+      "description": "The actual loop in 3–4 beats. Replaces generic features.",
+      "required": [
+        "heading",
+        "beats"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "beats": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "title",
+              "body"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "title": {
+                "$ref": "#/$defs/shortText"
+              },
+              "body": {
+                "$ref": "#/$defs/text"
+              },
+              "image": {
+                "$ref": "#/$defs/image"
+              }
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "description": "The 3–4 concrete mechanics that make it different. Facts from the team only.",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "title",
+              "body"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "title": {
+                "$ref": "#/$defs/shortText"
+              },
+              "body": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
+        "visible": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "modes": {
+      "type": "object",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "statusLabels": {
+          "type": "object",
+          "required": [
+            "live",
+            "beta",
+            "in-development"
+          ],
+          "properties": {
+            "live": {
+              "$ref": "#/$defs/text"
+            },
+            "beta": {
+              "$ref": "#/$defs/text"
+            },
+            "in-development": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "status",
+              "rules"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "name": {
+                "$ref": "#/$defs/text"
+              },
+              "status": {
+                "$ref": "#/$defs/status"
+              },
+              "rules": {
+                "$ref": "#/$defs/text",
+                "description": "The rules in one line."
+              },
+              "image": {
+                "$ref": "#/$defs/image"
+              }
+            }
+          }
+        }
+      }
+    },
+    "characters": {
+      "type": "object",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "role",
+              "line"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "name": {
+                "$ref": "#/$defs/text"
+              },
+              "role": {
+                "$ref": "#/$defs/text"
+              },
+              "line": {
+                "$ref": "#/$defs/text"
+              },
+              "image": {
+                "$ref": "#/$defs/image"
+              }
+            }
+          }
+        }
+      }
+    },
+    "gallery": {
+      "type": "object",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "image"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "image": {
+                "$ref": "#/$defs/image"
+              },
+              "caption": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        }
+      }
+    },
+    "awards": {
+      "type": "object",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "event",
+              "award",
+              "year"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "event": {
+                "type": "string"
+              },
+              "award": {
+                "$ref": "#/$defs/text"
+              },
+              "year": {
+                "type": "integer",
+                "minimum": 2020
+              },
+              "url": {
+                "$ref": "#/$defs/url"
+              },
+              "laurel": {
+                "type": "string",
+                "description": "Path to a laurel SVG/PNG if the event provides one."
+              }
+            }
+          }
+        }
+      }
+    },
+    "press": {
+      "type": "object",
+      "description": "Real quotes only. visible=false hides the block until there are some.",
+      "required": [
+        "heading",
+        "items",
+        "visible"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "quote",
+              "outlet",
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "quote": {
+                "$ref": "#/$defs/text"
+              },
+              "outlet": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              },
+              "url": {
+                "$ref": "#/$defs/url"
+              }
+            }
+          }
+        }
+      }
+    },
+    "team": {
+      "type": "object",
+      "required": [
+        "heading",
+        "studioName",
+        "blurb",
+        "stats"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "studioName": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "blurb": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "stats": {
+          "type": "array",
+          "maxItems": 4,
+          "description": "Real numbers only.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "value",
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "role"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "$ref": "#/$defs/text"
+              },
+              "url": {
+                "$ref": "#/$defs/url"
+              }
+            }
+          }
+        },
+        "showMembers": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "pressKit": {
+      "type": "object",
+      "required": [
+        "heading",
+        "body",
+        "cta",
+        "includes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        },
+        "cta": {
+          "$ref": "#/$defs/link"
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "available": {
+          "type": "boolean",
+          "description": "false until pressKit.cta.href is a real download; the page then shows pressKit.pending instead of the button."
+        },
+        "pending": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "socials": {
+      "type": "object",
+      "required": [
+        "heading",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "network",
+              "label",
+              "href"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "network": {
+                "type": "string",
+                "enum": [
+                  "steam",
+                  "discord",
+                  "instagram",
+                  "x",
+                  "tiktok",
+                  "youtube",
+                  "linkedin",
+                  "bluesky",
+                  "itch",
+                  "web"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "href": {
+                "$ref": "#/$defs/url"
+              },
+              "handle": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        },
+        "primary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "ids of the socials shown as big CTAs, in order."
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": [
+        "heading",
+        "body",
+        "email",
+        "form"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "pressEmail": {
+          "type": "string",
+          "format": "email"
+        },
+        "businessEmail": {
+          "type": "string",
+          "format": "email"
+        },
+        "form": {
+          "type": "object",
+          "required": [
+            "enabled",
+            "fields",
+            "submit",
+            "topics"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "true only when meta.firebase exists; otherwise the build renders a mailto link."
+            },
+            "fields": {
+              "type": "object",
+              "required": [
+                "name",
+                "email",
+                "topic",
+                "message"
+              ],
+              "properties": {
+                "name": {
+                  "$ref": "#/$defs/text"
+                },
+                "email": {
+                  "$ref": "#/$defs/text"
+                },
+                "topic": {
+                  "$ref": "#/$defs/text"
+                },
+                "message": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            },
+            "topics": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/text"
+              }
+            },
+            "submit": {
+              "$ref": "#/$defs/text"
+            },
+            "success": {
+              "$ref": "#/$defs/text"
+            },
+            "error": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "required": [
+        "copyright",
+        "links"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "copyright": {
+          "$ref": "#/$defs/text"
+        },
+        "legal": {
+          "$ref": "#/$defs/text"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "Small interface strings used by main.js and the templates.",
+      "required": [
+        "skipToContent",
+        "languageSwitch",
+        "playTrailer",
+        "closeLightbox",
+        "nextImage",
+        "prevImage",
+        "openMenu",
+        "closeMenu",
+        "external"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/text"
+      }
+    }
+  }
+}
