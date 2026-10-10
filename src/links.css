@@ -90,3 +90,9 @@ h1{font-size:clamp(3.6rem,11vw,6.5rem);color:var(--ink)}
   .url{font-size:8pt;opacity:1}
   .strip{justify-content:center}
 }
+
+/* official logo as the title */
+.logo-h1{margin:.2rem 0 .4rem}
+.logo-h1 img{width:min(70vw,380px);height:auto;filter:drop-shadow(4px 4px 0 rgba(11,18,48,.35))}
+.qr-brand{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.qr-brand img{width:clamp(120px,18vw,200px);height:auto}

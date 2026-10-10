@@ -9,7 +9,8 @@ body.screen::before{content:"";position:fixed;inset:0;background-image:repeating
 /* head */
 .stage-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem 2.5rem;align-items:center}
 .brand{display:flex;align-items:center;gap:clamp(.6rem,1.5vw,1.2rem)}
-.potato{width:clamp(80px,17vh,180px);height:auto;flex:none;filter:drop-shadow(4px 4px 0 var(--ink))}
+.potato{width:clamp(72px,15vh,160px);height:auto;flex:none;filter:drop-shadow(4px 4px 0 var(--ink))}
+.logo-img{height:clamp(84px,19vh,210px);width:auto;filter:drop-shadow(4px 4px 0 var(--ink))}
 .brand-big{font-size:clamp(2.2rem,6.4vh,5rem);color:var(--paper);text-shadow:.045em .045em 0 var(--ink),-.012em -.012em 0 var(--ink);line-height:.9}
 .stage-title{display:grid;gap:clamp(.4rem,1vh,.7rem);justify-items:center;text-align:center}
 .title-sticker{font-size:clamp(1.4rem,4.2vh,3rem);padding:.35em .7em;letter-spacing:.01em;box-shadow:6px 6px 0 var(--ink)}

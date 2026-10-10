@@ -21,7 +21,7 @@
 <main class="yard wide">
   <header class="qr-head">
     <span class="plate plate-static" aria-hidden="true">{{= qr.code}}</span>
-    <h1 class="display" data-k="qr.heading">{{t qr.heading}}</h1>
+    <div class="qr-brand"><img src="{{= base}}assets/img/logo-600.webp" width="1200" height="1166" alt="{{= meta.officialName}}"><h1 class="display" data-k="qr.heading">{{t qr.heading}}</h1></div>
     <p class="lead" data-k="qr.lead">{{t qr.lead}}</p>
     <p class="noprint"><a class="mono dl" href="#" onclick="window.print();return false" data-k="qr.print">{{t qr.print}}</a> &nbsp;·&nbsp; <a class="mono dl" href="{{= base}}{{#if lang == es}}es/{{/if}}screen/" data-k="screen.title">{{t screen.title}}</a></p>
   </header>

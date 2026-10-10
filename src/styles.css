@@ -119,6 +119,8 @@ a.sticker:active,button.sticker:active{transform:rotate(0) translate(3px,3px);bo
 .hero{overflow:hidden}
 .hero-grid{max-width:var(--max);margin:0 auto;padding:clamp(2.5rem,5vw,5rem) var(--gutter) clamp(3rem,6vw,6rem);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);align-items:center}
 .kicker{display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.4rem .7rem;transform:rotate(var(--rot))}
+.hero-logo{margin:.4rem 0 1.2rem}
+.hero-logo img{width:min(100%,560px);height:auto;filter:drop-shadow(6px 6px 0 rgba(11,18,48,.55))}
 .hero-title{font-size:var(--step-4);margin:.15em 0 .2em;color:var(--paper);text-shadow:.045em .045em 0 var(--ink),-.012em -.012em 0 var(--ink)}
 .pitch{font-size:var(--step-1);font-weight:700;text-transform:none;letter-spacing:0;max-width:30ch;margin-bottom:1.6rem;box-shadow:6px 6px 0 var(--ink)}
 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.6rem;margin-bottom:1.8rem}

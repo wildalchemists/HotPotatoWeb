@@ -385,6 +385,11 @@
         },
         "communityCta": {
           "$ref": "#/$defs/link"
+        },
+        "showLogo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Render hero.logo instead of the text title (the text stays for assistive tech and search)."
         }
       }
     },
