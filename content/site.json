@@ -567,6 +567,38 @@
             "es": "Una partida completa en la arena del patio de contenedores"
           }
         }
+      },
+      {
+        "id": "trailer-chase",
+        "image": {
+          "src": "trailer-chase",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 1569,
+          "height": 881,
+          "alt": {
+            "en": "Trailer still: the runner sprints along an orange container roof with the potato right behind, caption 'Escapa de la patata'",
+            "es": "Fotograma del tráiler: el corredor esprinta por el tejado de un contenedor naranja con la patata detrás, rótulo 'Escapa de la patata'"
+          }
+        }
+      },
+      {
+        "id": "trailer-zap",
+        "image": {
+          "src": "trailer-zap",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 1569,
+          "height": 881,
+          "alt": {
+            "en": "Trailer still with the in-game HUD: the potato takes a ZAP hit while a runner raises both hands, score and timer at the top, caption 'Pelea contra ella'",
+            "es": "Fotograma del tráiler con el HUD del juego: la patata recibe un ZAP mientras un corredor levanta las manos, marcador y tiempo arriba, rótulo 'Pelea contra ella'"
+          }
+        }
       }
     ]
   },
