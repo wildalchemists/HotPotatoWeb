@@ -57,6 +57,8 @@
     <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span>Instagram<br><b>@wild.alchemists</b></span></div>
     {{/if}}{{#if q.id == links}}
     <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span data-k="{{= q_path}}.label">{{t q.label}}</span></div>
+    {{/if}}{{#if q.id == form}}
+    <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span data-k="{{= q_path}}.label">{{t q.label}}</span></div>
     {{/if}}{{/each}}
     <span class="foot-url">wildalchemists.github.io/HotPotatoWeb</span>
     <a class="foot-lang" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>

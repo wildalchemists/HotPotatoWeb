@@ -1178,6 +1178,30 @@
               }
             }
           }
+        },
+        "extraTargets": {
+          "type": "array",
+          "description": "Extra QR targets beyond Steam/Discord/Instagram/links; scripts/qr.py turns them into qr.items.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "href",
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "href": {
+                "$ref": "#/$defs/url"
+              },
+              "label": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
         }
       }
     },

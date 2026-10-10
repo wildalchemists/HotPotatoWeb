@@ -1071,6 +1071,15 @@
           "es": "Todos los enlaces"
         },
         "file": "qr-links"
+      },
+      {
+        "id": "form",
+        "href": "https://forms.gle/6jNgYXUS2kKP8UgU9",
+        "label": {
+          "en": "Form",
+          "es": "Formulario"
+        },
+        "file": "qr-form"
       }
     ],
     "title": {
@@ -1101,7 +1110,17 @@
     "qrAlt": {
       "en": "QR code that opens",
       "es": "Código QR que abre"
-    }
+    },
+    "extraTargets": [
+      {
+        "id": "form",
+        "href": "https://forms.gle/6jNgYXUS2kKP8UgU9",
+        "label": {
+          "en": "Form",
+          "es": "Formulario"
+        }
+      }
+    ]
   },
   "screen": {
     "title": {
