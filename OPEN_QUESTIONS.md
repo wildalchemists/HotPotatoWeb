@@ -4,7 +4,7 @@ Facts the site needs that neither the old page nor the repo can answer. Each one
 
 | # | Question | Where it shows | site.json key |
 | --- | --- | --- | --- |
-| 1 | Official name, exactly as it should read with subtitle. The Steam URL slug says **Hot Potato: Tag Out**; the old page's `<title>` said "Hot Potato — Party Brawler". Which one? | `<title>`, Open Graph, JSON-LD, footer | `meta.officialName` |
+| 1 | ~~Official name~~ Set to **Hot Potato: Tag Out** on 2026-10-10 from the Steam URL the team sent. The page shows "Hot Potato" (`meta.shortName`); the full name goes to JSON-LD. Shout if the subtitle should appear on the page | JSON-LD | `meta.officialName` |
 | 2 | ~~Release status~~ Answered 2026-10-09: closed beta on Discord first, early access Feb–Mar 2027, full release Q3 2027. Open: the beta's date or window | Hero roadmap | `meta.roadmap` |
 | 3 | Platforms as listed on Steam (Windows only? Deck verified?) | Hero kicker, JSON-LD | `meta.platforms` |
 | 4 | Player count: local and/or online, minimum and maximum | Hero kicker, "How it plays" | `meta.players` |
@@ -19,8 +19,8 @@ Facts the site needs that neither the old page nor the repo can answer. Each one
 | 12 | Are Potato and Runner the only roles, or are there selectable characters/skins? The old page listed them as "Characters" but the screenshots show them as the two states of one round, so they are modelled as **roles** | Roles section | `characters` |
 | 13 | Maps / arenas: is the container yard the only arena? Name and one-liner for each | Gallery captions, Modes | not modelled until known |
 | 14 | Press kit: the team is making it (2026-10-10). Until `pressKit.available` is true the page says so and points press to the email; then set `pressKit.cta.href` | Press kit block | `pressKit.available`, `pressKit.cta.href` |
-| 15 | A **permanent** Discord invite. `discord.gg/tNm9bszS` has the shape of a temporary invite | Socials | `socials.items[discord].href` |
-| 16 | Separate press / business emails, or does `hello@wildalchemists.com` take everything? | Contact | `contact.pressEmail`, `contact.businessEmail` |
+| 15 | ~~Discord invite~~ Replaced on 2026-10-10 with `discord.gg/gQEActAFX`; CI checks it against Discord's API for an expiry | Socials | `socials.items[discord].href` |
+| 16 | ~~Email~~ Answered 2026-10-10: `wildalchemists@gmail.com` takes everything (replaces the old page's `hello@wildalchemists.com`) | Contact | `contact.email` |
 | 17 | Press or creator quotes with a source link. None existed; the block is hidden (`press.visible = false`) | Awards & press | `press.items[]` |
 | 18 | Awards since 2025 (FreakCon Málaga 2026 or others?) and laurel artwork per event, if the events provide it | Awards | `awards.items[]` |
 | 19 | ~~Team size~~ Answered 2026-10-09: 8 people (2 programmers, 3 artists, 2 designers, 1 producer) | Studio stats | `team.stats` |
@@ -34,7 +34,7 @@ Facts the site needs that neither the old page nor the repo can answer. Each one
 
 ## Decisions taken without asking (reversible)
 
-- **Contact email** is `hello@wildalchemists.com`, decoded from the Cloudflare-obfuscated link on the old page.
+- **Contact email** was `hello@wildalchemists.com` (decoded from the old page); the team replaced it with `wildalchemists@gmail.com` on 2026-10-10.
 - **Steam CTA** points to `https://store.steampowered.com/app/3650190/` (the old hero linked to the Steam homepage).
 - **Awards** appear once in data; the hero only references them (`hero.showAwards`).
 - **"Maps & Modes"** held modes, so they are `modes`; there is no `maps` key until question 13 is answered.
