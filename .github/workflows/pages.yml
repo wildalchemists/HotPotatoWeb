@@ -49,11 +49,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # TEMPORARY: while the repository's Pages source is still "Deploy from a branch", GitHub also runs its
-      # own "pages build and deployment" on every push to main and publishes the repo root (the README) about
-      # 45 s later, on top of our deployment. Waiting makes ours land last. Remove this step once
-      # Settings → Pages → Source is set to "GitHub Actions" (then the legacy build stops running).
-      - name: Wait for the legacy branch build to finish first
-        run: sleep 90
       - id: deployment
         uses: actions/deploy-pages@v4
