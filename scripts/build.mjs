@@ -36,6 +36,7 @@ const screenCss = readFileSync(join(ROOT, 'src/screen.css'), 'utf8');
 const js = readFileSync(join(ROOT, 'src/main.js'), 'utf8');
 const hash8 = (s) => createHash('sha1').update(s).digest('hex').slice(0, 8);
 const v = hash8(css + js + template + linksTemplate + qrTemplate + screenTemplate + linksCss + screenCss);
+const iconv = hash8(readFileSync(join(ROOT, 'assets/img/favicon.ico')).toString('base64') + readFileSync(join(ROOT, 'assets/img/favicon-192.png')).toString('base64'));
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -226,7 +227,7 @@ for (const page of PAGES) {
   const url = site.meta.siteUrl + page.rel;
   const otherRel = lang === 'en' ? 'es/' + page.rel : page.rel.slice(3);
   const otherUrl = base + otherRel;
-  const ctx = { lang, otherLang: other, base, url, otherUrl, otherUrlAbs: site.meta.siteUrl + otherRel, v, siteUrl: site.meta.siteUrl, year: String(site.meta.copyrightYear), jsonld: jsonLd(lang, url), hasFirebase: Boolean(site.meta.firebase), showPrice: Boolean(site.meta.price && site.meta.price.public) };
+  const ctx = { lang, otherLang: other, base, url, otherUrl, otherUrlAbs: site.meta.siteUrl + otherRel, v, iconv, siteUrl: site.meta.siteUrl, year: String(site.meta.copyrightYear), jsonld: jsonLd(lang, url), hasFirebase: Boolean(site.meta.firebase), showPrice: Boolean(site.meta.price && site.meta.price.public) };
   const html = evaluate(page.ast, { ctx, vars: {} });
   const dir = join(OUT, page.rel);
   mkdirSync(dir, { recursive: true });
@@ -249,7 +250,7 @@ if (existsSync(join(ROOT, 'assets/fonts'))) cpSync(join(ROOT, 'assets/fonts'), j
 cpSync(join(OUT, 'assets/img/favicon.ico'), join(OUT, 'favicon.ico'));
 writeFileSync(join(OUT, 'site.webmanifest'), JSON.stringify({
   name: site.meta.shortName, short_name: site.meta.shortName, start_url: './', display: 'browser', background_color: '#0B1230', theme_color: site.meta.themeColor,
-  icons: [{ src: 'assets/img/favicon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'assets/img/favicon-512.png', sizes: '512x512', type: 'image/png' }],
+  icons: [{ src: `assets/img/favicon-192.png?v=${iconv}`, sizes: '192x192', type: 'image/png' }, { src: `assets/img/favicon-512.png?v=${iconv}`, sizes: '512x512', type: 'image/png' }],
 }, null, 2));
 writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.meta.siteUrl}sitemap.xml\n`);
 const smPairs = [['', 'es/'], ['links/', 'es/links/'], ['qr/', 'es/qr/']];
