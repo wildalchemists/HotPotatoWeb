@@ -144,7 +144,7 @@
     </div>
     <ul class="modes" data-list="modes.items">
       {{#each modes.items as mode}}
-      <li class="mode sticker r{{= mode_n}}">
+      <li class="mode sticker r{{= mode_n}}{{#if mode.image}} mode-featured{{/if}}">
         {{#if mode.image}}<figure class="mode-img">{{img mode.image sizes="(max-width: 980px) 92vw, 40vw"}}</figure>{{/if}}
         <div class="mode-copy">
           <span class="stamp stamp-{{= mode.status}}" data-k="{{= mode_path}}.status">{{status mode.status}}</span>
