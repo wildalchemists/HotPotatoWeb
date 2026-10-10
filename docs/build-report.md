@@ -117,3 +117,7 @@ error: failed to push some refs to 'https://github.com/wildalchemists/HotPotatoW
 ### CI
 
 The workflow runs build + check on every push and pull request and deploys `dist/` only from `main`. Until the seven TODOs are filled, CI is red by design and nothing deploys. After that, a push to `main` deploys to GitHub Pages once the repository's Pages source is set to *GitHub Actions*.
+
+### CI result
+
+Run [38039076691](https://github.com/wildalchemists/HotPotatoWeb/actions/runs/38039076691) on the push of the fixed commit: build OK, check **failed with exit code 1** on the seven team TODOs, each surfaced as a GitHub error annotation; the deploy job did not run. The run took 11 seconds. That is the intended state until `content/site.json` carries the Modes intro, the two missing rule lines and the press-kit URL; the first push to `main` after that deploys.
