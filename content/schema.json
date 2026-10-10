@@ -860,6 +860,13 @@
           "items": {
             "$ref": "#/$defs/text"
           }
+        },
+        "available": {
+          "type": "boolean",
+          "description": "false until pressKit.cta.href is a real download; the page then shows pressKit.pending instead of the button."
+        },
+        "pending": {
+          "$ref": "#/$defs/text"
         }
       }
     },

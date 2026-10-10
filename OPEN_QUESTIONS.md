@@ -13,12 +13,12 @@ Facts the site needs that neither the old page nor the repo can answer. Each one
 | 7 | Price: team says "around 4,99, premium". Stored but **not rendered** until it is public and final (`meta.price.public`) | Hero (optional) | `meta.price` |
 | 8 | Logo as a clean SVG or transparent PNG. The key art has the graffiti logo but it is baked in, darkened, and carries the three laurels. A version without laurels and without the dark overlay is needed for the hero | Hero, nav, OG image | `hero.logo`, `hero.keyArt` |
 | 9 | The 3–4 concrete mechanics that make it different (not adjectives). The section is hidden (`features.visible = false`) until this is answered | "What makes it different" | `features.items[]` |
-| 10 | Rules in one line for **Infected** and **Team deathmatch** (the old page only said "In development") | Modes | `modes.items[1..2].rules` |
-| 10b | The team says there are **two current modes**; the old page listed one in beta and two in development. Which two are current, and are they live or beta? The intro of the Modes section is a TODO until then | Modes | `modes.intro`, `modes.items[].status` |
-| 11 | Is "Tag, you're it" really in **beta** (old page: "Beta release"), and is the final name "Tag, you're it"? | Modes | `modes.items[0]` |
+| 10 | ~~Rules for Infected and Team deathmatch~~ Answered 2026-10-10: Infected starts with one potato that infects whoever it tags; Team deathmatch is tag in teams. Confirm the one-line wordings on the page | Modes | `modes.items[].rules` |
+| 10b | ~~Which two modes~~ Answered 2026-10-10: Infected and Team deathmatch. **Assumptions to confirm:** both shown as *Beta* (the game is pre-release), and the old page's "Tag, you're it" was removed as the former name of the tag mode. If it is a third mode, it is one list item to add back | Modes | `modes.items[]` |
+| 11 | ~~"Tag, you're it"~~ Folded into 10b | Modes | |
 | 12 | Are Potato and Runner the only roles, or are there selectable characters/skins? The old page listed them as "Characters" but the screenshots show them as the two states of one round, so they are modelled as **roles** | Roles section | `characters` |
 | 13 | Maps / arenas: is the container yard the only arena? Name and one-liner for each | Gallery captions, Modes | not modelled until known |
-| 14 | Press kit URL (Drive, presskit(), zip) and its contents. The old button linked to `#` | Press kit block | `pressKit.cta.href`, `pressKit.includes` |
+| 14 | Press kit: the team is making it (2026-10-10). Until `pressKit.available` is true the page says so and points press to the email; then set `pressKit.cta.href` | Press kit block | `pressKit.available`, `pressKit.cta.href` |
 | 15 | A **permanent** Discord invite. `discord.gg/tNm9bszS` has the shape of a temporary invite | Socials | `socials.items[discord].href` |
 | 16 | Separate press / business emails, or does `hello@wildalchemists.com` take everything? | Contact | `contact.pressEmail`, `contact.businessEmail` |
 | 17 | Press or creator quotes with a source link. None existed; the block is hidden (`press.visible = false`) | Awards & press | `press.items[]` |

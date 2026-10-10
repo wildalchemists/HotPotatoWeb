@@ -269,7 +269,7 @@
         {{#each pressKit.includes as inc}}<li data-k="{{= inc_path}}">{{t inc}}</li>
         {{/each}}
       </ul>
-      <a class="sticker sticker-y r1" href="{{= pressKit.cta.href}}" rel="noopener" data-k="pressKit.cta.label" data-href="pressKit.cta.href">{{t pressKit.cta.label}}</a>
+      {{#if pressKit.available}}<a class="sticker sticker-y r1" href="{{= pressKit.cta.href}}" rel="noopener" data-k="pressKit.cta.label" data-href="pressKit.cta.href">{{t pressKit.cta.label}}</a>{{else}}<p class="sticker note r1" data-k="pressKit.pending">{{t pressKit.pending}}</p>{{/if}}
     </div>
 
     <div class="community" id="community">

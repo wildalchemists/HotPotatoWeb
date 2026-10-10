@@ -365,8 +365,8 @@
       "es": "Modos"
     },
     "intro": {
-      "en": "TODO: the team says two modes are current; the old page listed one in beta and two in development. Which two?",
-      "es": "TODO: el equipo dice que hay dos modos actuales; la web antigua listaba uno en beta y dos en desarrollo. ¿Cuáles?"
+      "en": "Two modes you can play today.",
+      "es": "Dos modos que ya se pueden jugar."
     },
     "statusLabels": {
       "live": {
@@ -384,15 +384,15 @@
     },
     "items": [
       {
-        "id": "tag-youre-it",
+        "id": "infected",
         "name": {
-          "en": "Tag, you're it",
-          "es": "Tag, you're it"
+          "en": "Infected",
+          "es": "Infected"
         },
         "status": "beta",
         "rules": {
-          "en": "One potato for everyone. Whoever is holding it at zero is out.",
-          "es": "Una patata para todos. Quien la tenga a cero queda fuera."
+          "en": "One potato at the start. Everyone it tags turns into a potato too, until nobody is left running.",
+          "es": "Empieza una sola patata. Cada jugador al que pilla se convierte en patata, hasta que no queda nadie corriendo."
         },
         "image": {
           "src": "map-1-thumb",
@@ -409,27 +409,15 @@
         }
       },
       {
-        "id": "infected",
-        "name": {
-          "en": "Infected",
-          "es": "Infected"
-        },
-        "status": "in-development",
-        "rules": {
-          "en": "TODO: rules in one line (from the team)",
-          "es": "TODO: reglas en una línea (del equipo)"
-        }
-      },
-      {
         "id": "team-deathmatch",
         "name": {
           "en": "Team deathmatch",
           "es": "Team deathmatch"
         },
-        "status": "in-development",
+        "status": "beta",
         "rules": {
-          "en": "TODO: rules in one line (from the team)",
-          "es": "TODO: reglas en una línea (del equipo)"
+          "en": "Tag, in teams. Catch the other side and don't get caught.",
+          "es": "Pilla pilla por equipos. Pilla al otro equipo y que no te pillen a ti."
         }
       }
     ]
@@ -717,7 +705,12 @@
         "en": "Fact sheet",
         "es": "Ficha del juego"
       }
-    ]
+    ],
+    "available": false,
+    "pending": {
+      "en": "The press kit is being put together. Email us and we send the logo, key art and screenshots.",
+      "es": "El press kit está en preparación. Escríbenos y te mandamos logo, arte principal y capturas."
+    }
   },
   "socials": {
     "heading": {

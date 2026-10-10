@@ -71,6 +71,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .sticker-ink{background:var(--ink);color:var(--paper);border-color:var(--paper);box-shadow:5px 5px 0 var(--paper)}
 .wall-ink .sticker-ink{border-color:var(--paper)}
 a.sticker:hover,button.sticker:hover{transform:rotate(0) translate(-2px,-2px)}
+.sticker.note{text-transform:none;letter-spacing:0;font-weight:700;max-width:34ch;font-size:var(--step-0)}
 .sticker.big{font-size:var(--step-1);padding:.8rem 1.2rem}
 .tape{position:absolute;width:92px;height:28px;background:var(--tape);transform:rotate(-38deg);left:-30px;top:-16px;pointer-events:none}
 .tape-r{left:auto;right:-30px;transform:rotate(38deg)}
