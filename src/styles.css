@@ -102,7 +102,8 @@ a.sticker:active,button.sticker:active{transform:rotate(0) translate(3px,3px);bo
 
 /* ---------- nav ---------- */
 .nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:1.25rem;padding:.65rem var(--gutter);background:var(--paper);box-shadow:0 4px 0 var(--ink)}
-.brand{font-size:1.5rem;text-decoration:none;line-height:1;white-space:nowrap}
+.brand{display:flex;align-items:center;gap:.55rem;font-size:1.5rem;text-decoration:none;line-height:1;white-space:nowrap}
+.brand-mark{width:44px;height:44px;flex:none;filter:drop-shadow(2px 2px 0 var(--ink))}
 .menu ul{display:flex;gap:1.25rem}
 .menu a{font-weight:700;font-size:var(--step--1);text-decoration:none}
 .menu a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
@@ -250,6 +251,7 @@ a.sticker:active,button.sticker:active{transform:rotate(0) translate(3px,3px);bo
 /* ---------- footer ---------- */
 .footer{border-top:4px solid var(--paper);padding:2rem 0 2.5rem}
 .footer-in{display:grid;gap:.6rem}
+.footer-mark{width:72px;height:72px;margin-bottom:.4rem;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.5))}
 .footer-links{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:.6rem}
 .footer-links a{font-weight:700;text-decoration:none;color:var(--paper)}
 .footer-links a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -298,6 +300,7 @@ body.lb-open{overflow:hidden}
 }
 @media (max-width:640px){
   .brand{font-size:1.2rem}
+  .brand-mark{width:34px;height:34px}
   .nav{gap:.8rem}
   .nav-cta{font-size:.78rem;padding:.45rem .6rem}
   .nav-cta2{display:none}
@@ -321,6 +324,7 @@ body.lb-open{overflow:hidden}
 @media (max-width:400px){
   .lang{display:none}
   .brand{font-size:1.1rem}
+  .brand-mark{width:30px;height:30px}
   .nav{gap:.6rem}
   .nav-cta{font-size:.72rem;padding:.4rem .5rem}
   .menu-btn{padding:.35rem .5rem;font-size:.78rem}
