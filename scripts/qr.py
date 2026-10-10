@@ -23,6 +23,8 @@ targets = [
     ("instagram", socials["instagram"]["href"], "Instagram", "Instagram"),
     ("links", links_url, "All the links", "Todos los enlaces"),
 ]
+for extra in site.get("qr", {}).get("extraTargets", []):
+    targets.append((extra["id"], extra["href"], extra["label"]["en"], extra["label"]["es"]))
 items = []
 for key, href, en, es in targets:
     q = segno.make(href, error="q")
