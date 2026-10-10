@@ -1,0 +1,53 @@
+/* /links/ — the Container Yard look (docs/art-direction.md, direction A), kept to one page. Colours sampled from the game. */
+:root{--sky:#3BABD2;--sky-deep:#1987AC;--blue:#154396;--green:#268741;--green-deep:#226C28;--yellow:#E8C73B;--ink:#0B1230;--paper:#F3F2EE;--concrete:#B8BDCA;
+  --display:'Big Shoulders Stencil Display',Impact,sans-serif;--text:'Archivo',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+  --corrugation:repeating-linear-gradient(90deg,transparent 0 18px,rgba(0,0,0,.14) 18px 26px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100vh;font-family:var(--text);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased;
+  background:var(--sky);background-image:radial-gradient(ellipse 16% 5% at 50% 6%,#fff 60%,transparent 61%),radial-gradient(ellipse 22% 6% at 82% 14%,#fff 60%,transparent 61%),radial-gradient(ellipse 12% 4% at 18% 22%,#fff 60%,transparent 61%),linear-gradient(var(--sky),var(--sky-deep))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--yellow);padding:.6rem 1rem;font-weight:700;text-decoration:none}
+.skip:focus{top:1rem}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:600}
+.display{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.86}
+.yard{max-width:1040px;margin:0 auto;padding:clamp(1.25rem,4vw,3rem) clamp(1rem,4vw,2rem) 2rem;display:grid;gap:1.25rem}
+
+/* the container */
+.container-box{position:relative;background:var(--green-deep);border:3px solid var(--ink);box-shadow:14px 14px 0 rgba(11,18,48,.35)}
+.frame{padding:14px;background:var(--green);background-image:var(--corrugation)}
+.window{background:var(--paper);border:3px solid var(--ink);padding:clamp(1.25rem,4vw,2.5rem)}
+.plate{position:absolute;top:-3px;left:24px;z-index:2;background:var(--paper);border:3px solid var(--ink);border-top:0;padding:.35rem .6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;font-weight:600}
+
+.head{margin-bottom:1.6rem}
+.kicker{display:inline-block;background:var(--ink);color:var(--paper);padding:.4rem .6rem;margin-bottom:.8rem}
+h1{font-size:clamp(3.6rem,11vw,6.5rem);color:var(--ink)}
+.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);font-weight:500;margin-top:.4rem}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
+.links{display:grid;gap:.9rem}
+.btn{display:grid;gap:.15rem;border:3px solid var(--ink);background:var(--paper);padding:.9rem 1.1rem;text-decoration:none;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1;box-shadow:5px 5px 0 var(--ink);position:relative;transition:transform .12s ease-out,box-shadow .12s ease-out}
+.btn .tag{font-family:var(--mono);font-weight:600;font-size:.68rem;letter-spacing:.14em;opacity:.75}
+.btn-yellow{background:var(--yellow)}
+.btn-yellow::before{content:"";position:absolute;inset:0;background:var(--corrugation);opacity:.35;pointer-events:none}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.small{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;padding-top:.4rem}
+.small a{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ink)}
+.small a:hover{background:var(--yellow)}
+
+.qr{display:grid;gap:.6rem;justify-items:center;text-align:center;border:3px solid var(--ink);background:#fff;padding:1rem;box-shadow:5px 5px 0 var(--ink)}
+.qr img{width:100%;max-width:300px;height:auto}
+.dl{text-decoration:none;border-bottom:2px solid var(--ink)}
+.dl:hover{background:var(--yellow)}
+
+.strip{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 1.5rem;color:var(--ink)}
+.strip a{text-decoration:none;border-bottom:2px solid var(--ink)}
+
+@media (max-width:760px){
+  .grid{grid-template-columns:1fr}
+  .qr{max-width:360px;justify-self:center;width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

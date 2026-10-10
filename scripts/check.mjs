@@ -227,7 +227,7 @@ export async function cli() {
     for (const page of htmlFiles) {
       const html = dist[page].toString('utf8');
       const base = page.includes('/') ? page.split('/').slice(0, -1).join('/') + '/' : '';
-      const norm = (p) => p.replace(/^\.\.\//, '').replace(/\?.*$/, '');
+      const norm = (p) => p.replace(/^(\.\.\/)+/, '').replace(/\?.*$/, '');
       let total = gzipSync(dist[page]).length, items = [`html ${kb(gzipSync(dist[page]).length)}`];
       const add = (p, label) => { const f = norm(p); if (dist[f]) { const n = /\.(css|js)$/.test(f) ? gzipSync(dist[f]).length : dist[f].length; total += n; items.push(`${label || f} ${kb(n)}`); } };
       for (const m of html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)) add(m[1]);

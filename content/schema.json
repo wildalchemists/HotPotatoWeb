@@ -22,7 +22,8 @@
     "socials",
     "contact",
     "footer",
-    "ui"
+    "ui",
+    "links"
   ],
   "$defs": {
     "text": {
@@ -1058,6 +1059,46 @@
       ],
       "additionalProperties": {
         "$ref": "#/$defs/text"
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "code",
+        "lead",
+        "scan",
+        "download",
+        "website",
+        "qrAlt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "code": {
+          "type": "string"
+        },
+        "lead": {
+          "$ref": "#/$defs/text"
+        },
+        "scan": {
+          "$ref": "#/$defs/text"
+        },
+        "download": {
+          "$ref": "#/$defs/text"
+        },
+        "website": {
+          "$ref": "#/$defs/text"
+        },
+        "qrAlt": {
+          "$ref": "#/$defs/text"
+        }
       }
     }
   }
