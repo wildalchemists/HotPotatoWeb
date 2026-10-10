@@ -22,9 +22,11 @@
     </div>
     <div class="stage-title">
       <p class="sticker sticker-y title-sticker" data-k="screen.heading">{{t screen.heading}}</p>
-      <p class="sticker howto" data-k="screen.howto">{{t screen.howto}}</p>
     </div>
-    <button class="sticker fs" type="button" data-on="{{t screen.fullscreen}}" data-off="{{t screen.exitFullscreen}}" title="{{t screen.hint}}">{{t screen.fullscreen}}</button>
+    <div class="head-tools">
+      <a class="foot-lang" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>
+      <button class="sticker fs" type="button" data-on="{{t screen.fullscreen}}" data-off="{{t screen.exitFullscreen}}" title="{{t screen.hint}}">{{t screen.fullscreen}}</button>
+    </div>
   </header>
 
   <section class="stage-main" aria-label="QR">
@@ -60,9 +62,8 @@
     {{/if}}{{#if q.id == form}}
     <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span data-k="{{= q_path}}.label">{{t q.label}}</span></div>
     {{/if}}{{/each}}
-    <span class="foot-url">wildalchemists.github.io/HotPotatoWeb</span>
-    <a class="foot-lang" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>
   </footer>
+  <p class="foot-url">wildalchemists.github.io/HotPotatoWeb</p>
 </main>
 <script>
 (function(){

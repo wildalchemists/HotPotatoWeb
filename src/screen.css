@@ -2,12 +2,13 @@
 body.screen{height:100vh;min-height:100vh;overflow:hidden;display:block}
 body.screen.idle{cursor:none}
 body.screen::before{content:"";position:fixed;inset:0;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 12px,transparent 12px 40px);pointer-events:none}
-.stage{position:relative;height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(.6rem,1.6vh,1.4rem);padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.5vw,2.5rem)}
+.stage{position:relative;height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:clamp(.6rem,1.6vh,1.4rem);padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.5vw,2.5rem)}
 .stage .sticker{transform:none}
 .stage .sticker:hover{transform:none}
 
 /* head */
 .stage-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem 2.5rem;align-items:center}
+.stage-head .head-tools{align-self:start}
 .brand{display:flex;align-items:center;gap:clamp(.6rem,1.5vw,1.2rem)}
 .potato{width:clamp(72px,15vh,160px);height:auto;flex:none;filter:drop-shadow(4px 4px 0 var(--ink))}
 .logo-img{height:clamp(84px,19vh,210px);width:auto;filter:drop-shadow(4px 4px 0 var(--ink))}
@@ -30,11 +31,12 @@ body.is-fs .fs:hover,body.is-fs .fs:focus{opacity:1}
 .url{font-weight:500;font-size:clamp(.85rem,2vh,1.3rem);color:#2a3047;margin:0;text-align:center;word-break:break-all}
 
 /* foot */
-.stage-foot{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);color:var(--paper)}
+.stage-foot{display:flex;align-items:center;justify-content:center;gap:clamp(.8rem,2vw,2rem);color:var(--paper)}
+.head-tools{display:flex;align-items:center;gap:1rem}
 .foot-label{font-size:clamp(1rem,2.4vh,1.6rem);color:var(--yellow)}
 .small-card{display:flex;align-items:center;gap:.7rem;background:#fff;color:var(--ink);border:3px solid var(--ink);padding:.4rem .8rem .4rem .4rem;box-shadow:5px 5px 0 var(--ink);font-weight:500;font-size:clamp(.75rem,1.7vh,1.05rem);line-height:1.2}
 .small-card img{width:clamp(48px,9vh,80px);height:auto}
-.foot-url{margin-left:auto;font-weight:700;font-size:clamp(.8rem,1.9vh,1.2rem)}
+.foot-url{margin:0;text-align:center;color:var(--paper);font-weight:700;font-size:clamp(.9rem,2.2vh,1.4rem)}
 .foot-lang{color:var(--paper);font-weight:700;text-decoration:none;border-bottom:3px solid var(--paper)}
 
 @media (max-aspect-ratio:1/1){
@@ -46,5 +48,4 @@ body.is-fs .fs:hover,body.is-fs .fs:focus{opacity:1}
   .big-card{grid-template-rows:auto auto auto auto}
   .big-card img{height:auto;width:min(70vw,440px)}
   .stage-foot{flex-wrap:wrap}
-  .foot-url{margin-left:0}
 }
