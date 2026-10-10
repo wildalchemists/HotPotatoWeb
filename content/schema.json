@@ -1185,7 +1185,10 @@
         "fullscreen",
         "exitFullscreen",
         "hint",
-        "more"
+        "more",
+        "howto",
+        "steamLine",
+        "discordLine"
       ],
       "additionalProperties": false,
       "properties": {
@@ -1208,6 +1211,15 @@
           "$ref": "#/$defs/text"
         },
         "more": {
+          "$ref": "#/$defs/text"
+        },
+        "howto": {
+          "$ref": "#/$defs/text"
+        },
+        "steamLine": {
+          "$ref": "#/$defs/text"
+        },
+        "discordLine": {
           "$ref": "#/$defs/text"
         }
       }

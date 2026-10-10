@@ -32,9 +32,10 @@ const qrTemplate = readFileSync(join(ROOT, 'src/qr.html'), 'utf8');
 const screenTemplate = readFileSync(join(ROOT, 'src/screen.html'), 'utf8');
 const css = readFileSync(join(ROOT, 'src/styles.css'), 'utf8');
 const linksCss = readFileSync(join(ROOT, 'src/links.css'), 'utf8');
+const screenCss = readFileSync(join(ROOT, 'src/screen.css'), 'utf8');
 const js = readFileSync(join(ROOT, 'src/main.js'), 'utf8');
 const hash8 = (s) => createHash('sha1').update(s).digest('hex').slice(0, 8);
-const v = hash8(css + js + template + linksTemplate + qrTemplate + screenTemplate + linksCss);
+const v = hash8(css + js + template + linksTemplate + qrTemplate + screenTemplate + linksCss + screenCss);
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -236,6 +237,7 @@ for (const page of PAGES) {
 // ---------- static files ----------
 writeFileSync(join(OUT, 'styles.css'), css);
 writeFileSync(join(OUT, 'links.css'), linksCss);
+writeFileSync(join(OUT, 'screen.css'), screenCss);
 writeFileSync(join(OUT, 'main.js'), js);
 mkdirSync(join(OUT, 'assets/img'), { recursive: true });
 for (const f of readdirSync(join(ROOT, 'assets/img'))) {

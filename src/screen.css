@@ -1,0 +1,47 @@
+/* /screen/ — the booth display. Same red wall and stickers as the site; built to be read from three metres. */
+body.screen{height:100vh;min-height:100vh;overflow:hidden;display:block}
+body.screen.idle{cursor:none}
+body.screen::before{content:"";position:fixed;inset:0;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 12px,transparent 12px 40px);pointer-events:none}
+.stage{position:relative;height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(.6rem,1.6vh,1.4rem);padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2.5vw,2.5rem)}
+.stage .sticker{transform:none}
+.stage .sticker:hover{transform:none}
+
+/* head */
+.stage-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem 2.5rem;align-items:center}
+.brand-big{font-size:clamp(2.2rem,6.4vh,5rem);color:var(--paper);text-shadow:.045em .045em 0 var(--ink),-.012em -.012em 0 var(--ink);line-height:.9}
+.stage-title{display:grid;gap:clamp(.4rem,1vh,.7rem);justify-items:center;text-align:center}
+.title-sticker{font-size:clamp(1.4rem,4.2vh,3rem);padding:.35em .7em;letter-spacing:.01em;box-shadow:6px 6px 0 var(--ink)}
+.howto{font-size:clamp(.95rem,2.4vh,1.6rem);font-weight:700;text-transform:none;letter-spacing:0;padding:.45em .9em}
+.fs{font-size:clamp(.75rem,1.6vh,1rem);padding:.6em .9em;background:var(--paper)}
+body.is-fs .fs{opacity:0}
+body.is-fs .fs:hover,body.is-fs .fs:focus{opacity:1}
+
+/* the two big cards */
+.stage-main{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,3vw,3rem);min-height:0}
+.big-card{display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;justify-items:center;align-items:center;gap:clamp(.4rem,1.2vh,.9rem);background:#fff;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:clamp(.8rem,2vh,1.6rem) clamp(1rem,2vw,2rem);min-height:0}
+.card-head{display:flex;align-items:center;gap:clamp(.6rem,1.5vw,1.2rem)}
+.num{font-size:clamp(2.4rem,7vh,5rem);line-height:1;color:var(--purple)}
+.card-head h2{font-size:clamp(1.3rem,3.8vh,2.8rem);padding:.3em .7em;margin:0;line-height:1;box-shadow:6px 6px 0 var(--ink)}
+.big-card img{height:100%;width:auto;max-width:100%;max-height:100%;min-height:0;object-fit:contain}
+.line{font-weight:700;font-size:clamp(1rem,2.6vh,1.7rem);text-align:center;color:var(--ink);margin:0}
+.url{font-weight:500;font-size:clamp(.85rem,2vh,1.3rem);color:#2a3047;margin:0;text-align:center;word-break:break-all}
+
+/* foot */
+.stage-foot{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);color:var(--paper)}
+.foot-label{font-size:clamp(1rem,2.4vh,1.6rem);color:var(--yellow)}
+.small-card{display:flex;align-items:center;gap:.7rem;background:#fff;color:var(--ink);border:3px solid var(--ink);padding:.4rem .8rem .4rem .4rem;box-shadow:5px 5px 0 var(--ink);font-weight:500;font-size:clamp(.75rem,1.7vh,1.05rem);line-height:1.2}
+.small-card img{width:clamp(48px,9vh,80px);height:auto}
+.foot-url{margin-left:auto;font-weight:700;font-size:clamp(.8rem,1.9vh,1.2rem)}
+.foot-lang{color:var(--paper);font-weight:700;text-decoration:none;border-bottom:3px solid var(--paper)}
+
+@media (max-aspect-ratio:1/1){
+  body.screen{height:auto;overflow:auto}
+  .stage{height:auto;min-height:100vh}
+  .stage-head{grid-template-columns:1fr;justify-items:start}
+  .stage-title{justify-items:start;text-align:left}
+  .stage-main{grid-template-columns:1fr}
+  .big-card{grid-template-rows:auto auto auto auto}
+  .big-card img{height:auto;width:min(70vw,440px)}
+  .stage-foot{flex-wrap:wrap}
+  .foot-url{margin-left:0}
+}
