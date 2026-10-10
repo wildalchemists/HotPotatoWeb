@@ -29,11 +29,12 @@ const site = JSON.parse(readFileSync(join(ROOT, 'content/site.json'), 'utf8'));
 const template = readFileSync(join(ROOT, 'src/template.html'), 'utf8');
 const linksTemplate = readFileSync(join(ROOT, 'src/links.html'), 'utf8');
 const qrTemplate = readFileSync(join(ROOT, 'src/qr.html'), 'utf8');
+const screenTemplate = readFileSync(join(ROOT, 'src/screen.html'), 'utf8');
 const css = readFileSync(join(ROOT, 'src/styles.css'), 'utf8');
 const linksCss = readFileSync(join(ROOT, 'src/links.css'), 'utf8');
 const js = readFileSync(join(ROOT, 'src/main.js'), 'utf8');
 const hash8 = (s) => createHash('sha1').update(s).digest('hex').slice(0, 8);
-const v = hash8(css + js + template + linksTemplate + qrTemplate + linksCss);
+const v = hash8(css + js + template + linksTemplate + qrTemplate + screenTemplate + linksCss);
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -180,6 +181,7 @@ function evaluate(nodes, scope) {
 const AST = parse(tokenize(template)).nodes;
 const LINKS_AST = parse(tokenize(linksTemplate)).nodes;
 const QR_AST = parse(tokenize(qrTemplate)).nodes;
+const SCREEN_AST = parse(tokenize(screenTemplate)).nodes;
 
 // ---------- per-language render ----------
 function jsonLd(lang, url) {
@@ -213,6 +215,7 @@ const PAGES = [
   { ast: AST, rel: '' }, { ast: AST, rel: 'es/' },
   { ast: LINKS_AST, rel: 'links/' }, { ast: LINKS_AST, rel: 'es/links/' },
   { ast: QR_AST, rel: 'qr/' }, { ast: QR_AST, rel: 'es/qr/' },
+  { ast: SCREEN_AST, rel: 'screen/' }, { ast: SCREEN_AST, rel: 'es/screen/' },
 ];
 for (const page of PAGES) {
   const lang = page.rel.startsWith('es/') ? 'es' : 'en';

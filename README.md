@@ -10,7 +10,7 @@ Official site of **Hot Potato**, the party brawler by [Wild Alchemists](https://
 | `assets/img/` | Real image files: `<name>-1200.webp` and `<name>-2400.webp` per picture, favicons, Open Graph image. Never base64. |
 | `assets/fonts/` | Self-hosted WOFF2 (licences inside). |
 | `src/template.html`, `src/styles.css`, `src/main.js` | The site. Vanilla HTML/CSS/JS. Text is baked in at build time; `main.js` only adds behaviour. |
-| `src/links.html`, `src/qr.html`, `src/links.css` | `/links/`: the one-page links hub (Steam, Discord, Instagram, the rest, plus a QR to itself). `/qr/`: the convention sheet, four big QR codes (Steam wishlist, Discord, Instagram, links hub) with a print stylesheet that fits one A4 page. QR images come from `python3 scripts/qr.py` (needs `pip install segno`); rerun it if a URL changes. |
+| `src/links.html`, `src/qr.html`, `src/links.css` | `/links/`: the one-page links hub (Steam, Discord, Instagram, the rest, plus a QR to itself). `/qr/`: the convention sheet, four big QR codes (Steam wishlist, Discord, Instagram, links hub) with a print stylesheet that fits one A4 page. `/screen/` (`src/screen.html`): the booth display, Steam and Discord QR codes filling a 16:9 screen, full-screen button (or press F), no scroll. QR images come from `python3 scripts/qr.py` (needs `pip install segno`); rerun it if a URL changes. |
 | `scripts/build.mjs` | Renders template + content into `dist/` for both languages. |
 | `scripts/check.mjs` | Validation. Errors block publishing. |
 | `scripts/serve.mjs` | 30-line local server. |

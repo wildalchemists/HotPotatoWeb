@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="{{= lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{t screen.title}}</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{= url}}">
+<link rel="icon" href="{{= base}}favicon.ico" sizes="any">
+<meta name="theme-color" content="#3BABD2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@900&family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{= base}}links.css?v={{= v}}">
+</head>
+<body class="screen">
+<main class="stage">
+  <header class="stage-head">
+    <div>
+      <p class="mono kicker" data-k="hero.kicker">{{t hero.kicker}}</p>
+      <h1 class="display" data-k="meta.shortName">{{= meta.shortName}}</h1>
+    </div>
+    <div class="stage-title">
+      <p class="display big" data-k="screen.heading">{{t screen.heading}}</p>
+      <p class="lead" data-k="screen.lead">{{t screen.lead}}</p>
+    </div>
+    <button class="fs mono" type="button" data-on="{{t screen.fullscreen}}" data-off="{{t screen.exitFullscreen}}" title="{{t screen.hint}}">{{t screen.fullscreen}}</button>
+  </header>
+
+  <section class="stage-main" aria-label="QR">
+    {{#each qr.items as q}}{{#if q.id == steam}}
+    <div class="big-card card-steam">
+      <h2 class="display" data-k="{{= q_path}}.label">{{t q.label}}</h2>
+      <img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}">
+      <p class="mono url">store.steampowered.com/app/{{= meta.steamAppId}}</p>
+    </div>
+    {{/if}}{{#if q.id == discord}}
+    <div class="big-card card-discord">
+      <h2 class="display" data-k="{{= q_path}}.label">{{t q.label}}</h2>
+      <img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}">
+      <p class="mono url">{{= q.href}}</p>
+    </div>
+    {{/if}}{{/each}}
+  </section>
+
+  <footer class="stage-foot">
+    <span class="mono foot-label" data-k="screen.more">{{t screen.more}}</span>
+    {{#each qr.items as q}}{{#if q.id == instagram}}
+    <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span class="mono">Instagram · @wild.alchemists</span></div>
+    {{/if}}{{#if q.id == links}}
+    <div class="small-card"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt="{{t qr.qrAlt}} {{= q.href}}"><span class="mono" data-k="{{= q_path}}.label">{{t q.label}}</span></div>
+    {{/if}}{{/each}}
+    <span class="mono foot-url">wildalchemists.github.io/HotPotatoWeb</span>
+    <a class="mono foot-lang" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>
+  </footer>
+</main>
+<script>
+(function(){
+  var b=document.querySelector('.fs'),root=document.documentElement,t;
+  function sync(){var on=!!document.fullscreenElement;b.textContent=b.getAttribute(on?'data-off':'data-on');document.body.classList.toggle('is-fs',on);}
+  function toggle(){if(document.fullscreenElement){document.exitFullscreen();}else if(root.requestFullscreen){root.requestFullscreen();}}
+  b.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){if(e.key==='f'||e.key==='F')toggle();});
+  document.addEventListener('fullscreenchange',sync);
+  document.addEventListener('mousemove',function(){document.body.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){document.body.classList.add('idle');},4000);});
+  sync();
+})();
+</script>
+</body>
+</html>
