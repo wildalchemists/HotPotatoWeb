@@ -28,11 +28,12 @@ const LANGS = ['en', 'es'];
 const site = JSON.parse(readFileSync(join(ROOT, 'content/site.json'), 'utf8'));
 const template = readFileSync(join(ROOT, 'src/template.html'), 'utf8');
 const linksTemplate = readFileSync(join(ROOT, 'src/links.html'), 'utf8');
+const qrTemplate = readFileSync(join(ROOT, 'src/qr.html'), 'utf8');
 const css = readFileSync(join(ROOT, 'src/styles.css'), 'utf8');
 const linksCss = readFileSync(join(ROOT, 'src/links.css'), 'utf8');
 const js = readFileSync(join(ROOT, 'src/main.js'), 'utf8');
 const hash8 = (s) => createHash('sha1').update(s).digest('hex').slice(0, 8);
-const v = hash8(css + js + template + linksTemplate + linksCss);
+const v = hash8(css + js + template + linksTemplate + qrTemplate + linksCss);
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -178,6 +179,7 @@ function evaluate(nodes, scope) {
 
 const AST = parse(tokenize(template)).nodes;
 const LINKS_AST = parse(tokenize(linksTemplate)).nodes;
+const QR_AST = parse(tokenize(qrTemplate)).nodes;
 
 // ---------- per-language render ----------
 function jsonLd(lang, url) {
@@ -210,6 +212,7 @@ const report = [];
 const PAGES = [
   { ast: AST, rel: '' }, { ast: AST, rel: 'es/' },
   { ast: LINKS_AST, rel: 'links/' }, { ast: LINKS_AST, rel: 'es/links/' },
+  { ast: QR_AST, rel: 'qr/' }, { ast: QR_AST, rel: 'es/qr/' },
 ];
 for (const page of PAGES) {
   const lang = page.rel.startsWith('es/') ? 'es' : 'en';
@@ -244,7 +247,7 @@ writeFileSync(join(OUT, 'site.webmanifest'), JSON.stringify({
   icons: [{ src: 'assets/img/favicon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'assets/img/favicon-512.png', sizes: '512x512', type: 'image/png' }],
 }, null, 2));
 writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.meta.siteUrl}sitemap.xml\n`);
-const smPairs = [['', 'es/'], ['links/', 'es/links/']];
+const smPairs = [['', 'es/'], ['links/', 'es/links/'], ['qr/', 'es/qr/']];
 writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
   smPairs.flatMap(([en, es]) => [en, es].map((rel) => `  <url><loc>${site.meta.siteUrl + rel}</loc><xhtml:link rel="alternate" hreflang="en" href="${site.meta.siteUrl + en}"/><xhtml:link rel="alternate" hreflang="es" href="${site.meta.siteUrl + es}"/><xhtml:link rel="alternate" hreflang="x-default" href="${site.meta.siteUrl + en}"/></url>`)).join('\n') + `\n</urlset>\n`);
 writeFileSync(join(OUT, '.nojekyll'), '');

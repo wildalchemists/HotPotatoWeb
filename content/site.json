@@ -1010,5 +1010,74 @@
       "en": "QR code that opens wildalchemists.github.io/HotPotatoWeb/links/",
       "es": "Código QR que abre wildalchemists.github.io/HotPotatoWeb/links/"
     }
+  },
+  "qr": {
+    "items": [
+      {
+        "id": "steam",
+        "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
+        "label": {
+          "en": "Wishlist on Steam",
+          "es": "Lista de deseados en Steam"
+        },
+        "file": "qr-steam"
+      },
+      {
+        "id": "discord",
+        "href": "https://discord.gg/gQEActAFX",
+        "label": {
+          "en": "Join the Discord",
+          "es": "Entra en el Discord"
+        },
+        "file": "qr-discord"
+      },
+      {
+        "id": "instagram",
+        "href": "https://www.instagram.com/wild.alchemists/",
+        "label": {
+          "en": "Instagram",
+          "es": "Instagram"
+        },
+        "file": "qr-instagram"
+      },
+      {
+        "id": "links",
+        "href": "https://wildalchemists.github.io/HotPotatoWeb/links/",
+        "label": {
+          "en": "All the links",
+          "es": "Todos los enlaces"
+        },
+        "file": "qr-links"
+      }
+    ],
+    "title": {
+      "en": "Hot Potato: scan us",
+      "es": "Hot Potato: escanéanos"
+    },
+    "description": {
+      "en": "QR codes for events: wishlist Hot Potato on Steam, join the Discord, follow on Instagram.",
+      "es": "Códigos QR para eventos: lista de deseados en Steam, Discord e Instagram de Hot Potato."
+    },
+    "code": "HPTU 365019 0 · SCAN",
+    "heading": {
+      "en": "Scan us",
+      "es": "Escanéanos"
+    },
+    "lead": {
+      "en": "Point the camera, no app needed.",
+      "es": "Apunta con la cámara, sin instalar nada."
+    },
+    "download": {
+      "en": "Download PNG",
+      "es": "Descargar PNG"
+    },
+    "print": {
+      "en": "Print this page",
+      "es": "Imprimir esta página"
+    },
+    "qrAlt": {
+      "en": "QR code that opens",
+      "es": "Código QR que abre"
+    }
   }
 }

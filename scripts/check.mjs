@@ -22,7 +22,7 @@ export const IDENTICAL_MIN_LENGTH = 13; // shorter identical EN/ES strings are u
 
 const isText = (o) => o && typeof o === 'object' && !Array.isArray(o) && 'en' in o && 'es' in o && Object.keys(o).every((k) => k === 'en' || k === 'es');
 const isImage = (o) => o && typeof o === 'object' && typeof o.src === 'string' && 'width' in o && 'height' in o && 'alt' in o;
-const isTodo = (s) => typeof s === 'string' && /^#?TODO\b/i.test(s.trim());
+const isTodo = (s) => typeof s === 'string' && /^#?TODO\b/.test(s.trim()); // case-sensitive: "Todo" is a Spanish word
 // Pictographic characters at or above U+2300 (clocks, arrows-with-boxes, all emoji); © ® ™ stay allowed.
 const hasEmoji = (s) => [...s].some((ch) => ch.codePointAt(0) >= 0x2300 && /\p{Extended_Pictographic}/u.test(ch));
 
