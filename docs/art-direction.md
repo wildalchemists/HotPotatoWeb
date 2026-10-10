@@ -66,7 +66,7 @@ One player is "it" and *is* the potato (the tagged runner turns into the potato 
 - **Type.** *Rubik Spray Paint* for display — a spray-painted face that answers to the HOT half of the logo. *Rubik* for text (same family, so the sticker copy and the sprayed title share a skeleton). *Permanent Marker* only for hand-written notes and roles, as a marker on a wall.
 - **Layout logic.** Nothing is aligned on purpose: posters at −4° to +3°, stickers at ±2°, notes written over edges. The grid still exists underneath (two columns, 1360 px max) so it holds on mobile.
 - **Texture.** Corrugation on every wall (12/40 px stripes at 14–18 % black), paper stickers with 3 px ink border and 5 px offset shadow, translucent tape corners, hand-drawn SVG arrows and a hand-drawn circle around the trailer link (paths with deliberate wobble, not geometry).
-- **Signature interaction.** The circle around "watch the trailer" draws itself on load (`stroke-dashoffset`); posters straighten on hover as if you pressed them flat. Both off under `prefers-reduced-motion`.
+- **Signature interaction.** None, by the team's decision (2026-10-10): nothing animates on load or on scroll. The only motion is button feedback: stickers lift 2 px on hover and press 3 px into the wall on click. The hand-drawn circle is static.
 - **Risk.** It is the most demanding to keep consistent as content grows (every new item needs its angle and tape). Rubik Spray Paint's texture needs ≥ 2.5 rem to stay legible, so small headings fall back to Rubik 900. It leans on the key art crops, which are brightened versions of a dark file; a clean logo from the team removes that dependency.
 
 ### C — Match Broadcast

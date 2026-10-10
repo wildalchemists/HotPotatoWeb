@@ -116,11 +116,4 @@
     });
   }
 
-  /* ---------- posters settle when they scroll in (one-shot, no fade) ---------- */
-  if (!reduced && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-    }, { rootMargin: '0px 0px -10% 0px' });
-    qsa('.beat .poster, .gallery .poster, .role .poster').forEach(function (p) { io.observe(p); });
-  }
 })();
