@@ -216,7 +216,7 @@
     },
     "intro": {
       "en": "One potato, one arena, one clock. Nobody wants to be holding it when it runs out.",
-      "es": "Una patata, una arena y un reloj. Nadie quiere tenerla cuando llegue a cero."
+      "es": ""
     },
     "beats": [
       {
@@ -577,6 +577,21 @@
           "alt": {
             "en": "A full match in the container yard arena",
             "es": "Una partida completa en la arena del patio de contenedores"
+          }
+        }
+      },
+      {
+        "id": "shot-big",
+        "image": {
+          "src": "shot-big",
+          "widths": [
+            1200
+          ],
+          "width": 1200,
+          "height": 585,
+          "alt": {
+            "en": "Oversized test image",
+            "es": "Imagen de prueba demasiado pesada"
           }
         }
       }
