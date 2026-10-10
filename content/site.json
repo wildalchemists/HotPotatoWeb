@@ -327,34 +327,34 @@
       {
         "id": "feature-1",
         "title": {
-          "en": "TODO: mechanic 1",
-          "es": "TODO: mecánica 1"
+          "en": "TODO: mechanic 1 (name)",
+          "es": "TODO: mecánica 1 (nombre)"
         },
         "body": {
-          "en": "TODO: one concrete sentence from the team",
-          "es": "TODO: una frase concreta del equipo"
+          "en": "TODO: mechanic 1 in one concrete sentence from the team",
+          "es": "TODO: mecánica 1 en una frase concreta del equipo"
         }
       },
       {
         "id": "feature-2",
         "title": {
-          "en": "TODO: mechanic 2",
-          "es": "TODO: mecánica 2"
+          "en": "TODO: mechanic 2 (name)",
+          "es": "TODO: mecánica 2 (nombre)"
         },
         "body": {
-          "en": "TODO",
-          "es": "TODO"
+          "en": "TODO: mechanic 2 in one concrete sentence from the team",
+          "es": "TODO: mecánica 2 en una frase concreta del equipo"
         }
       },
       {
         "id": "feature-3",
         "title": {
-          "en": "TODO: mechanic 3",
-          "es": "TODO: mecánica 3"
+          "en": "TODO: mechanic 3 (name)",
+          "es": "TODO: mecánica 3 (nombre)"
         },
         "body": {
-          "en": "TODO",
-          "es": "TODO"
+          "en": "TODO: mechanic 3 in one concrete sentence from the team",
+          "es": "TODO: mecánica 3 en una frase concreta del equipo"
         }
       }
     ]
@@ -735,8 +735,7 @@
         "id": "discord",
         "network": "discord",
         "label": "Discord",
-        "href": "https://discord.gg/tNm9bszS",
-        "handle": "TODO: replace with a permanent invite"
+        "href": "https://discord.gg/tNm9bszS"
       },
       {
         "id": "instagram",

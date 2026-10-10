@@ -1,0 +1,9 @@
+#!/bin/sh
+# Runs before every push: build the site and run the checks. Errors block the push.
+# Enable once per clone:  git config core.hooksPath .githooks
+set -e
+cd "$(git rev-parse --show-toplevel)"
+echo "pre-push: building…"
+node scripts/build.mjs
+echo "pre-push: checking…"
+node scripts/check.mjs ${HP_CHECK_FLAGS:-}

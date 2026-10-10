@@ -36,14 +36,17 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 const isText = (o) => o && typeof o === 'object' && 'en' in o && 'es' in o;
 
-function get(path, scope) {
+const rendered = new Set(); // absolute site.json paths whose value reaches the page (for scripts/check.mjs and the editor)
+
+function get(path, scope, record = false) {
   if (path === 'this') return scope.vars.this;
   const parts = path.split('.');
-  let cur;
-  if (parts[0] in scope.vars) cur = scope.vars[parts[0]];
+  let cur, abs = null;
+  if (parts[0] in scope.vars) { cur = scope.vars[parts[0]]; if (scope.vars[parts[0] + '_path']) abs = scope.vars[parts[0] + '_path']; }
   else if (parts[0] in scope.ctx) cur = scope.ctx[parts[0]];
-  else cur = site[parts[0]];
-  for (let i = 1; i < parts.length && cur != null; i++) cur = cur[parts[i]];
+  else { cur = site[parts[0]]; abs = parts[0]; }
+  for (let i = 1; i < parts.length && cur != null; i++) { cur = cur[parts[i]]; if (abs !== null) abs += /^\d+$/.test(parts[i]) ? `[${parts[i]}]` : `.${parts[i]}`; }
+  if (record && abs !== null) rendered.add(abs);
   return cur;
 }
 const truthy = (v) => Array.isArray(v) ? v.length > 0 : v !== undefined && v !== null && v !== false && v !== '' && v !== 0;
@@ -111,7 +114,7 @@ function evaluate(nodes, scope) {
       case 'text': out += n.value; break;
       case 't': {
         const [path, mod] = n.arg.split('|');
-        const val = get(path.trim(), scope);
+        const val = get(path.trim(), scope, true);
         if (val === undefined) throw new Error(`{{t ${path}}}: missing in site.json`);
         const s = isText(val) ? val[scope.ctx.lang] : val;
         if (typeof s !== 'string') throw new Error(`{{t ${path}}}: not a string`);
@@ -119,7 +122,7 @@ function evaluate(nodes, scope) {
         break;
       }
       case '=': {
-        const val = get(n.arg, scope);
+        const val = get(n.arg, scope, true);
         if (val === undefined) throw new Error(`{{= ${n.arg}}}: missing`);
         out += esc(isText(val) ? val[scope.ctx.lang] : val);
         break;
@@ -127,11 +130,11 @@ function evaluate(nodes, scope) {
       case 'raw': { const val = get(n.arg, scope); out += val == null ? '' : String(val); break; }
       case 'img': {
         const [path, ...rest] = n.arg.split(/\s+(.+)/);
-        out += imgTag(get(path, scope), parseAttrs(rest.join(' ') || ''), scope, path);
+        out += imgTag(get(path, scope, true), parseAttrs(rest.join(' ') || ''), scope, path);
         break;
       }
       case 'status': {
-        const st = get(n.arg, scope);
+        const st = get(n.arg, scope, true);
         const label = site.modes.statusLabels[st];
         if (!label) throw new Error(`unknown status ${st}`);
         out += esc(label[scope.ctx.lang]);
@@ -225,8 +228,9 @@ writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site
 writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
   LANGS.map((l) => { const u = site.meta.siteUrl + (l === 'en' ? '' : 'es/'); return `  <url><loc>${u}</loc>` + LANGS.map((a) => `<xhtml:link rel="alternate" hreflang="${a}" href="${site.meta.siteUrl + (a === 'en' ? '' : 'es/')}"/>`).join('') + `<xhtml:link rel="alternate" hreflang="x-default" href="${site.meta.siteUrl}"/></url>`; }).join('\n') + `\n</urlset>\n`);
 writeFileSync(join(OUT, '.nojekyll'), '');
+writeFileSync(join(OUT, 'content-manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), rendered: [...rendered].sort() }, null, 2) + '\n');
 
 const kb = (n) => (n / 1024).toFixed(1) + ' KB';
 console.log(`built → ${OUT.replace(ROOT + '/', '')}/  (v=${v})`);
 for (const [f, n] of report) console.log(`  ${f.padEnd(16)} ${kb(n)}`);
-console.log(`  styles.css       ${kb(Buffer.byteLength(css))}\n  main.js          ${kb(Buffer.byteLength(js))}`);
+console.log(`  styles.css       ${kb(Buffer.byteLength(css))}\n  main.js          ${kb(Buffer.byteLength(js))}\n  ${rendered.size} content paths rendered (content-manifest.json)`);

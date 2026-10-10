@@ -38,4 +38,5 @@ Same philosophy as the team's portfolio site: zero dependencies, editable in the
 ## Working notes
 
 - Dev-time image tools: `scripts/extract-legacy.mjs` and `scripts/palette.mjs` are zero-dependency Node. WebP encoding is not possible in bare Node, so the extract script shells out to whichever encoder is installed (`cwebp`, ImageMagick, or Python Pillow) and says which one it used. None of these ships to the site.
+- `node scripts/check.mjs` must pass before anything is published (pre-push hook + CI). A `TODO` in a rendered field is an error; in an unrendered field it is a warning.
 - Prompt pack for this rebuild lives outside the repo (Claude doc "Hot Potato Web — Redesign Prompt Pack"); the checkpoints referenced there are the stopping points.
