@@ -5,12 +5,12 @@
     "shortName": "Hot Potato",
     "studio": "Wild Alchemists",
     "title": {
-      "en": "Hot Potato — a party brawler by Wild Alchemists",
-      "es": "Hot Potato — un party brawler de Wild Alchemists"
+      "en": "Hot Potato: the party brawler where you don't want to be it",
+      "es": "Hot Potato: el party brawler donde no quieres ser la patata"
     },
     "description": {
-      "en": "Hot Potato is a multiplayer party brawler by Wild Alchemists. Get tagged and you're the potato: pass it on before the clock hits zero. Wishlist on Steam.",
-      "es": "Hot Potato es un party brawler multijugador de Wild Alchemists. Si te pillan, eres la patata: pásala antes de que el reloj llegue a cero. Añádelo a tu lista de deseados en Steam."
+      "en": "Hot Potato is a party brawler by Wild Alchemists. Get tagged and you turn into the potato; pass it on before the clock hits zero. Early access on Steam in 2027.",
+      "es": "Hot Potato es un party brawler de Wild Alchemists. Si te pillan, te conviertes en la patata; pásala antes de que el reloj llegue a cero. Acceso anticipado en Steam en 2027."
     },
     "siteUrl": "https://wildalchemists.github.io/HotPotatoWeb/",
     "steamAppId": "3650190",
@@ -192,8 +192,8 @@
   "trailer": {
     "youtubeId": "PpLcHtBJhDs",
     "title": {
-      "en": "Hot Potato — trailer",
-      "es": "Hot Potato — tráiler"
+      "en": "Trailer",
+      "es": "Tráiler"
     },
     "poster": {
       "src": "shot-1776779423012",
@@ -215,8 +215,8 @@
       "es": "Cómo se juega"
     },
     "intro": {
-      "en": "One potato, one arena, one clock. Nobody wants to be holding it when it runs out.",
-      "es": "Una patata, una arena y un reloj. Nadie quiere tenerla cuando llegue a cero."
+      "en": "There is one potato and one clock. Nobody wants to be holding it when the clock runs out.",
+      "es": "Hay una patata y un reloj. Nadie quiere tenerla cuando el reloj llegue a cero."
     },
     "beats": [
       {
@@ -227,7 +227,7 @@
         },
         "body": {
           "en": "Whoever is the potato runs at you. One touch and now it's you.",
-          "es": "Quien lleva la patata va a por ti. Un toque y ahora eres tú."
+          "es": "Quien lleva la patata va a por ti. Un toque y ya eres tú."
         },
         "image": {
           "src": "shot-3",
@@ -274,8 +274,8 @@
           "es": "Pásala"
         },
         "body": {
-          "en": "Chase, jump, corner someone, tag them. Their problem now.",
-          "es": "Persigue, salta, acorrala a alguien y tócale. Ahora es su problema."
+          "en": "Chase someone up the containers and tag them. Their problem now.",
+          "es": "Persigue a alguien por los contenedores y tócale. Ahora es su problema."
         },
         "image": {
           "src": "shot-2",
@@ -391,8 +391,8 @@
         },
         "status": "beta",
         "rules": {
-          "en": "Classic rules: one potato, everybody runs, whoever holds it at zero is out.",
-          "es": "Las reglas de siempre: una patata, todos corren y quien la tenga a cero queda fuera."
+          "en": "One potato for everyone. Whoever is holding it at zero is out.",
+          "es": "Una patata para todos. Quien la tenga a cero queda fuera."
         },
         "image": {
           "src": "map-1-thumb",
@@ -455,8 +455,8 @@
           "es": "Persigue a los demás"
         },
         "line": {
-          "en": "Catch another player to pass the potato on.",
-          "es": "Alcanza a otro jugador para pasarle la patata."
+          "en": "Catch anyone and the potato is theirs.",
+          "es": "Pilla a cualquiera y la patata es suya."
         },
         "image": {
           "src": "char-1-art",
@@ -487,8 +487,8 @@
           "es": "No te conviertas en la patata"
         },
         "line": {
-          "en": "Keep moving, keep your distance, don't get tagged.",
-          "es": "No pares, guarda las distancias y que no te toquen."
+          "en": "Stay out of reach. If the potato touches you, you are the potato.",
+          "es": "No te dejes alcanzar. Si la patata te toca, la patata eres tú."
         },
         "image": {
           "src": "char-2-art",
@@ -642,8 +642,8 @@
         "es": "Wild Alchemists es un estudio indie de ocho personas de Madrid que empezó en la universidad. Hacemos juegos para jugar en la misma habitación, a gritos."
       },
       {
-        "en": "Hot Potato is our first game on Steam. It is built in Unreal Engine 5 and shaped with the people who play it: the beta happens on our Discord first.",
-        "es": "Hot Potato es nuestro primer juego en Steam. Está hecho en Unreal Engine 5 y se construye con la gente que lo juega: la beta pasa primero por nuestro Discord."
+        "en": "Hot Potato is our first game on Steam, built in Unreal Engine 5. The people who play it shape it: the beta runs on our Discord first.",
+        "es": "Hot Potato es nuestro primer juego en Steam, hecho en Unreal Engine 5. Lo moldea la gente que lo juega: la beta pasa primero por nuestro Discord."
       }
     ],
     "stats": [
@@ -759,8 +759,8 @@
       }
     ],
     "intro": {
-      "en": "The beta runs on Discord, the clips land on Instagram, the wishlist lives on Steam.",
-      "es": "La beta va por Discord, los clips por Instagram y la lista de deseados en Steam."
+      "en": "The beta runs on Discord and the clips land on Instagram. The wishlist is on Steam.",
+      "es": "La beta va por Discord y los clips por Instagram. La lista de deseados está en Steam."
     },
     "primary": [
       "discord",
@@ -774,8 +774,8 @@
       "es": "Contacto"
     },
     "body": {
-      "en": "Press, publishers, events, or you want into the beta: write to us or come to the Discord.",
-      "es": "Prensa, publishers, eventos o quieres entrar en la beta: escríbenos o pásate por el Discord."
+      "en": "Press and business go to the email. Beta access goes through the Discord.",
+      "es": "Prensa y negocio, al correo. Para entrar en la beta, al Discord."
     },
     "email": "hello@wildalchemists.com",
     "form": {
@@ -821,12 +821,12 @@
         "es": "Enviar"
       },
       "success": {
-        "en": "Sent. We read everything, we answer most of it.",
+        "en": "Sent. We read everything and answer most of it.",
         "es": "Enviado. Lo leemos todo y contestamos casi todo."
       },
       "error": {
         "en": "That didn't go through. Email us instead: hello@wildalchemists.com",
-        "es": "No ha llegado. Escríbenos a hello@wildalchemists.com"
+        "es": "No ha llegado. Escríbenos directamente a hello@wildalchemists.com"
       }
     }
   },
