@@ -29,6 +29,11 @@ jobs:
         run: node scripts/build.mjs
       - name: Check content and build
         run: node scripts/check.mjs
+      - name: Configure GitHub Pages (switches the source to Actions on first run)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload dist/ for Pages
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3

@@ -49,7 +49,7 @@ Warnings (reported, not blocking): a `TODO` in a field the template does not ren
    git config core.hooksPath .githooks
    ```
 2. **On GitHub**, `.github/workflows/pages.yml` runs build + check on every push and pull request. On `main` it also deploys `dist/` with `actions/deploy-pages`. A failed check never deploys.
-3. **One-time repository setting**: *Settings → Pages → Build and deployment → Source: GitHub Actions*. The site is served at `https://wildalchemists.github.io/HotPotatoWeb/` (change `meta.siteUrl` in `site.json` if a custom domain is added).
+3. The first run on `main` switches the repository's Pages source to GitHub Actions by itself (`actions/configure-pages` with `enablement: true`); if that step is ever refused, set it by hand under *Settings → Pages → Source: GitHub Actions*. The site is served at `https://wildalchemists.github.io/HotPotatoWeb/` (change `meta.siteUrl` in `site.json` if a custom domain is added).
 
 Commits made by the editor go through the same workflow, so they are checked too.
 
