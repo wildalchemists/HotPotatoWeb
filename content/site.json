@@ -1,7 +1,7 @@
 {
   "$schema": "./schema.json",
   "meta": {
-    "officialName": "TODO: confirm the official name. Steam slug reads \"Hot Potato: Tag Out\"; the old site said \"Hot Potato — Party Brawler\".",
+    "officialName": "Hot Potato: Tag Out",
     "shortName": "Hot Potato",
     "studio": "Wild Alchemists",
     "title": {
@@ -14,7 +14,7 @@
     },
     "siteUrl": "https://wildalchemists.github.io/HotPotatoWeb/",
     "steamAppId": "3650190",
-    "steamUrl": "https://store.steampowered.com/app/3650190/",
+    "steamUrl": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
     "ogImage": "assets/img/og-1200x630.jpg",
     "themeColor": "#1EA7E6",
     "copyrightYear": 2026,
@@ -133,7 +133,7 @@
         "en": "Wishlist on Steam",
         "es": "Lista de deseados"
       },
-      "href": "https://store.steampowered.com/app/3650190/",
+      "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
       "external": true
     }
   },
@@ -151,7 +151,7 @@
         "en": "Wishlist on Steam",
         "es": "Añadir a tu lista de deseados"
       },
-      "href": "https://store.steampowered.com/app/3650190/",
+      "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
       "external": true
     },
     "secondaryCta": {
@@ -185,7 +185,7 @@
         "en": "Join the Discord",
         "es": "Entra en el Discord"
       },
-      "href": "https://discord.gg/tNm9bszS",
+      "href": "https://discord.gg/gQEActAFX",
       "external": true
     }
   },
@@ -567,6 +567,38 @@
             "es": "Una partida completa en la arena del patio de contenedores"
           }
         }
+      },
+      {
+        "id": "trailer-chase",
+        "image": {
+          "src": "trailer-chase",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 1569,
+          "height": 881,
+          "alt": {
+            "en": "Trailer still: the runner sprints along an orange container roof with the potato right behind, caption 'Escapa de la patata'",
+            "es": "Fotograma del tráiler: el corredor esprinta por el tejado de un contenedor naranja con la patata detrás, rótulo 'Escapa de la patata'"
+          }
+        }
+      },
+      {
+        "id": "trailer-zap",
+        "image": {
+          "src": "trailer-zap",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 1569,
+          "height": 881,
+          "alt": {
+            "en": "Trailer still with the in-game HUD: the potato takes a ZAP hit while a runner raises both hands, score and timer at the top, caption 'Pelea contra ella'",
+            "es": "Fotograma del tráiler con el HUD del juego: la patata recibe un ZAP mientras un corredor levanta las manos, marcador y tiempo arriba, rótulo 'Pelea contra ella'"
+          }
+        }
       }
     ]
   },
@@ -722,13 +754,13 @@
         "id": "steam",
         "network": "steam",
         "label": "Steam",
-        "href": "https://store.steampowered.com/app/3650190/"
+        "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/"
       },
       {
         "id": "discord",
         "network": "discord",
         "label": "Discord",
-        "href": "https://discord.gg/tNm9bszS"
+        "href": "https://discord.gg/gQEActAFX"
       },
       {
         "id": "instagram",
@@ -770,7 +802,7 @@
       "en": "Press and business go to the email. Beta access goes through the Discord.",
       "es": "Prensa y negocio, al correo. Para entrar en la beta, al Discord."
     },
-    "email": "hello@wildalchemists.com",
+    "email": "wildalchemists@gmail.com",
     "form": {
       "enabled": false,
       "fields": {
@@ -818,8 +850,8 @@
         "es": "Enviado. Lo leemos todo y contestamos casi todo."
       },
       "error": {
-        "en": "That didn't go through. Email us instead: hello@wildalchemists.com",
-        "es": "No ha llegado. Escríbenos directamente a hello@wildalchemists.com"
+        "en": "That didn't go through. Email us instead: wildalchemists@gmail.com",
+        "es": "No ha llegado. Escríbenos directamente a wildalchemists@gmail.com"
       }
     }
   },

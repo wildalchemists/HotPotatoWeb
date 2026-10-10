@@ -182,7 +182,8 @@ function jsonLd(lang, url) {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: m.shortName,
+    name: /^TODO/.test(m.officialName) ? m.shortName : m.officialName,
+    alternateName: m.shortName,
     url,
     inLanguage: lang,
     description: m.description[lang],
