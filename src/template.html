@@ -24,10 +24,11 @@
 <meta name="twitter:title" content="{{t meta.title}}">
 <meta name="twitter:description" content="{{t meta.description}}">
 <meta name="twitter:image" content="{{= siteUrl}}{{= meta.ogImage}}">
-<link rel="icon" href="{{= base}}favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="{{= base}}assets/img/favicon-32.png">
-<link rel="apple-touch-icon" href="{{= base}}assets/img/apple-touch-icon.png">
-<link rel="manifest" href="{{= base}}site.webmanifest">
+<link rel="icon" href="{{= base}}favicon.ico?v={{= iconv}}" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{= base}}assets/img/favicon-32.png?v={{= iconv}}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{= base}}assets/img/favicon-192.png?v={{= iconv}}">
+<link rel="apple-touch-icon" href="{{= base}}assets/img/apple-touch-icon.png?v={{= iconv}}">
+<link rel="manifest" href="{{= base}}site.webmanifest?v={{= iconv}}">
 <link rel="preload" as="image" href="{{= base}}assets/img/logo-600.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-spray-paint-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-var-latin.woff2" crossorigin>
