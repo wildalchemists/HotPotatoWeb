@@ -39,11 +39,12 @@
 
         <div class="grid">
           <nav class="links" id="links" aria-label="Links">
-            <a class="btn btn-yellow" href="{{= hero.primaryCta.href}}" rel="noopener" data-k="hero.primaryCta.label" data-href="hero.primaryCta.href"><span class="mono tag">Steam</span>{{t hero.primaryCta.label}}</a>
-            <a class="btn btn-ink" href="{{= hero.communityCta.href}}" rel="noopener" data-k="hero.communityCta.label" data-href="hero.communityCta.href"><span class="mono tag">Discord</span>{{t hero.communityCta.label}}</a>
-            {{#each socials.items as s}}{{#if s.network == instagram}}
-            <a class="btn" href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href"><span class="mono tag">Instagram</span>{{#if s.handle}}{{= s.handle}}{{else}}{{= s.label}}{{/if}}</a>
-            {{/if}}{{/each}}
+            {{#each qr.items as q}}{{#unless q.id == links}}
+            <div class="row">
+              <a class="btn btn-{{= q.id}}" href="{{= q.href}}" rel="noopener" data-k="{{= q_path}}.label" data-href="{{= q_path}}.href"><span class="mono tag">{{= q.id}}</span>{{t q.label}}</a>
+              <a class="mini-qr" href="{{= q.href}}" rel="noopener" aria-hidden="true" tabindex="-1"><img src="{{= base}}assets/img/{{= q.file}}.svg" width="520" height="520" alt=""></a>
+            </div>
+            {{/unless}}{{/each}}
             <ul class="small">
               {{#each socials.items as s}}{{#if s.network == x}}<li><a href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href">X {{#if s.handle}}· {{= s.handle}}{{/if}}</a></li>{{/if}}{{#if s.network == linkedin}}<li><a href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href">LinkedIn</a></li>{{/if}}{{/each}}
               <li><a href="{{= base}}{{#if lang == es}}es/{{/if}}" data-k="links.website">{{t links.website}}</a></li>
