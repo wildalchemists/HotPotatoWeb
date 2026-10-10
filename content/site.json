@@ -365,8 +365,8 @@
       "es": "Modos"
     },
     "intro": {
-      "en": "Two modes you can play today.",
-      "es": "Dos modos que ya se pueden jugar."
+      "en": "Two modes you can play today and one on the way.",
+      "es": "Dos modos que ya se pueden jugar y uno en camino."
     },
     "statusLabels": {
       "live": {
@@ -416,8 +416,20 @@
         },
         "status": "beta",
         "rules": {
-          "en": "Tag. Catch the others and don't get caught.",
-          "es": "Pilla pilla. Pilla a los demás y que no te pillen a ti."
+          "en": "Everyone against everyone. Catch the others and don't get caught.",
+          "es": "Todos contra todos. Pilla a los demás y que no te pillen a ti."
+        }
+      },
+      {
+        "id": "team-deathmatch",
+        "name": {
+          "en": "Team deathmatch",
+          "es": "Team deathmatch"
+        },
+        "status": "in-development",
+        "rules": {
+          "en": "The team mode. Still being built.",
+          "es": "El modo por equipos. Todavía en desarrollo."
         }
       }
     ]
