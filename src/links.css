@@ -36,9 +36,13 @@ h1{font-size:clamp(3.6rem,11vw,6.5rem);color:var(--ink)}
 .btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .row{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:.8rem;align-items:stretch}
 .row .btn{align-content:center}
+.row-steam,.row-discord{grid-template-columns:minmax(0,1fr) 150px}
+.row-steam .btn,.row-discord .btn{font-size:clamp(1.7rem,3vw,2.4rem);padding:1.2rem 1.2rem;min-height:150px}
+.row-instagram .btn{font-size:clamp(1.15rem,1.8vw,1.4rem)}
+.row-instagram{grid-template-columns:minmax(0,1fr) 96px;margin-top:.4rem}
 .mini-qr{display:block;background:#fff;border:3px solid var(--ink);padding:5px;box-shadow:5px 5px 0 var(--ink)}
 .mini-qr img{width:100%;height:auto;display:block}
-@media (max-width:420px){.row{grid-template-columns:minmax(0,1fr) 92px}}
+@media (max-width:420px){.row-steam,.row-discord{grid-template-columns:minmax(0,1fr) 120px}.row-steam .btn,.row-discord .btn{min-height:120px;font-size:1.5rem}.row-instagram{grid-template-columns:minmax(0,1fr) 80px}}
 .small{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;padding-top:.4rem}
 .small a{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ink)}
 .small a:hover{background:var(--yellow)}

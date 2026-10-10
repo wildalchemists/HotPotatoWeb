@@ -341,6 +341,9 @@
         },
         "cta": {
           "$ref": "#/$defs/link"
+        },
+        "cta2": {
+          "$ref": "#/$defs/link"
         }
       }
     },

@@ -131,9 +131,17 @@
     "cta": {
       "label": {
         "en": "Wishlist on Steam",
-        "es": "Lista de deseados"
+        "es": "Wishlist en Steam"
       },
       "href": "https://store.steampowered.com/app/3650190/Hot_Potato_Tag_Out/",
+      "external": true
+    },
+    "cta2": {
+      "label": {
+        "en": "Discord",
+        "es": "Discord"
+      },
+      "href": "https://discord.gg/gQEActAFX",
       "external": true
     }
   },
