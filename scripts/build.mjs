@@ -11,6 +11,7 @@
 //   {{#each path as x}}…{{/each}}   loops; x, x_index, x_first, x_last available inside
 //   {{#if path}}…{{else}}…{{/if}}   truthy test; {{#if path == value}} compares; {{#unless path}}
 //   {{img path attr="…" …}}    responsive <img> from an image object; add data-img automatically
+//   {{imgsrc path}}            URL of the image object's largest variant (lightbox links)
 //   {{status path}}            mode status → localized label
 //   Context vars: lang, otherLang, base, url, otherUrl, v (cache-buster), siteUrl, year, jsonld
 
@@ -72,7 +73,7 @@ function imgTag(img, attrs, scope, path) {
 }
 
 // ---------- template engine ----------
-const TAG = /\{\{\s*(#each|#if|#unless|\/each|\/if|\/unless|else|t|=|raw|img|status)?\s*([^}]*?)\s*\}\}/g;
+const TAG = /\{\{\s*(#each|#if|#unless|\/each|\/if|\/unless|else|t|=|raw|imgsrc|img|status)?\s*([^}]*?)\s*\}\}/g;
 
 function tokenize(src) {
   const tokens = [];
@@ -131,6 +132,12 @@ function evaluate(nodes, scope) {
       case 'img': {
         const [path, ...rest] = n.arg.split(/\s+(.+)/);
         out += imgTag(get(path, scope, true), parseAttrs(rest.join(' ') || ''), scope, path);
+        break;
+      }
+      case 'imgsrc': {
+        const img = get(n.arg, scope, true);
+        if (!img || !img.src) throw new Error(`{{imgsrc ${n.arg}}}: not an image object`);
+        out += `${scope.ctx.base}assets/img/${img.src}-${Math.max(...(img.widths || [1200, 2400]))}.webp`;
         break;
       }
       case 'status': {

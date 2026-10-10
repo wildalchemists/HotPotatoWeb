@@ -42,3 +42,78 @@ Fonts are self-hosted in `assets/fonts/` (latin + latin-ext WOFF2, licences in `
 - Permanent Discord invite.
 - Clean logo file: the hero still uses a brightened crop of the key art.
 - Price is stored but not rendered (`meta.price.public = false`).
+
+
+## Checks (Prompt 5 checkpoint, 2026-10-10)
+
+`scripts/check.mjs` runs locally through `.githooks/pre-push` and in CI through `.github/workflows/pages.yml`. Below, the deliberately broken state (an emptied ES string `howItPlays.intro.es` and a 503 KB `shot-big-1200.webp` added to the gallery) and what happened.
+
+### Local check on the broken content
+
+```
+· offline: external links and the Discord invite were not checked
+  · first view es/index.html: 243 KB of 600 KB (7 files)
+  · first view index.html: 243 KB of 600 KB (7 files)
+
+23 warnings:
+  ⚠ modes.items[0].name: ES is identical to EN ("Tag, you're it…"): untranslated?
+  ⚠ modes.items[2].name: ES is identical to EN ("Team deathmatch…"): untranslated?
+  ⚠ meta.officialName: TODO (not rendered): "TODO: confirm the official name. Steam slug reads "Hot Potato: Tag Out"
+  ⚠ meta.platforms[0]: TODO (not rendered): "TODO: platforms as listed on Steam"
+  ⚠ meta.players.en: TODO (not rendered): "TODO: player count (local / online, min–max)"
+  ⚠ meta.players.es: TODO (not rendered): "TODO: número de jugadores"
+  ⚠ meta.genreTags[0]: TODO (not rendered): "TODO: genre tags as on Steam"
+  ⚠ meta.ageRating: TODO (not rendered): "TODO: PEGI / age rating, or remove"
+  ⚠ hero.logo: TODO (not rendered): "TODO: assets/img/logo.svg (the graffiti HOT POTATO logo as a clean SVG"
+  ⚠ features.items[0].title.en: TODO (not rendered): "TODO: mechanic 1 (name)"
+  ⚠ features.items[0].title.es: TODO (not rendered): "TODO: mecánica 1 (nombre)"
+  ⚠ features.items[0].body.en: TODO (not rendered): "TODO: mechanic 1 in one concrete sentence from the team"
+  ⚠ features.items[0].body.es: TODO (not rendered): "TODO: mecánica 1 en una frase concreta del equipo"
+  ⚠ features.items[1].title.en: TODO (not rendered): "TODO: mechanic 2 (name)"
+  ⚠ features.items[1].title.es: TODO (not rendered): "TODO: mecánica 2 (nombre)"
+  ⚠ features.items[1].body.en: TODO (not rendered): "TODO: mechanic 2 in one concrete sentence from the team"
+  ⚠ features.items[1].body.es: TODO (not rendered): "TODO: mecánica 2 en una frase concreta del equipo"
+  ⚠ features.items[2].title.en: TODO (not rendered): "TODO: mechanic 3 (name)"
+  ⚠ features.items[2].title.es: TODO (not rendered): "TODO: mecánica 3 (nombre)"
+  ⚠ features.items[2].body.en: TODO (not rendered): "TODO: mechanic 3 in one concrete sentence from the team"
+  ⚠ features.items[2].body.es: TODO (not rendered): "TODO: mecánica 3 en una frase concreta del equipo"
+  ⚠ hero.communityCta.href: Discord invite https://discord.gg/tNm9bszS: confirm it is permanent (the CLI checks the API)
+  ⚠ socials.items[1].href: Discord invite https://discord.gg/tNm9bszS: confirm it is permanent (the CLI checks the API)
+
+12 errors (publishing blocked):
+  ✗ howItPlays.intro.es: schema: is empty
+  ✗ howItPlays.intro.es: missing ES value
+  ✗ modes.intro.en: TODO reaches the page: "TODO: the team says two modes are current; the old page listed one in "
+  ✗ modes.intro.es: TODO reaches the page: "TODO: el equipo dice que hay dos modos actuales; la web antigua listab"
+  ✗ modes.items[1].rules.en: TODO reaches the page: "TODO: rules in one line (from the team)"
+  ✗ modes.items[1].rules.es: TODO reaches the page: "TODO: reglas en una línea (del equipo)"
+  ✗ modes.items[2].rules.en: TODO reaches the page: "TODO: rules in one line (from the team)"
+  ✗ modes.items[2].rules.es: TODO reaches the page: "TODO: reglas en una línea (del equipo)"
+  ✗ pressKit.cta.href: TODO reaches the page: "#TODO-press-kit-url"
+  ✗ gallery.items[4].image.src: assets/img/shot-big-1200.webp is 503 KB, limit 400 KB
+  ✗ dist/es/index.html: references missing assets/img/shot-big-2400.webp
+  ✗ dist/index.html: references missing assets/img/shot-big-2400.webp
+
+FAIL — fix the errors above before publishing.
+```
+
+The two deliberate breaks show up as `howItPlays.intro.es: missing ES value` (plus the schema's `is empty`) and `shot-big-1200.webp is 503 KB, limit 400 KB`. The check also caught a real template bug: the lightbox link hardcoded a `-2400.webp` file that an image with `widths: [1200]` does not have (`references missing assets/img/shot-big-2400.webp`). That is fixed with a `{{imgsrc}}` tag that always points at the largest variant.
+
+The seven `TODO reaches the page` errors are the team's open facts (Modes intro, the rules of Infected and Team deathmatch, the press-kit URL). They block every push and every deploy until `content/site.json` has them.
+
+### The pre-push hook
+
+```
+$ git config core.hooksPath .githooks
+$ git push origin claude/cool-dirac-a0i9ro
+  ✗ gallery.items[4].image.src: assets/img/shot-big-1200.webp is 503 KB, limit 400 KB
+  ✗ dist/es/index.html: references missing assets/img/shot-big-2400.webp
+  ✗ dist/index.html: references missing assets/img/shot-big-2400.webp
+
+FAIL — fix the errors above before publishing.
+error: failed to push some refs to 'https://github.com/wildalchemists/HotPotatoWeb'
+```
+
+### CI
+
+The workflow runs build + check on every push and pull request and deploys `dist/` only from `main`. Until the seven TODOs are filled, CI is red by design and nothing deploys. After that, a push to `main` deploys to GitHub Pages once the repository's Pages source is set to *GitHub Actions*.

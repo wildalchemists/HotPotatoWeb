@@ -31,6 +31,7 @@ Paths use dots for objects and `[n]` for array items: `howItPlays.beats[2].title
 | `{{#each path as x}} … {{/each}}` | loop; inside: `x`, `x_index`, `x_n` (1-based), `x_first`, `x_last`, `x_path` |
 | `{{#if path}} … {{else}} … {{/if}}`, `{{#if path == value}}`, `{{#unless path}}` | conditionals |
 | `{{img path sizes="…" loading="eager"}}` | responsive `<img>` with `srcset`, `width`, `height`, localized `alt`, `object-position` from `focal`, and `data-img` |
+| `{{imgsrc path}}` | URL of an image object's largest variant (used by the lightbox links) |
 | `{{status path}}` | a mode status rendered through `modes.statusLabels` |
 
 The build throws on any missing key, so a template can never silently render an empty string.

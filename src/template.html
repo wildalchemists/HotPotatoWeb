@@ -194,7 +194,7 @@
     <ul class="gallery" data-list="gallery.items">
       {{#each gallery.items as g}}
       <li class="poster r{{= g_n}}">
-        <a href="{{= base}}assets/img/{{= g.image.src}}-2400.webp" class="gallery-link" data-lightbox data-index="{{= g_index}}" data-w="{{= g.image.width}}" data-h="{{= g.image.height}}">
+        <a href="{{imgsrc g.image}}" class="gallery-link" data-lightbox data-index="{{= g_index}}" data-w="{{= g.image.width}}" data-h="{{= g.image.height}}">
           {{img g.image sizes="(max-width: 640px) 92vw, (max-width: 1100px) 46vw, 30vw"}}
         </a>
         {{#if g.caption}}<figcaption class="marker light small" data-k="{{= g_path}}.caption">{{t g.caption}}</figcaption>{{/if}}
