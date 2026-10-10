@@ -1108,7 +1108,7 @@
       "es": "Hot Potato: pantalla para eventos"
     },
     "heading": {
-      "en": "Scan to play with us",
+      "en": "Scan and play with us",
       "es": "Escanea y juega con nosotros"
     },
     "lead": {
@@ -1128,8 +1128,20 @@
       "es": "Pulsa F para pantalla completa"
     },
     "more": {
-      "en": "More",
-      "es": "Más"
+      "en": "Also",
+      "es": "También"
+    },
+    "howto": {
+      "en": "Open your phone camera and point it at a code. No app needed.",
+      "es": "Abre la cámara del móvil y apunta al código. No hace falta ninguna app."
+    },
+    "steamLine": {
+      "en": "Add it to your wishlist. It helps us a lot.",
+      "es": "Añádelo a tu lista de deseados. Nos ayuda mucho."
+    },
+    "discordLine": {
+      "en": "Closed beta and news, on Discord first.",
+      "es": "Beta cerrada y novedades, primero en Discord."
     }
   }
 }
