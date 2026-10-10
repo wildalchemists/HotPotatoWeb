@@ -27,10 +27,12 @@ const LANGS = ['en', 'es'];
 
 const site = JSON.parse(readFileSync(join(ROOT, 'content/site.json'), 'utf8'));
 const template = readFileSync(join(ROOT, 'src/template.html'), 'utf8');
+const linksTemplate = readFileSync(join(ROOT, 'src/links.html'), 'utf8');
 const css = readFileSync(join(ROOT, 'src/styles.css'), 'utf8');
+const linksCss = readFileSync(join(ROOT, 'src/links.css'), 'utf8');
 const js = readFileSync(join(ROOT, 'src/main.js'), 'utf8');
 const hash8 = (s) => createHash('sha1').update(s).digest('hex').slice(0, 8);
-const v = hash8(css + js + template);
+const v = hash8(css + js + template + linksTemplate + linksCss);
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -175,6 +177,7 @@ function evaluate(nodes, scope) {
 }
 
 const AST = parse(tokenize(template)).nodes;
+const LINKS_AST = parse(tokenize(linksTemplate)).nodes;
 
 // ---------- per-language render ----------
 function jsonLd(lang, url) {
@@ -204,21 +207,29 @@ function jsonLd(lang, url) {
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 const report = [];
-for (const lang of LANGS) {
+const PAGES = [
+  { ast: AST, rel: '' }, { ast: AST, rel: 'es/' },
+  { ast: LINKS_AST, rel: 'links/' }, { ast: LINKS_AST, rel: 'es/links/' },
+];
+for (const page of PAGES) {
+  const lang = page.rel.startsWith('es/') ? 'es' : 'en';
   const other = lang === 'en' ? 'es' : 'en';
-  const dir = lang === 'en' ? OUT : join(OUT, 'es');
-  const base = lang === 'en' ? '' : '../';
-  const url = site.meta.siteUrl + (lang === 'en' ? '' : 'es/');
-  const otherUrl = base + (other === 'en' ? '' : 'es/');
-  const ctx = { lang, otherLang: other, base, url, otherUrl, otherUrlAbs: site.meta.siteUrl + (other === 'en' ? '' : 'es/'), v, siteUrl: site.meta.siteUrl, year: String(site.meta.copyrightYear), jsonld: jsonLd(lang, url), hasFirebase: Boolean(site.meta.firebase), showPrice: Boolean(site.meta.price && site.meta.price.public) };
-  const html = evaluate(AST, { ctx, vars: {} });
+  const depth = page.rel.split('/').filter(Boolean).length;
+  const base = '../'.repeat(depth);
+  const url = site.meta.siteUrl + page.rel;
+  const otherRel = lang === 'en' ? 'es/' + page.rel : page.rel.slice(3);
+  const otherUrl = base + otherRel;
+  const ctx = { lang, otherLang: other, base, url, otherUrl, otherUrlAbs: site.meta.siteUrl + otherRel, v, siteUrl: site.meta.siteUrl, year: String(site.meta.copyrightYear), jsonld: jsonLd(lang, url), hasFirebase: Boolean(site.meta.firebase), showPrice: Boolean(site.meta.price && site.meta.price.public) };
+  const html = evaluate(page.ast, { ctx, vars: {} });
+  const dir = join(OUT, page.rel);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
-  report.push([`${lang === 'en' ? '' : 'es/'}index.html`, Buffer.byteLength(html)]);
+  report.push([`${page.rel}index.html`, Buffer.byteLength(html)]);
 }
 
 // ---------- static files ----------
 writeFileSync(join(OUT, 'styles.css'), css);
+writeFileSync(join(OUT, 'links.css'), linksCss);
 writeFileSync(join(OUT, 'main.js'), js);
 mkdirSync(join(OUT, 'assets/img'), { recursive: true });
 for (const f of readdirSync(join(ROOT, 'assets/img'))) {
@@ -233,8 +244,9 @@ writeFileSync(join(OUT, 'site.webmanifest'), JSON.stringify({
   icons: [{ src: 'assets/img/favicon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'assets/img/favicon-512.png', sizes: '512x512', type: 'image/png' }],
 }, null, 2));
 writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.meta.siteUrl}sitemap.xml\n`);
+const smPairs = [['', 'es/'], ['links/', 'es/links/']];
 writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
-  LANGS.map((l) => { const u = site.meta.siteUrl + (l === 'en' ? '' : 'es/'); return `  <url><loc>${u}</loc>` + LANGS.map((a) => `<xhtml:link rel="alternate" hreflang="${a}" href="${site.meta.siteUrl + (a === 'en' ? '' : 'es/')}"/>`).join('') + `<xhtml:link rel="alternate" hreflang="x-default" href="${site.meta.siteUrl}"/></url>`; }).join('\n') + `\n</urlset>\n`);
+  smPairs.flatMap(([en, es]) => [en, es].map((rel) => `  <url><loc>${site.meta.siteUrl + rel}</loc><xhtml:link rel="alternate" hreflang="en" href="${site.meta.siteUrl + en}"/><xhtml:link rel="alternate" hreflang="es" href="${site.meta.siteUrl + es}"/><xhtml:link rel="alternate" hreflang="x-default" href="${site.meta.siteUrl + en}"/></url>`)).join('\n') + `\n</urlset>\n`);
 writeFileSync(join(OUT, '.nojekyll'), '');
 writeFileSync(join(OUT, 'content-manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), rendered: [...rendered].sort() }, null, 2) + '\n');
 

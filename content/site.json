@@ -979,5 +979,36 @@
       "en": "Beat",
       "es": "Paso"
     }
+  },
+  "links": {
+    "title": {
+      "en": "Hot Potato: all the links",
+      "es": "Hot Potato: todos los enlaces"
+    },
+    "description": {
+      "en": "Wishlist Hot Potato on Steam, join the beta on Discord, follow the clips on Instagram. One page, every link.",
+      "es": "Añade Hot Potato a tu lista de deseados en Steam, entra en la beta por Discord y sigue los clips en Instagram. Una página, todos los enlaces."
+    },
+    "code": "HPTU 365019 0 · LINKS",
+    "lead": {
+      "en": "Wishlist, beta, clips. One page.",
+      "es": "Lista de deseados, beta y clips. Una página."
+    },
+    "scan": {
+      "en": "Scan to open this page",
+      "es": "Escanea para abrir esta página"
+    },
+    "download": {
+      "en": "Download the QR (PNG)",
+      "es": "Descargar el QR (PNG)"
+    },
+    "website": {
+      "en": "Official website",
+      "es": "Web oficial"
+    },
+    "qrAlt": {
+      "en": "QR code that opens wildalchemists.github.io/HotPotatoWeb/links/",
+      "es": "Código QR que abre wildalchemists.github.io/HotPotatoWeb/links/"
+    }
   }
 }

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="{{= lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{t links.title}}</title>
+<meta name="description" content="{{t links.description}}">
+<link rel="canonical" href="{{= url}}">
+<link rel="alternate" hreflang="en" href="{{= siteUrl}}links/">
+<link rel="alternate" hreflang="es" href="{{= siteUrl}}es/links/">
+<link rel="alternate" hreflang="x-default" href="{{= siteUrl}}links/">
+<meta name="theme-color" content="#3BABD2">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{= meta.shortName}}">
+<meta property="og:title" content="{{t links.title}}">
+<meta property="og:description" content="{{t links.description}}">
+<meta property="og:url" content="{{= url}}">
+<meta property="og:image" content="{{= siteUrl}}{{= meta.ogImage}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{{= base}}favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="{{= base}}assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@900&family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{= base}}links.css?v={{= v}}">
+</head>
+<body>
+<a class="skip" href="#links">{{t ui.skipToContent}}</a>
+<main class="yard">
+  <article class="container-box">
+    <span class="plate" aria-hidden="true">{{= links.code}}</span>
+    <div class="frame">
+      <div class="window">
+        <header class="head">
+          <p class="mono kicker" data-k="hero.kicker">{{t hero.kicker}}</p>
+          <h1 class="display" data-k="meta.shortName">{{= meta.shortName}}</h1>
+          <p class="lead" data-k="links.lead">{{t links.lead}}</p>
+        </header>
+
+        <div class="grid">
+          <nav class="links" id="links" aria-label="Links">
+            <a class="btn btn-yellow" href="{{= hero.primaryCta.href}}" rel="noopener" data-k="hero.primaryCta.label" data-href="hero.primaryCta.href"><span class="mono tag">Steam</span>{{t hero.primaryCta.label}}</a>
+            <a class="btn btn-ink" href="{{= hero.communityCta.href}}" rel="noopener" data-k="hero.communityCta.label" data-href="hero.communityCta.href"><span class="mono tag">Discord</span>{{t hero.communityCta.label}}</a>
+            {{#each socials.items as s}}{{#if s.network == instagram}}
+            <a class="btn" href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href"><span class="mono tag">Instagram</span>{{#if s.handle}}{{= s.handle}}{{else}}{{= s.label}}{{/if}}</a>
+            {{/if}}{{/each}}
+            <ul class="small">
+              {{#each socials.items as s}}{{#if s.network == x}}<li><a href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href">X {{#if s.handle}}· {{= s.handle}}{{/if}}</a></li>{{/if}}{{#if s.network == linkedin}}<li><a href="{{= s.href}}" rel="noopener me" data-href="{{= s_path}}.href">LinkedIn</a></li>{{/if}}{{/each}}
+              <li><a href="{{= base}}{{#if lang == es}}es/{{/if}}" data-k="links.website">{{t links.website}}</a></li>
+              <li><a href="mailto:{{= contact.email}}" data-k="contact.email">{{= contact.email}}</a></li>
+            </ul>
+          </nav>
+
+          <aside class="qr" aria-labelledby="qr-title">
+            <img src="{{= base}}assets/img/qr-links.svg" width="520" height="520" alt="{{t links.qrAlt}}">
+            <p id="qr-title" class="mono" data-k="links.scan">{{t links.scan}}</p>
+            <a class="mono dl" href="{{= base}}assets/img/qr-links-1024.png" download="hot-potato-links-qr.png" data-k="links.download">{{t links.download}}</a>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <footer class="strip">
+    <span class="mono"><span data-k="team.studioName">{{= team.studioName}}</span> · <span data-k="team.location">{{= team.location}}</span></span>
+    <a class="mono" href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a>
+  </footer>
+</main>
+</body>
+</html>

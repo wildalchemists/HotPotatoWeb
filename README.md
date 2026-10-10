@@ -10,6 +10,7 @@ Official site of **Hot Potato**, the party brawler by [Wild Alchemists](https://
 | `assets/img/` | Real image files: `<name>-1200.webp` and `<name>-2400.webp` per picture, favicons, Open Graph image. Never base64. |
 | `assets/fonts/` | Self-hosted WOFF2 (licences inside). |
 | `src/template.html`, `src/styles.css`, `src/main.js` | The site. Vanilla HTML/CSS/JS. Text is baked in at build time; `main.js` only adds behaviour. |
+| `src/links.html`, `src/links.css` | The one-page links hub at `/links/` (and `/es/links/`): Steam, Discord, Instagram, the rest, and a QR that opens the page (`assets/img/qr-links.svg`, regenerate with `python3 -m segno` if the URL changes). |
 | `scripts/build.mjs` | Renders template + content into `dist/` for both languages. |
 | `scripts/check.mjs` | Validation. Errors block publishing. |
 | `scripts/serve.mjs` | 30-line local server. |
