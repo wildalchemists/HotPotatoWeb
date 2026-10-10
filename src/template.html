@@ -307,7 +307,7 @@
     <p class="light" data-k="footer.copyright">{{t footer.copyright}}</p>
     <p class="light small" data-k="footer.legal">{{t footer.legal}}</p>
     <ul class="footer-links" data-list="footer.links">
-      {{#each footer.links as l}}<li><a href="{{= l.href}}" data-k="{{= l_path}}.label" data-href="{{= l_path}}.href">{{t l.label}}</a></li>
+      {{#each footer.links as l}}<li><a href="{{#unless l.href == #press-kit}}{{#unless l.href == #contact}}{{= base}}{{#if lang == es}}es/{{/if}}{{/unless}}{{/unless}}{{= l.href}}" data-k="{{= l_path}}.label" data-href="{{= l_path}}.href">{{t l.label}}</a></li>
       {{/each}}
       <li><a href="{{= otherUrl}}" hreflang="{{= otherLang}}" lang="{{= otherLang}}" data-lang-switch="{{= otherLang}}">{{t ui.languageSwitch}}</a></li>
       <li><a href="#top">{{t ui.backToTop}}</a></li>

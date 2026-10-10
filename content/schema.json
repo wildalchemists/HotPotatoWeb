@@ -24,7 +24,8 @@
     "footer",
     "ui",
     "links",
-    "qr"
+    "qr",
+    "screen"
   ],
   "$defs": {
     "text": {
@@ -63,7 +64,7 @@
     },
     "url": {
       "type": "string",
-      "pattern": "^(https?://|mailto:|#|/)"
+      "pattern": "^(https?://|mailto:|#|/|[a-z0-9-]+/)"
     },
     "image": {
       "type": "object",
@@ -1172,6 +1173,42 @@
               }
             }
           }
+        }
+      }
+    },
+    "screen": {
+      "type": "object",
+      "required": [
+        "title",
+        "heading",
+        "lead",
+        "fullscreen",
+        "exitFullscreen",
+        "hint",
+        "more"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "lead": {
+          "$ref": "#/$defs/text"
+        },
+        "fullscreen": {
+          "$ref": "#/$defs/text"
+        },
+        "exitFullscreen": {
+          "$ref": "#/$defs/text"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "more": {
+          "$ref": "#/$defs/text"
         }
       }
     }

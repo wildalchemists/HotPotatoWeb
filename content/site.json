@@ -911,6 +911,20 @@
           "es": "Contacto"
         },
         "href": "#contact"
+      },
+      {
+        "label": {
+          "en": "QR codes for events",
+          "es": "QR para eventos"
+        },
+        "href": "qr/"
+      },
+      {
+        "label": {
+          "en": "Event screen",
+          "es": "Pantalla para eventos"
+        },
+        "href": "screen/"
       }
     ]
   },
@@ -1086,6 +1100,36 @@
     "qrAlt": {
       "en": "QR code that opens",
       "es": "Código QR que abre"
+    }
+  },
+  "screen": {
+    "title": {
+      "en": "Hot Potato: event screen",
+      "es": "Hot Potato: pantalla para eventos"
+    },
+    "heading": {
+      "en": "Scan to play with us",
+      "es": "Escanea y juega con nosotros"
+    },
+    "lead": {
+      "en": "Wishlist on Steam. Beta on Discord.",
+      "es": "Lista de deseados en Steam. Beta en Discord."
+    },
+    "fullscreen": {
+      "en": "Full screen",
+      "es": "Pantalla completa"
+    },
+    "exitFullscreen": {
+      "en": "Exit full screen",
+      "es": "Salir de pantalla completa"
+    },
+    "hint": {
+      "en": "Press F for full screen",
+      "es": "Pulsa F para pantalla completa"
+    },
+    "more": {
+      "en": "More",
+      "es": "Más"
     }
   }
 }
