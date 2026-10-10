@@ -23,7 +23,8 @@
     "contact",
     "footer",
     "ui",
-    "links"
+    "links",
+    "qr"
   ],
   "$defs": {
     "text": {
@@ -1098,6 +1099,76 @@
         },
         "qrAlt": {
           "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "qr": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "code",
+        "heading",
+        "lead",
+        "download",
+        "print",
+        "qrAlt",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "code": {
+          "type": "string"
+        },
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "lead": {
+          "$ref": "#/$defs/text"
+        },
+        "download": {
+          "$ref": "#/$defs/text"
+        },
+        "print": {
+          "$ref": "#/$defs/text"
+        },
+        "qrAlt": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "href",
+              "label",
+              "file"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "href": {
+                "$ref": "#/$defs/url"
+              },
+              "label": {
+                "$ref": "#/$defs/text"
+              },
+              "file": {
+                "type": "string",
+                "pattern": "^qr-[a-z0-9-]+$"
+              }
+            }
+          }
         }
       }
     }

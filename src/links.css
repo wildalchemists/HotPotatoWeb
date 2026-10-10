@@ -51,3 +51,33 @@ h1{font-size:clamp(3.6rem,11vw,6.5rem);color:var(--ink)}
   .qr{max-width:360px;justify-self:center;width:100%}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- /qr/ : the convention sheet ---------- */
+.yard.wide{max-width:1200px}
+.qr-head{position:relative;background:var(--paper);border:3px solid var(--ink);box-shadow:10px 10px 0 rgba(11,18,48,.35);padding:clamp(1.25rem,4vw,2rem) clamp(1.25rem,4vw,2.5rem) 1.25rem;display:grid;gap:.4rem;justify-items:start}
+.plate-static{position:absolute;top:-3px;left:24px}
+.qr-head h1{margin-top:.6rem}
+.codes{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(1rem,2.5vw,1.6rem)}
+.code{background:#fff;border:3px solid var(--ink);box-shadow:7px 7px 0 var(--ink);padding:1.1rem 1.1rem 1rem;display:grid;gap:.6rem;justify-items:center;text-align:center}
+.code h2{font-size:clamp(1.6rem,2.4vw,2.1rem);line-height:.9;color:var(--ink);min-height:2em;display:flex;align-items:center}
+.code-steam h2{background:var(--yellow);padding:.2em .5em;border:3px solid var(--ink)}
+.code-discord h2{background:var(--ink);color:var(--paper);padding:.2em .5em;border:3px solid var(--ink)}
+.code-img{display:block;width:100%}
+.code-img img{width:100%;height:auto}
+.url{font-size:.66rem;letter-spacing:.04em;text-transform:none;word-break:break-all;opacity:.8}
+.strip .mono{color:var(--ink)}
+
+@media print{
+  @page{margin:12mm}
+  body{background:#fff!important;color:#000}
+  .noprint,.skip{display:none!important}
+  .yard{max-width:none;padding:0;gap:8mm}
+  .qr-head{box-shadow:none;border-width:2px;padding:8mm 10mm 5mm}
+  .qr-head h1{font-size:40pt;margin-top:2mm}
+  .codes{grid-template-columns:1fr 1fr;gap:6mm}
+  .code{box-shadow:none;break-inside:avoid;page-break-inside:avoid;border-width:2px;padding:5mm 6mm 4mm;gap:3mm}
+  .code-img{max-width:58mm}
+  .code h2{font-size:18pt;min-height:1.6em}
+  .url{font-size:8pt;opacity:1}
+  .strip{justify-content:center}
+}
