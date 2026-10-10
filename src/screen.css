@@ -8,6 +8,8 @@ body.screen::before{content:"";position:fixed;inset:0;background-image:repeating
 
 /* head */
 .stage-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem 2.5rem;align-items:center}
+.brand{display:flex;align-items:center;gap:clamp(.6rem,1.5vw,1.2rem)}
+.potato{width:clamp(56px,11vh,112px);height:auto;border-radius:50%;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);background:#fff;flex:none}
 .brand-big{font-size:clamp(2.2rem,6.4vh,5rem);color:var(--paper);text-shadow:.045em .045em 0 var(--ink),-.012em -.012em 0 var(--ink);line-height:.9}
 .stage-title{display:grid;gap:clamp(.4rem,1vh,.7rem);justify-items:center;text-align:center}
 .title-sticker{font-size:clamp(1.4rem,4.2vh,3rem);padding:.35em .7em;letter-spacing:.01em;box-shadow:6px 6px 0 var(--ink)}
