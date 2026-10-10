@@ -409,15 +409,15 @@
         }
       },
       {
-        "id": "team-deathmatch",
+        "id": "tag-youre-it",
         "name": {
-          "en": "Team deathmatch",
-          "es": "Team deathmatch"
+          "en": "Tag, you're it",
+          "es": "Tag, you're it"
         },
         "status": "beta",
         "rules": {
-          "en": "Tag, in teams. Catch the other side and don't get caught.",
-          "es": "Pilla pilla por equipos. Pilla al otro equipo y que no te pillen a ti."
+          "en": "Tag. Catch the others and don't get caught.",
+          "es": "Pilla pilla. Pilla a los demás y que no te pillen a ti."
         }
       }
     ]
