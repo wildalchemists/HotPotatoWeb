@@ -418,6 +418,19 @@
         "rules": {
           "en": "Everyone against everyone. Catch the others and don't get caught.",
           "es": "Todos contra todos. Pilla a los demás y que no te pillen a ti."
+        },
+        "image": {
+          "src": "shot-3",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 2193,
+          "height": 1234,
+          "alt": {
+            "en": "The potato chases the runner down a red container roof",
+            "es": "La patata persigue al corredor por el techo rojo de un contenedor"
+          }
         }
       },
       {

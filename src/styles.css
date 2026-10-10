@@ -169,7 +169,8 @@ a.sticker:active,button.sticker:active{transform:rotate(0) translate(3px,3px);bo
 /* ---------- modes ---------- */
 .modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
 .mode{display:grid;gap:1rem;padding:1rem;text-transform:none;letter-spacing:0;font-weight:500;box-shadow:7px 7px 0 var(--ink)}
-.mode:first-child{grid-column:1/-1;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center}
+.mode-featured{grid-column:1/-1;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center}
+.mode-featured:nth-of-type(even) .mode-img{order:2}
 .mode-img{border:3px solid var(--ink)}
 .mode-img img{aspect-ratio:16/9;height:auto;object-fit:cover}
 .mode-copy .h3{margin:.2rem 0 .5rem}
@@ -277,7 +278,8 @@ body.lb-open{overflow:hidden}
   .beat:nth-child(even) .beat-copy{justify-self:start;text-align:left}
   .beat:nth-child(even) .beat-copy .beat-n{left:auto;right:-1rem}
   .beat-n{right:-1rem}
-  .mode:first-child{grid-template-columns:1fr}
+  .mode-featured{grid-template-columns:1fr}
+  .mode-featured:nth-of-type(even) .mode-img{order:0}
   .studio{grid-template-columns:1fr}
 }
 @media (max-width:900px){
