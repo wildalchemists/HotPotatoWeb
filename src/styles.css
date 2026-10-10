@@ -110,6 +110,10 @@ a.sticker:active,button.sticker:active{transform:rotate(0) translate(3px,3px);bo
 .lang{margin-left:auto;font-weight:700;font-size:var(--step--1);text-decoration:none;border-bottom:3px solid transparent}
 .lang:hover{border-bottom-color:var(--ink)}
 .nav-cta{font-size:.9rem;padding:.5rem .8rem}
+.nav-cta2{margin-left:auto}
+.nav .lang{margin-left:0}
+.nav .lang{margin-left:auto}
+.nav .lang + .nav-cta2{margin-left:0}
 
 /* ---------- hero ---------- */
 .hero{overflow:hidden}
@@ -294,6 +298,7 @@ body.lb-open{overflow:hidden}
   .brand{font-size:1.2rem}
   .nav{gap:.8rem}
   .nav-cta{font-size:.78rem;padding:.45rem .6rem}
+  .nav-cta2{display:none}
   .hero-title{font-size:clamp(3.4rem,20vw,5.6rem)}
   .wallpile{min-height:380px}
   .poster-key{width:88%;top:0}
