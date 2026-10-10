@@ -186,7 +186,7 @@
         "y": 0.45
       }
     },
-    "logo": "TODO: assets/img/logo.svg (the graffiti HOT POTATO logo as a clean SVG or transparent PNG)",
+    "logo": "assets/img/logo-1200.webp",
     "showAwards": true,
     "communityCta": {
       "label": {
@@ -195,7 +195,8 @@
       },
       "href": "https://discord.gg/gQEActAFX",
       "external": true
-    }
+    },
+    "showLogo": true
   },
   "trailer": {
     "youtubeId": "PpLcHtBJhDs",

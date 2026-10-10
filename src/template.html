@@ -28,7 +28,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{{= base}}assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="{{= base}}assets/img/apple-touch-icon.png">
 <link rel="manifest" href="{{= base}}site.webmanifest">
-<link rel="preload" as="image" href="{{= base}}assets/img/keyart-logo-1200.webp" fetchpriority="high">
+<link rel="preload" as="image" href="{{= base}}assets/img/logo-600.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-spray-paint-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="{{= base}}assets/fonts/rubik-var-latin.woff2" crossorigin>
 <link rel="stylesheet" href="{{= base}}styles.css?v={{= v}}">
@@ -59,7 +59,7 @@
   <div class="hero-grid">
     <div class="hero-copy">
       <p class="kicker r1" data-k="hero.kicker">{{t hero.kicker}}</p>
-      <h1 id="hero-title" class="spray hero-title" data-k="meta.shortName">{{= meta.shortName}}</h1>
+      {{#if hero.showLogo}}<h1 id="hero-title" class="hero-title hero-logo"><img src="{{= base}}assets/img/logo-600.webp" srcset="{{= base}}assets/img/logo-600.webp 600w, {{= base}}assets/img/logo-1200.webp 1200w" sizes="(max-width: 980px) 86vw, 46vw" width="1200" height="1166" fetchpriority="high" decoding="async" alt="{{= meta.officialName}}" data-img="hero.logo"></h1>{{else}}<h1 id="hero-title" class="spray hero-title" data-k="meta.shortName">{{= meta.shortName}}</h1>{{/if}}
       <p class="sticker pitch r1" data-k="hero.pitch">{{t hero.pitch}}</p>
       <div class="ctas">
         <a class="sticker sticker-y big r3" href="{{= hero.primaryCta.href}}" rel="noopener" data-k="hero.primaryCta.label" data-href="hero.primaryCta.href">{{t hero.primaryCta.label}}</a>

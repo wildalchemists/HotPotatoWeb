@@ -11,7 +11,7 @@ Facts the site needs that neither the old page nor the repo can answer. Each one
 | 5 | Genre tags as on the Steam page | JSON-LD, meta keywords | `meta.genreTags` |
 | 6 | PEGI / age rating, if any | Footer | `meta.ageRating` |
 | 7 | Price: team says "around 4,99, premium". Stored but **not rendered** until it is public and final (`meta.price.public`) | Hero (optional) | `meta.price` |
-| 8 | Logo as a clean SVG or transparent PNG. The key art has the graffiti logo but it is baked in, darkened, and carries the three laurels. A version without laurels and without the dark overlay is needed for the hero | Hero, nav, OG image | `hero.logo`, `hero.keyArt` |
+| 8 | ~~Logo~~ Received 2026-10-10 as a transparent PNG (881 px): `assets/img/logo-1200.webp` / `-600.webp`. Used in the hero, the event screen and the links/QR pages. An SVG would still help for print | Hero, screen, links, QR | `hero.logo` |
 | 9 | The 3–4 concrete mechanics that make it different (not adjectives). The section is hidden (`features.visible = false`) until this is answered | "What makes it different" | `features.items[]` |
 | 10 | ~~Rules for Infected and Team deathmatch~~ Answered 2026-10-10: Infected starts with one potato that infects whoever it tags; Team deathmatch is tag in teams. Confirm the one-line wordings on the page | Modes | `modes.items[].rules` |
 | 10b | ~~Modes~~ Answered 2026-10-10: **Infected** (beta), **Tag, you're it** (beta, everyone against everyone) and **Team deathmatch** (in development, the team mode). Rules of Team deathmatch to come when it exists | Modes | `modes.items[]` |
