@@ -444,7 +444,7 @@
         "beats": {
           "type": "array",
           "minItems": 3,
-          "maxItems": 4,
+          "maxItems": 5,
           "items": {
             "type": "object",
             "required": [

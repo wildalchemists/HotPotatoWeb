@@ -224,8 +224,8 @@
       "es": "Cómo se juega"
     },
     "intro": {
-      "en": "There is one potato and one clock. Nobody wants to be holding it when the clock runs out.",
-      "es": "Hay una patata y un reloj. Nadie quiere tenerla cuando el reloj llegue a cero."
+      "en": "There is one potato and one clock. Nobody wants to be holding it when the clock runs out, and somebody ends up on top.",
+      "es": "Hay una patata y un reloj. Nadie quiere tenerla cuando el reloj llegue a cero, y alguien acaba el primero."
     },
     "beats": [
       {
@@ -321,6 +321,30 @@
           "alt": {
             "en": "A full match in the container yard: eight runners scatter while the potato closes in",
             "es": "Una partida completa en el patio de contenedores: ocho corredores se dispersan mientras la patata se acerca"
+          }
+        }
+      },
+      {
+        "id": "scoreboard",
+        "title": {
+          "en": "Points on the board",
+          "es": "Puntos en el marcador"
+        },
+        "body": {
+          "en": "Every round scores. The scoreboard crowns whoever is first: there is a loser, and there is a winner.",
+          "es": "Cada ronda puntúa. El marcador corona a quien va primero: hay perdedor, pero también hay ganador."
+        },
+        "image": {
+          "src": "trailer-zap",
+          "widths": [
+            1200,
+            2400
+          ],
+          "width": 1569,
+          "height": 881,
+          "alt": {
+            "en": "In-game HUD with the score list and 'Your rank: #1' while the potato takes a ZAP hit",
+            "es": "HUD del juego con la lista de puntos y 'Your rank: #1' mientras la patata recibe un ZAP"
           }
         }
       }
